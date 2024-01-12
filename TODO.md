@@ -32,7 +32,9 @@ Flexible Fundraising Single Web Page
 
 # In Progress
 - [ ] Donation Section:
-  - [ ] Integration with Stripe checkout for secure transactions, with support for multiple currencies.
+  - [ ] Integration with Stripe checkout for secure transactions, with support for multiple currencies using client-side.
+  - [ ] Integration with Stripe checkout for secure transactions, with support for multiple currencies using backend.
+  - [ ] Integration with Stripe checkout for secure transactions, with support for multiple currencies using link.
 
 # Backlog
 
