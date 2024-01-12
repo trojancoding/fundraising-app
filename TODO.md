@@ -31,7 +31,8 @@ Flexible Fundraising Single Web Page
 
 
 # In Progress
-
+- [ ] Donation Section:
+  - [ ] Integration with Stripe checkout for secure transactions, with support for multiple currencies.
 
 # Backlog
 
