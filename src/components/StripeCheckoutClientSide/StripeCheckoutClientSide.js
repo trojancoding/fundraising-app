@@ -44,14 +44,17 @@ function StripeCheckoutClientSide(props) {
 
     var regex = /^[0-9]+(\.[0-9]{0,2})?$/;
     var regexOneMoreDecimal = /^[0-9]+(\.[0-9]{0,3})?$/;
+    var regexDotPlacement = /^[0-9]+(\.[0-9]{3})$/;
 
     // Check for different decimal settings
     if(zeroDecimalCurrencies.includes(priceElementSelected.currencyShortName)){
       regex = /^[0-9]+$/;
       regexOneMoreDecimal = /^[0-9]+$/;
+      regexDotPlacement = /^[0-9]+$/;
     }else if(threeDecimalCurrencies.includes(priceElementSelected.currencyShortName)){
       regex = /^[0-9]+(\.[0-9]{0,3})?$/;
       regexOneMoreDecimal = /^[0-9]+(\.[0-9]{0,4})?$/;
+      regexDotPlacement = /^[0-9]+(\.[0-9]{4})$/;
     }
 
 
@@ -88,11 +91,16 @@ function StripeCheckoutClientSide(props) {
       // If user cleans input
       if (input === "") {
         setDonationAmountValue(input);
-      } else if (!zeroDecimalCurrencies.includes(priceElementSelected.currencyShortName) && regexOneMoreDecimal.test(input)) { // If user tries to change digits after dot
-        //Check if user changes digits or adds more after the 2
+      } else if (!zeroDecimalCurrencies.includes(priceElementSelected.currencyShortName)
+                && regexOneMoreDecimal.test(input) && regexDotPlacement.test(input)) { // If user tries to change digits after dot
+        //Check if user changes digits or adds more
         if (input[input.length - 1] === (donationAmountValue.length > 0 ? donationAmountValue[donationAmountValue.length - 1] : "")) {
           const newInput = input.slice(0, -1);
-          setDonationAmountValue(newInput);
+          if(parseFloat(newInput) > priceElementSelected.maximumCharge){
+            setDonationAmountValue(priceElementSelected.maximumCharge);
+          }else{
+            setDonationAmountValue(newInput);
+          }
         }
       }
     }
