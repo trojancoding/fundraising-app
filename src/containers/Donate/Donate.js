@@ -8,7 +8,11 @@ function Donate(props) {
   return (
     <div className="App">
       <Header title="Edit containers\Donate\Donate.js and save to reload."/>
-      <StripeCheckoutClientSide priceList={PageSettings.priceList} buttonText={PageSettings.donateButtonText} />
+      <StripeCheckoutClientSide priceList={PageSettings.priceList}
+      buttonText={PageSettings.donateButtonText} removeLeadingZeros={PageSettings.removeLeadingZeros}
+      zeroDecimalCurrencies={PageSettings.zeroDecimalCurrencies}
+      threeDecimalCurrencies={PageSettings.threeDecimalCurrencies}
+      divisableByHundredCurrencies={PageSettings.divisableByHundredCurrencies} />
     </div>
   );
 }
