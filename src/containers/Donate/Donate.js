@@ -1,4 +1,5 @@
 import Header from '../../components/Header/Header';
+import DonationInfo from '../../components/DonationInfo/DonationInfo';
 import StripeCheckoutClientSide from '../../components/StripeCheckoutClientSide/StripeCheckoutClientSide';
 import StripeCheckoutServer from '../../components/StripeCheckoutServer/StripeCheckoutServer';
 import StripeCheckoutLink from '../../components/StripeCheckoutLink/StripeCheckoutLink';
@@ -8,11 +9,12 @@ function Donate(props) {
   const PageSettings = props.PageSettings;
 
   return (
-    <div className="App">
-      <Header title="Edit containers\Donate\Donate.js and save to reload." />
+    <div className='Donate-container'>
+      <Header title='Create Ad Campaign in the Tram'/>
+      <DonationInfo moneyRaised='US$ 20,712' />
 
       {PageSettings.paymentMethod === "client-side" &&
-        <StripeCheckoutClientSide priceList={PageSettings.clientSideMethodPriceList}
+         <StripeCheckoutClientSide priceList={PageSettings.clientSideMethodPriceList}
           buttonText={PageSettings.donateButtonText} removeLeadingZeros={PageSettings.removeLeadingZeros}
           zeroDecimalCurrencies={PageSettings.zeroDecimalCurrencies}
           threeDecimalCurrencies={PageSettings.threeDecimalCurrencies}
@@ -30,7 +32,7 @@ function Donate(props) {
       }
       {PageSettings.paymentMethod === "link" &&
         <StripeCheckoutLink priceList={PageSettings.linkMethodPriceList}
-          buttonText={PageSettings.donateButtonText} />
+          buttonText={PageSettings.donateButtonText} /> 
       }
     </div>
   );

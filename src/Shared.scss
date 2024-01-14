@@ -1,0 +1,68 @@
+// Global Tweaks
+
+* {
+    box-sizing: border-box;
+}
+
+// Font Face Variables
+
+@font-face {
+    font-family: 'Red Hat Display';
+    src: url("./assets/fonts/RedHatDisplay-VariableFont_wght.ttf");
+}
+
+@font-face {
+    font-family: 'Red Hat Display Italic';
+    src: url("./assets/fonts/RedHatDisplay-Italic-VariableFont_wght.ttf");
+}
+
+@font-face {
+    font-family: 'Red Hat Text';
+    src: url("./assets/fonts/RedHatText-VariableFont_wght.ttf");
+}
+
+@font-face {
+    font-family: 'Red Hat Text Italic';
+    src: url("./assets/fonts/RedHatText-Italic-VariableFont_wght.ttf");
+}
+
+$font-main: 'Red Hat Display';
+$font-main-italic: 'Red Hat Display Italic';
+$font-text: 'Red Hat Text';
+$font-text-italic: 'Red Hat Text Italic';
+
+// Fonts Size Variables
+
+$font-main-size: 45px;
+$font-secondary-size: 25px;
+$font-text-size: 18px;
+
+// Colors Variables
+
+$font-main-color: #222222;
+$font-text-color: #22222277;
+$font-bright-color: #FFFFFF;
+
+$container-background: #FFFFFF;
+
+$color-main: #9C79E7;
+$color-accent: #F5E6DC;
+$color-accent-2: #E4B290;
+$color-mild: #2222221D;
+
+// Gaps and Sizes
+
+$container-padding: 40px;
+$container-margin: 10px;
+$container-border-radius: 16px;
+$container-box-shadow: 0 0 20px rgba(#000000, 0.1);
+$container-big-width: 36%;
+$container-small-width: 20%;
+
+// Separator
+
+.separator {
+    background-color: $color-mild;
+    height: 2.5px;
+    margin: 26px 0px;
+}

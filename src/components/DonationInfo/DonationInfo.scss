@@ -1,0 +1,78 @@
+// Variables
+
+// Import color, font variables from Shared.scss file
+@use '../../Shared.scss';
+
+
+// Header styles
+.DonationInfo-container {
+  display: flex;
+  flex-flow: column wrap;
+  width: Shared.$container-small-width;
+  background-color: Shared.$container-background;
+  padding: Shared.$container-padding;
+  margin: Shared.$container-margin;
+  border-radius: Shared.$container-border-radius;
+  box-shadow: Shared.$container-box-shadow;
+
+  .money-raised {
+    font-family: Shared.$font-main, Helvetica, sans-serif;
+    font-size: Shared.$font-main-size;
+    font-weight: 500;
+    color: Shared.$font-main-color;
+    line-height: 120%;
+    margin: 0;
+  }
+
+  .progress-bar-container {
+    background-color: Shared.$color-mild;
+    height: 10px;
+    margin: 8px 0px 16px;
+
+    .progress-bar {
+      background-color: Shared.$color-main;
+      height: 100%;
+      width: 69%;
+    }
+  }
+
+  .text {
+    font-family: Shared.$font-text, Helvetica, sans-serif;
+    font-size: Shared.$font-text-size;
+    color: Shared.$font-text-color;
+    line-height: 120%;
+    margin: 0;
+  }
+
+  h3 {
+    font-family: Shared.$font-main, Helvetica, sans-serif;
+    font-size: Shared.$font-secondary-size;
+    font-weight: 600;
+    color: Shared.$font-main-color;
+    line-height: 120%;
+    margin: 0 0 12px;
+  }
+
+  @mixin text-box() {
+    font-family: Shared.$font-main, Helvetica, sans-serif;
+    font-size: Shared.$font-text-size;
+    height: 50px;
+    margin: 6px 0;
+    border: none;
+    border-radius: 3px;
+  }
+
+  .donation-input {
+    background-color: Shared.$color-accent;
+    font-weight: 500;
+    padding: 0 14px;
+    @include text-box();
+  }
+
+  .donation-button {
+    background-color: Shared.$color-main;
+    color: Shared.$font-bright-color;
+    font-weight: bold;
+    @include text-box();
+  }
+}
