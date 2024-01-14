@@ -42,17 +42,15 @@ function StripeCheckoutClientSide(props) {
     window.open(priceElementSelected.productLink, '_blank').focus();
   };
   return (
-    <div>
+    <>
       <select name="currency" id="currency" onChange={(e) => handleCurrencyChange(e)} value={currencyValue}>
         {priceList.map(priceElement =>
           <option value={priceElement.productLink}>{priceElement.currencyShortName + " - " + priceElement.currencyName}</option>
         )}
       </select>
       {errorMessage ?? <div>{errorMessage}</div>}
-      <button role="link" onClick={handleClick}>
-        {props.buttonText ?? "Donate"}
-      </button>
-    </div>
+      <button role="link" onClick={handleClick} className='donation-button'><p className='button-text'>{props.buttonText ?? "Donate"}</p><span className='icon-container'></span></button>
+    </>
   );
 }
 export default StripeCheckoutClientSide;

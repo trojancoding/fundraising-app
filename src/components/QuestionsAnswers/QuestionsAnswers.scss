@@ -1,0 +1,173 @@
+// Variables
+
+// Import color, font variables from Shared.scss file
+@use '../../Shared.scss';
+
+
+// QuestionsAnswers styles
+.QuestionsAnswers-container {
+  display: flex;
+  flex-flow: column wrap;
+  width: Shared.$container-big-width;
+  height: fit-content;
+  background-color: Shared.$container-background;
+  padding: Shared.$container-padding;
+  margin: Shared.$container-margin;
+  border-radius: Shared.$container-border-radius;
+  box-shadow: Shared.$container-box-shadow;
+
+  .QuestionsAnswers-header{
+    flex-wrap: nowrap;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    height: 50px;
+    padding-top: 0;
+    padding-bottom: 0;
+    margin-bottom: 20px;
+    &-choice{
+        cursor: pointer;
+        height:100%;
+        flex-wrap: nowrap;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        flex: 0 0 50%;
+        &.disabled{
+            h2{
+                color: Shared.$font-text-color;
+            }
+            .icon{
+                opacity: 42%;
+            }
+            border-bottom: Shared.$color-mild 2.5px solid;
+        }
+        h2{
+            padding-left: Shared.$font-secondary-size;
+            font-weight: 500;
+            font-family: Shared.$font-main, Helvetica, sans-serif;
+            font-size: Shared.$font-secondary-size;
+            color: Shared.$font-main-color;
+        }
+        .icon{
+            margin-left: 8px;
+            width: Shared.$font-secondary-size;
+        }
+        border-bottom: Shared.$color-main 2.5px solid;
+    }
+  }
+  .rewards{
+    position: relative;
+    z-index: 100;
+    .reward-background{
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image: url(Shared.$redeem-icon);
+        background-repeat: no-repeat;
+        background-position: center center;
+        background-size: contain;
+        z-index: 0;
+        opacity: 0.05;
+    }
+    .reward{
+        position: relative;
+        z-index: 100;
+        flex-wrap: wrap;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        .goal{
+            flex: 0 0 100%;
+            font-family: Shared.$font-main, Helvetica, sans-serif;
+            font-size: calc(Shared.$font-secondary-size + 10px);
+            color: Shared.$color-accent-2;
+            font-weight: 800;
+            margin: 20px 0 0 0px;
+        }
+        .title{
+            flex: 0 0 100%;
+            font-family: Shared.$font-main, Helvetica, sans-serif;
+            font-size: Shared.$font-secondary-size;
+            color: Shared.$font-main-color;
+            margin: 20px 0 0 0px;
+        }
+        .description{
+            flex: 0 0 100%;
+            font-family: Shared.$font-text, Helvetica, sans-serif;
+            color: Shared.$font-text-color;
+            margin: 20px 30px 30px 30px;
+        }
+    }
+  }
+  .questions{
+    .question{
+        .question-clickable{
+            flex-wrap: nowrap;
+            display: flex;
+            // justify-content: center;
+            align-items: center;
+            .icon{
+                flex: 0 0 32px;
+                margin-left: auto;
+            }
+            margin: 20px 0 0 0px;
+            cursor: pointer;
+        }
+        h4{
+            font-weight: 500;
+            font-family: Shared.$font-text, Helvetica, sans-serif;
+            font-size: Shared.$font-text-size;
+            color: Shared.$font-main-color;
+            text-align: left;
+            margin:0;
+            margin-right: 5px;
+        }
+        p{
+            font-family: Shared.$font-text, Helvetica, sans-serif;
+            font-size: Shared.$font-text-size;
+            color: Shared.$font-text-color;
+            font-weight: 400;
+            margin: 10px 0 0 0px;
+            margin-right: 32px;
+            max-height: 500px;
+            transition: max-height 0.15s ease-in-out;
+            overflow: hidden;
+        }
+        .question-hidden{
+            max-height: 0;
+            transition: max-height 0.15s ease-in-out;
+            overflow: hidden;
+        }
+    }
+  }
+
+  .icon-help {
+    content: url(Shared.$help-icon);
+    width: 20px;
+    margin-right: 10px;
+  }
+  .icon-redeem {
+    content: url(Shared.$redeem-icon);
+    width: 20px;
+    margin-right: 10px;
+  }
+  .icon-more {
+    content: url(Shared.$expand-more-icon);
+    width: 20px;
+    margin-right: 10px;
+    transition: transform 0.15s ease-in-out;
+  }
+  .icon-less {
+    content: url(Shared.$expand-more-icon);
+    width: 20px;
+    margin-right: 10px;
+    transform: rotate(180deg);
+    transition: transform 0.15s ease-in-out;
+  }
+}

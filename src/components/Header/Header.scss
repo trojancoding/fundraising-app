@@ -25,7 +25,7 @@
     line-height: 120%;
     margin: 0;
 
-    &::after {
+    &.new-badge::after {
       content: "NEW";
       background-color: Shared.$color-accent;
       font-family: Shared.$font-main, Helvetica, sans-serif;

@@ -20,7 +20,7 @@ function StripeCheckoutClientSide(props) {
 
 
   // User inputed donate amount
-  const [donationAmountValue, setDonationAmountValue] = useState("0");
+  const [donationAmountValue, setDonationAmountValue] = useState("");
 
 
   // Messages
@@ -58,9 +58,13 @@ function StripeCheckoutClientSide(props) {
       regexDotPlacement = /^[0-9]+(\.[0-9]{4})$/;
     }
 
-
+    if(input > priceElementSelected.maximumCharge){
+      setErrorMessage(`The maximum donation amount is ${priceElementSelected.symbol != null ? priceElementSelected.symbol : priceElementSelected.currencyShortName}${priceElementSelected.maximumCharge}`);
+    }else{
+      setErrorMessage("");
+    }
     // Check if input value matches with amount regex
-    const isValid = regex.test(input) && input <= priceElementSelected.maximumCharge;
+    const isValid = regex.test(input);
     if (isValid) {
       /*
         REMOVE LEADING ZEROS IN INPUT
@@ -92,6 +96,7 @@ function StripeCheckoutClientSide(props) {
       // If user cleans input
       if (input === "") {
         setDonationAmountValue(input);
+        setErrorMessage("");
       } else if (!zeroDecimalCurrencies.includes(priceElementSelected.currencyShortName) && !divisableByHundredCurrencies.includes(priceElementSelected.currencyShortName)
                 && regexOneMoreDecimal.test(input) && regexDotPlacement.test(input)) { // If user tries to change digits after dot
         //Check if user changes digits or adds more
@@ -118,6 +123,10 @@ function StripeCheckoutClientSide(props) {
     // When the customer clicks on the button, redirect them to Checkout.
 
     // Validate donation value
+    if(donationAmountValue===""){
+      setErrorMessage("Put in your donation amount.");
+      return false;
+    }
     try {
       const parsedAmountValue = parseFloat(donationAmountValue);
       // Check minimum and maximum values.
@@ -163,19 +172,20 @@ function StripeCheckoutClientSide(props) {
     }
   };
   return (
-    <div>
+    <>
       <select name="currency" id="currency" onChange={(e) => handleCurrencyChange(e)} value={currencyValue}>
         {priceList.map(priceElement =>
           <option value={priceElement.priceId}>{priceElement.currencyShortName + " - " + priceElement.currencyName}</option>
         )}
       </select>
-      <div>{priceElementSelected.symbol != null ? priceElementSelected.symbol : priceElementSelected.currencyShortName}</div>
-      <input type='text' value={donationAmountValue} onChange={(e) => handleAmountChange(e)}></input>
+      <div className='input-container'>
+                <div className='currency-dropdown'>{priceElementSelected.symbol != null ? priceElementSelected.symbol : priceElementSelected.currencyShortName}</div>
+                <input className='donation-input' type='text' placeholder='5.00' value={donationAmountValue} onChange={(e) => handleAmountChange(e)} />
+      </div>
       {errorMessage ?? <div>{errorMessage}</div>}
-      <button role="link" onClick={handleClick}>
-        {props.buttonText ?? "Donate"}
-      </button>
-    </div>
+      <button role="link" onClick={handleClick} className='donation-button'><p className='button-text'>{props.buttonText ?? "Donate"}</p><span className='icon-container'></span></button>
+
+    </>
   );
 }
 export default StripeCheckoutClientSide;
