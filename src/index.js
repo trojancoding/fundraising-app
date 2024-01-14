@@ -248,6 +248,7 @@ const fundraisersData = [
   {
     // Path to the fundraiser (example.com/path)
     path:"tram-ad-campaign",
+    newBadge:false, // [NEW] badge on the title
     // Title at the top of the page
     title:"Create Ad Campaign in the Tram",
     // Description under the title
@@ -287,10 +288,11 @@ const fundraisersData = [
   {
     // Path to the fundraiser (example.com/path)
     path:"street-ad-campaign",
+    newBadge:true, // [NEW] badge on the title
     // Title at the top of the page
     title:"Create Ad Campaign in the Streets",
     // Description under the title
-    description:"The campaign will feature posters and banners that highlight the benefits of meditation and mindfulness. We believe that by spreading awareness about the importance of mental health, we can help people lead happier and healthier lives.",
+    description:"The campaign will feature banners in the streets that highlight the benefits of meditation and mindfulness. We believe that by spreading awareness about the importance of mental health, we can help people lead happier and healthier lives.",
     questionsAndAnswers:[
       {
         question:"What is the purpose of a street campaign promoting meditation and mindfulness?",

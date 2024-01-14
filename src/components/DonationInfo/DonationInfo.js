@@ -1,7 +1,10 @@
 import './DonationInfo.scss';
-import logo from '../../assets/logo.svg';
+import StripeCheckoutClientSide from '../../components/StripeCheckoutClientSide/StripeCheckoutClientSide';
+import StripeCheckoutServer from '../../components/StripeCheckoutServer/StripeCheckoutServer';
+import StripeCheckoutLink from '../../components/StripeCheckoutLink/StripeCheckoutLink';
 
 function DonationInfo(props) {
+    const PageSettings = props.PageSettings;
     const moneyRaised = props.moneyRaised;
     return (
         <div className='DonationInfo-container'>
@@ -12,11 +15,28 @@ function DonationInfo(props) {
             <p className='text'>69% raised of US$ 30,000</p>
             <div className='separator'></div>
             <h3>Support this project</h3>
-            <div className='input-container'>
-                <div className='currency-dropdown'>US$</div>
-                <input className='donation-input' type='text' placeholder='5.00'/>
-            </div>
-            <button className='donation-button'><p className='button-text'>Donate</p><span className='icon-container'></span></button>
+
+            {PageSettings.paymentMethod === "client-side" &&
+                <StripeCheckoutClientSide priceList={PageSettings.clientSideMethodPriceList}
+                    buttonText={PageSettings.donateButtonText} removeLeadingZeros={PageSettings.removeLeadingZeros}
+                    zeroDecimalCurrencies={PageSettings.zeroDecimalCurrencies}
+                    threeDecimalCurrencies={PageSettings.threeDecimalCurrencies}
+                    divisableByHundredCurrencies={PageSettings.divisableByHundredCurrencies}
+                />
+            }
+            {PageSettings.paymentMethod === "server" &&
+                <StripeCheckoutServer priceList={PageSettings.serverMethodPriceList}
+                    buttonText={PageSettings.donateButtonText} removeLeadingZeros={PageSettings.removeLeadingZeros}
+                    zeroDecimalCurrencies={PageSettings.zeroDecimalCurrencies}
+                    threeDecimalCurrencies={PageSettings.threeDecimalCurrencies}
+                    divisableByHundredCurrencies={PageSettings.divisableByHundredCurrencies}
+                    createPaymentIntentUrl={PageSettings.createPaymentIntentUrl}
+                />
+            }
+            {PageSettings.paymentMethod === "link" &&
+                <StripeCheckoutLink priceList={PageSettings.linkMethodPriceList}
+                    buttonText={PageSettings.donateButtonText} />
+            }
         </div>
     );
 }

@@ -20,7 +20,7 @@ function StripeCheckoutClientSide(props) {
 
 
   // User inputed donate amount
-  const [donationAmountValue, setDonationAmountValue] = useState("0");
+  const [donationAmountValue, setDonationAmountValue] = useState("");
 
 
   // Messages
@@ -123,6 +123,10 @@ function StripeCheckoutClientSide(props) {
     // When the customer clicks on the button, redirect them to Checkout.
 
     // Validate donation value
+    if(donationAmountValue===""){
+      setErrorMessage("Put in your donation amount.");
+      return false;
+    }
     try {
       const parsedAmountValue = parseFloat(donationAmountValue);
       // Check minimum and maximum values.
@@ -168,19 +172,20 @@ function StripeCheckoutClientSide(props) {
     }
   };
   return (
-    <div>
+    <>
       <select name="currency" id="currency" onChange={(e) => handleCurrencyChange(e)} value={currencyValue}>
         {priceList.map(priceElement =>
           <option value={priceElement.priceId}>{priceElement.currencyShortName + " - " + priceElement.currencyName}</option>
         )}
       </select>
-      <div>{priceElementSelected.symbol != null ? priceElementSelected.symbol : priceElementSelected.currencyShortName}</div>
-      <input type='text' value={donationAmountValue} onChange={(e) => handleAmountChange(e)}></input>
+      <div className='input-container'>
+                <div className='currency-dropdown'>{priceElementSelected.symbol != null ? priceElementSelected.symbol : priceElementSelected.currencyShortName}</div>
+                <input className='donation-input' type='text' placeholder='5.00' value={donationAmountValue} onChange={(e) => handleAmountChange(e)} />
+      </div>
       {errorMessage ?? <div>{errorMessage}</div>}
-      <button role="link" onClick={handleClick}>
-        {props.buttonText ?? "Donate"}
-      </button>
-    </div>
+      <button role="link" onClick={handleClick} className='donation-button'><p className='button-text'>{props.buttonText ?? "Donate"}</p><span className='icon-container'></span></button>
+
+    </>
   );
 }
 export default StripeCheckoutClientSide;
