@@ -14,6 +14,7 @@
   margin: Shared.$container-margin;
   border-radius: Shared.$container-border-radius;
   box-shadow: Shared.$container-box-shadow;
+  height: fit-content;
 
   .money-raised {
     font-family: Shared.$font-main, Helvetica, sans-serif;
@@ -28,6 +29,8 @@
     background-color: Shared.$color-mild;
     height: 10px;
     margin: 8px 0px 16px;
+    border-radius: 2px;
+    overflow: hidden;
 
     .progress-bar {
       background-color: Shared.$color-main;
@@ -55,24 +58,63 @@
 
   @mixin text-box() {
     font-family: Shared.$font-main, Helvetica, sans-serif;
-    font-size: Shared.$font-text-size;
     height: 50px;
     margin: 6px 0;
     border: none;
     border-radius: 3px;
   }
 
-  .donation-input {
-    background-color: Shared.$color-accent;
-    font-weight: 500;
-    padding: 0 14px;
+  .input-container {
+    display: flex;
+    flex-flow: row nowrap;
     @include text-box();
+    overflow: hidden;
+
+    .currency-dropdown {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      background-color: Shared.$color-accent-3;
+      color: Shared.$font-text-color;
+      font-family: Shared.$font-main, Helvetica, sans-serif;
+      font-size: Shared.$font-text-size;
+      font-weight: 500;
+      width: 80px;
+    }
+  
+    .donation-input {
+      background-color: Shared.$color-accent;
+      color: Shared.$font-main-color;
+      font-family: Shared.$font-main, Helvetica, sans-serif;
+      font-size: Shared.$font-text-size;
+      font-weight: 500;
+      padding: 0 14px;
+      border: none;
+      width: 100%;
+    }
   }
 
   .donation-button {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-items: center;
     background-color: Shared.$color-main;
-    color: Shared.$font-bright-color;
-    font-weight: bold;
     @include text-box();
+
+    .button-text {
+      color: Shared.$font-bright-color;
+      font-weight: bold;
+      font-size: Shared.$font-secondary-size;
+      width: 100%;
+      transform: translateX(15px);
+    }
+
+    .icon-container {
+      content: url(Shared.$heart-icon);
+      width: 20px;
+      margin-right: 10px;
+    }
   }
 }
