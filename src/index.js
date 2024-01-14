@@ -6,14 +6,55 @@ import Donate from './containers/Donate/Donate'
 
 // **********************************
 // **********************************
+// **********************************
 // ****** SETTINGS FOR THE APP ******
+// **********************************
 // **********************************
 // **********************************
 
 // Here you can modify the variables to change page appearance and dynamic data.
 
 // **********************************
+// **********************************
+// ********* MAIN SETTINGS **********
+// **********************************
+// **********************************
+
+// Change main settings 
+/*
+  Set which method of stripe are you going to use
+
+  "client-side" - create products on Stripe with minimum price and "sell multiple items" to acheive end price for donation
+    pros:
+      - user can select his own donation amount on foundation site which is send to checkout page
+      - redirect after successful/unsuccessful payment
+      - no server needed
+    cons:
+      - "Qty 500, €0.01 each" info after product description on stripe checkout page
+
+  "link" - set Stripe links for products with "customer chooses price"
+    pros:
+      - donation amount choice is made on Stripe website, which may seem more secure to the user
+      - "Thanks for your donation" info on Stripe website
+      - no server needed
+    cons:
+      - no redirect after successful/unsuccessful payment
+      - user cannot select donation amount on foundation site
+
+  "server" - generate stripe links on the server real-time
+    pros:
+      - user can select his own donation amount on foundation site which is send to checkout page
+    cons:
+      - server needed to generate payment links every time
+
+*/
+const paymentMethod = "server";
+
+
+// **********************************
+// **********************************
 // ******* CURRENCY SETTINGS ********
+// **********************************
 // **********************************
 
 // Change currency settings 
@@ -46,20 +87,33 @@ const threeDecimalCurrencies = [];
   
   For example, to charge 5 ISK/5 UGX, provide an amount value of 500.
   The amount value must be evenly divisible by 100: 100, 200, 300, and so on. 
+
+  In that case divisableByHundredCurrencies are treated as zeroDecimalCurrencies
+  In CLIENT-SIDE METHOD the lowest price is set to minimal 0.01
 */
-const divisableByHundredCurrencies = ["TWD","UGX"]; // currency shortNames
+const divisableByHundredCurrencies = ["ISK","UGX"]; // currency shortNames
 
 // **********************************
+// **********************************
 // ********* WEBSITE DATA ***********
+// **********************************
 // **********************************
 
 // Set website static/dynamic data
 
+
+
+// **********************************
+// ****** CLIENT-SIDE METHOD ********
+// **********************************
+    /*
+        USING PRODUCTS WITH PRICE
+    */
 /*
-  List of currencies with their priceIds
+  List of currencies with their priceIds for client-side method
   Default value is the first value
 */
-const priceList = [
+const clientSideMethodPriceList = [
   {
     "symbol":"€", // (string or null) Currency symbol shown before donation amount
     // if symbol is null currencyShortName is shown before donation amount
@@ -69,7 +123,8 @@ const priceList = [
     "productPrice" : 0.01, // (float) Stripe product price to calculate quantity for desired amount
     "minimumCharge":0.50, // (float) Minimum charge amount from stripe website (https://stripe.com/docs/currencies#minimum-and-maximum-charge-amounts)
     //(the lowest amount from the page doesn't always work, so boost it up in some cases)
-    "maximumCharge":99999999,// (int) Maximum charge amount from stripe website (https://stripe.com/docs/currencies#minimum-and-maximum-charge-amounts)
+    // ('Amount must convert to at least X.XX. CA$0.50 converts to approximately X.XX.')
+    "maximumCharge":999999.99,// (int) Maximum charge amount from stripe website (https://stripe.com/docs/currencies#minimum-and-maximum-charge-amounts)
   },
   {
     "symbol":"$",
@@ -78,7 +133,7 @@ const priceList = [
     "priceId" : "price_1OXqzwAz4DzMSQxdAVc2CAKt",
     "productPrice" : 0.01,
     "minimumCharge":0.50,
-    "maximumCharge":99999999,
+    "maximumCharge":999999.99,
   },
   {
     "symbol":"CA$",
@@ -87,7 +142,7 @@ const priceList = [
     "priceId" : "price_1OXs8dAz4DzMSQxdpq84Kq6X",
     "productPrice" : 0.01,
     "minimumCharge":0.50,
-    "maximumCharge":99999999,
+    "maximumCharge":999999.99,
   },
   {
     "symbol":"£",
@@ -96,10 +151,74 @@ const priceList = [
     "priceId" : "price_1OXs9kAz4DzMSQxdUCnSQry9",
     "productPrice" : 0.01,
     "minimumCharge":0.40,
-    "maximumCharge":99999999,
+    "maximumCharge":999999.99,
+  },
+  {
+    "symbol":null,
+    "currencyShortName": "ISK",
+    "currencyName": "Icelandic Króna",
+    "priceId" : "price_1OYG6PAz4DzMSQxdFonqWysw",
+    "productPrice" : 0.01,
+    "minimumCharge":100,
+    "maximumCharge":999999.99,
+  },
+];
+// **********************************
+// ********* LINK METHOD ************
+// **********************************
+    /*
+        USING STRIPE LINKS FOR CURRENCIES
+    */
+/*
+  List of currencies with their productLinks for link method
+  Default value is the first value
+*/
+const linkMethodPriceList = [
+  {
+    "symbol":"€", // (string or null) Currency symbol shown before donation amount
+    "currencyShortName": "EUR", // (string) Currency shortName (Provide the same shortNames across settings)
+    "currencyName": "Euro", // (string) Currency name shown in currency 
+    "productLink" : "https://donate.stripe.com/test_5kAbIT6AedMs9GM145", // (string) Stripe productLink from product
+  },
+  {
+    "symbol":"$",
+    "currencyShortName": "USD",
+    "currencyName": "US Dollar",
+    "productLink" : "https://donate.stripe.com/test_dR600bcYCdMsaKQ5kk",
   },
 ];
 
+// **********************************
+// ********* SERVER METHOD **********
+// **********************************
+/*
+  URL of the server's createPaymentIntent method
+  POST parameters: amount, currency
+*/
+const createPaymentIntentUrl = "http://localhost:3003/api/create-payment-intent";
+/*
+  List of currencies with their productLinks for link method
+  Default value is the first value
+*/
+const serverMethodPriceList = [
+  {
+    "symbol":"€", // (string or null) Currency symbol shown before donation amount
+    "currencyShortName": "EUR", // (string) Currency shortName (Provide the same shortNames across settings)
+    // currencyShortName is used as ID in Checkout component
+    "currencyName": "Euro", // (string) Currency name shown in currency 
+    "minimumCharge":0.50, // (float) Minimum charge amount from stripe website (https://stripe.com/docs/currencies#minimum-and-maximum-charge-amounts)
+    //(the lowest amount from the page doesn't always work, so boost it up in some cases)
+    // ('Amount must convert to at least X.XX. CA$0.50 converts to approximately X.XX.')
+    "maximumCharge":999999.99,// (int) Maximum charge amount from stripe website (https://stripe.com/docs/currencies#minimum-and-maximum-charge-amounts)
+  },
+  {
+    "symbol":"$",
+    "currencyShortName": "USD",
+    "currencyName": "US Dollar",
+    "minimumCharge":0.50,
+    "maximumCharge":999999.99,
+  },
+];
 // **********************************
 // ********** UI SETTINGS ***********
 // **********************************
@@ -120,7 +239,13 @@ const donateButtonText = "Donate";
 
 // Import settings to props
 const PageSettings = {
-  priceList:priceList,
+  paymentMethod:paymentMethod,
+
+  createPaymentIntentUrl:createPaymentIntentUrl,
+
+  serverMethodPriceList:serverMethodPriceList,
+  clientSideMethodPriceList:clientSideMethodPriceList,
+  linkMethodPriceList:linkMethodPriceList,
 
   donateButtonText:donateButtonText,
   removeLeadingZeros:removeLeadingZeros,

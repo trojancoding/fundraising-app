@@ -1,12 +1,17 @@
 import React from 'react';
 import { useState } from 'react';
+import { Elements, PaymentElement } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js'
+import CheckoutForm from '../CheckoutForm/CheckoutForm';
 // Make sure to call `loadStripe` outside of a component’s render to avoid
 // recreating the `Stripe` object on every render.
 const stripePromise = loadStripe('pk_test_51OXpJKAz4DzMSQxdYvJCa8y6OJX5Wrg5TZYrOb1dTlBaM9NfD5p6rYWfV29QB36ye0xFRDFqGa4LSVo3oGdjT8RX003uZec5L8');
 
-function StripeCheckoutClientSide(props) {
+function StripeCheckoutServer(props) {
   const priceList = props.priceList;
+
+  const createPaymentIntentUrl = props.createPaymentIntentUrl;
+  
   const removeLeadingZeros = props.removeLeadingZeros ?? true;
 
   const zeroDecimalCurrencies = props.zeroDecimalCurrencies;
@@ -15,23 +20,34 @@ function StripeCheckoutClientSide(props) {
 
   // Data of selected currency
   const [priceElementSelected, setPriceElementSelected] = useState(priceList[0]);
-  const [currencyValue, setCurrencyValue] = useState(priceElementSelected.priceId);
+  const [currencyValue, setCurrencyValue] = useState(priceElementSelected.currencyShortName);
 
 
   // User inputed donate amount
   const [donationAmountValue, setDonationAmountValue] = useState("0");
 
+  // Stripe elements
+  const [showStripeElements, setShowStripeElements] = useState(false);
+  /*
+    https://stripe.com/docs/payments/accept-a-payment?platform=web&ui=elements&client=react
+    const options = {
+      clientSecret: '{{CLIENT_SECRET}}',
+      appearance: {...},
+    };
+  */
+  const [stripeOptions, setStripeOptions] = useState(null);
 
+  
   // Messages
   const [errorMessage, setErrorMessage] = useState("");
 
   /*
-    Function searches for priceElement by priceId
+    Function searches for priceElement by currencyShortName
   */
-  const getPriceElementByPriceId = (priceId) => {
+  const getPriceElementByCurrencyShortName = (currencyShortName) => {
     for (let index = 0; index < priceList.length; index++) {
       const priceElement = priceList[index];
-      if (priceElement.priceId === priceId) {
+      if (priceElement.currencyShortName === currencyShortName) {
         return priceElement;
       }
     }
@@ -108,7 +124,7 @@ function StripeCheckoutClientSide(props) {
 
   const handleCurrencyChange = (e) => {
     const newCurrencyValue = e.target.value;
-    const newPriceElement = getPriceElementByPriceId(newCurrencyValue);
+    const newPriceElement = getPriceElementByCurrencyShortName(newCurrencyValue);
     setCurrencyValue(newCurrencyValue);
     setPriceElementSelected(newPriceElement);
   };
@@ -134,24 +150,36 @@ function StripeCheckoutClientSide(props) {
     }
 
     /*
-        CLIENT-SIDE METHOD
-        USING PRODUCTS WITH PRICE
+        SERVER METHOD
+        USING SERVER TO GET CLIENT-SECRET
     */
     try {
-      const stripe = await stripePromise;
-      const { error } = await stripe.redirectToCheckout({
-        lineItems: [{
-          price: priceElementSelected.priceId, // Price ID of the Product (Indicating Currency)
-          quantity: Math.round(parseFloat(donationAmountValue) / priceElementSelected.productPrice), // Set donation price by multiplying product price by quantity
-          //(Math round for floating-point arithmetic rounding errors)
-        }],
-        mode: 'payment',
-        successUrl: window.location.href,
-        cancelUrl: window.location.href,
+      // Send amount and currency values to the server
+      // On the server based on the currencies you need to adjust
+      // amount multiplier to their decimal type or other special cases
+      // https://stripe.com/docs/currencies
+
+      const intentResponse = await fetch(createPaymentIntentUrl,{
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          currency:priceElementSelected.currencyShortName,
+          amount:parseFloat(donationAmountValue),
+        }),
       });
-      // If `redirectToCheckout` fails due to a browser or network
-      // error, display the localized error message to your customer
-      // using `error.message`.
+      const intentResponseJson = await intentResponse.json();
+
+      /*
+        https://stripe.com/docs/payments/accept-a-payment?platform=web&ui=elements&client=react
+        const options = {
+          clientSecret: '{{CLIENT_SECRET}}',
+          appearance: {...},
+        };
+      */
+      setStripeOptions({clientSecret:intentResponseJson.client_secret})
+      setShowStripeElements(true);
       setErrorMessage("");
     } catch (error) {
       if (error) {
@@ -165,7 +193,7 @@ function StripeCheckoutClientSide(props) {
     <div>
       <select name="currency" id="currency" onChange={(e) => handleCurrencyChange(e)} value={currencyValue}>
         {priceList.map(priceElement =>
-          <option value={priceElement.priceId}>{priceElement.currencyShortName + " - " + priceElement.currencyName}</option>
+          <option value={priceElement.currencyShortName}>{priceElement.currencyShortName + " - " + priceElement.currencyName}</option>
         )}
       </select>
       <div>{priceElementSelected.symbol != null ? priceElementSelected.symbol : priceElementSelected.currencyShortName}</div>
@@ -174,7 +202,13 @@ function StripeCheckoutClientSide(props) {
       <button role="link" onClick={handleClick}>
         {props.buttonText ?? "Donate"}
       </button>
+      {showStripeElements &&
+      <Elements stripe={stripePromise} options={stripeOptions}>
+        <CheckoutForm />
+      </Elements>
+      }
+
     </div>
   );
 }
-export default StripeCheckoutClientSide;
+export default StripeCheckoutServer;
