@@ -5,6 +5,7 @@ import StripeCheckoutServer from '../../components/StripeCheckoutServer/StripeCh
 import StripeCheckoutLink from '../../components/StripeCheckoutLink/StripeCheckoutLink';
 import './Donate.scss';
 import LatestDonations from '../../components/LatestDonations/LatestDonations';
+import QuestionForm from '../../components/QuestionForm/QuestionForm';
 
 function Donate(props) {
   const PageSettings = props.PageSettings;
@@ -14,7 +15,7 @@ function Donate(props) {
       <Header title='Create Ad Campaign in the Tram'/>
       <DonationInfo moneyRaised='US$ 20,712' />
       <LatestDonations />
-
+      <QuestionForm />
       {/* {PageSettings.paymentMethod === "client-side" &&
          <StripeCheckoutClientSide priceList={PageSettings.clientSideMethodPriceList}
           buttonText={PageSettings.donateButtonText} removeLeadingZeros={PageSettings.removeLeadingZeros}

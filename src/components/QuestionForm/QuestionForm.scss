@@ -1,0 +1,111 @@
+// Variables
+
+// Import color, font variables from Shared.scss file
+@use '../../Shared.scss';
+
+
+// Header styles
+.QuestionForm-container {
+  display: flex;
+  flex-flow: column wrap;
+  width: Shared.$container-big-width;
+  background-color: Shared.$container-background;
+  padding: Shared.$container-padding;
+  margin: Shared.$container-margin;
+  border-radius: Shared.$container-border-radius;
+  box-shadow: Shared.$container-box-shadow;
+  height: fit-content;
+
+  .form-container {
+    display: flex;
+    flex-flow: column wrap;
+  
+    .form-label {
+      color: Shared.$font-main-color;
+      font-family: Shared.$font-main, Helvetica, sans-serif;
+      font-size: Shared.$font-text-size;
+      font-weight: 500;
+      margin-top: 24px;
+    }
+
+    @mixin form-input() {
+      &::placeholder {
+        color: Shared.$font-text-color;
+      }
+      color: Shared.$font-main-color;
+      font-family: Shared.$font-main, Helvetica, sans-serif;
+      font-size: Shared.$font-text-size;
+      font-weight: 400;
+      padding: 8px;
+      border: 2px solid Shared.$color-mild;
+      border-radius: 3px;
+      margin: 8px 0;
+      height: 46px;
+    }
+    
+    .email-input-container {
+      display: flex;
+      flex-flow: row nowrap;
+      overflow: hidden;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+
+      .email-input {
+        @include form-input();
+        width: calc(100% - 50px)
+      }
+
+      .email-check-icon {
+        content: url(Shared.$done-icon);
+        width: 36px;
+        margin-right: 6px;
+        opacity: 0.5;
+      }
+    }
+    
+    .message-input {
+      @include form-input();
+      width: 100%;
+      resize: vertical;
+      max-height: 200px;
+    }
+
+    .characters-left {
+      align-self: flex-end;
+      color: Shared.$font-text-color;
+      font-family: Shared.$font-text, Helvetica, sans-serif;
+      font-size: Shared.$font-tiny-size;
+      font-weight: 500;
+      transform: translateY(-4px);
+    }
+  }
+
+  .send-button {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-items: center;
+    background-color: Shared.$color-accent;
+    font-family: Shared.$font-main, Helvetica, sans-serif;
+    height: 50px;
+    margin: 16px 0;
+    border: none;
+    border-radius: 3px;
+
+    .send-button-text {
+      color: Shared.$font-text-color;
+      font-weight: bold;
+      font-size: Shared.$font-secondary-size;
+      width: 100%;
+      transform: translateX(16px);
+    }
+
+    .send-icon-container {
+      content: url(Shared.$send-icon);
+      width: 40px;
+      margin-right: 6px;
+      opacity: 0.4;
+    }
+  }
+}
