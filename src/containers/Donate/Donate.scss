@@ -1,11 +1,25 @@
 // Variables
 
+$gradient-color-1: #F1CFB5;
+$gradient-color-2: #EFE7FF;
+$gradient-color-3: #E3E3E3;
+
 // Import color, font variables from Shared.scss file
 @use '../../Shared.scss';
 
-
 // Donate styles
 
-.App {
-  text-align: center;
+body {
+  background-color: $gradient-color-2;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  background-image: radial-gradient(ellipse farthest-corner at 150% 100%, $gradient-color-1 0%, $gradient-color-2 60%, $gradient-color-3 100%);
+  height: 200vh;
+}
+
+.Donate-container {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  width: 100%;
 }
