@@ -12,8 +12,11 @@ function DonationInfo(props) {
             <p className='text'>69% raised of US$ 30,000</p>
             <div className='separator'></div>
             <h3>Support this project</h3>
-            <input className='donation-input' type='text' placeholder='US$ 5.00'/>
-            <button className='donation-button'>Donate</button>
+            <div className='input-container'>
+                <div className='currency-dropdown'>US$</div>
+                <input className='donation-input' type='text' placeholder='5.00'/>
+            </div>
+            <button className='donation-button'><p className='button-text'>Donate</p><span className='icon-container'></span></button>
         </div>
     );
 }

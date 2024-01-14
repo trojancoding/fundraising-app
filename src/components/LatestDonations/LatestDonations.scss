@@ -1,0 +1,69 @@
+// Variables
+
+// Import color, font variables from Shared.scss file
+@use '../../Shared.scss';
+
+
+// Header styles
+.LatestDonations-container {
+  display: flex;
+  flex-flow: column wrap;
+  width: Shared.$container-small-width;
+  background-color: Shared.$container-background;
+  padding: Shared.$container-padding;
+  margin: Shared.$container-margin;
+  border-radius: Shared.$container-border-radius;
+  box-shadow: Shared.$container-box-shadow;
+  height: fit-content;
+
+  .latest-donation-container {
+    display: flex;
+    flex-flow: row wrap;
+    
+    .latest-donation-value {
+      width: 100%;
+      font-family: Shared.$font-main, Helvetica, sans-serif;
+      font-size: calc(Shared.$font-secondary-size + 10px);
+      font-weight: 400;
+      color: Shared.$font-main-color;
+      line-height: 120%;
+    }
+
+    .latest-donation-details {
+      display: flex;
+      flex-flow: row nowrap;
+      width: 100%;
+      font-family: Shared.$font-text, Helvetica, sans-serif;
+      font-size: Shared.$font-text-size;
+      color: Shared.$font-text-color;
+      line-height: 120%;
+      margin: 0;
+
+      p {
+        margin: 0;
+      }
+
+      .inline-separator {
+        padding: 0 8px;
+        font-size: 16px;
+      }
+    }
+  }
+
+  .see-all-button {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-items: center;
+    background-color: Shared.$color-accent;
+    font-family: Shared.$font-main, Helvetica, sans-serif;
+    height: 50px;
+    margin: 20px 0 0;
+    border: none;
+    border-radius: 3px;
+    color: Shared.$font-text-color;
+    font-weight: bold;
+    font-size: Shared.$font-secondary-size;
+    width: 100%;
+  }
+}
