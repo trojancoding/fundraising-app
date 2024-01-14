@@ -1,6 +1,5 @@
 import React from 'react';
 import './StripeCheckoutClientSide.scss';
-import { loadStripe } from '@stripe/stripe-js';
 import { useState } from 'react';
 import { loadStripe } from '@stripe/stripe-js'
 // Make sure to call `loadStripe` outside of a component’s render to avoid
