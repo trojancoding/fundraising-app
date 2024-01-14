@@ -74,8 +74,13 @@ function StripeCheckoutServer(props) {
     }
 
 
+    if(input > priceElementSelected.maximumCharge){
+      setErrorMessage(`The maximum donation amount is ${priceElementSelected.symbol != null ? priceElementSelected.symbol : priceElementSelected.currencyShortName}${priceElementSelected.maximumCharge}`);
+    }else{
+      setErrorMessage("");
+    }
     // Check if input value matches with amount regex
-    const isValid = regex.test(input) && input <= priceElementSelected.maximumCharge;
+    const isValid = regex.test(input);
     if (isValid) {
       /*
         REMOVE LEADING ZEROS IN INPUT
@@ -107,6 +112,7 @@ function StripeCheckoutServer(props) {
       // If user cleans input
       if (input === "") {
         setDonationAmountValue(input);
+        setErrorMessage("");
       } else if (!zeroDecimalCurrencies.includes(priceElementSelected.currencyShortName) && !divisableByHundredCurrencies.includes(priceElementSelected.currencyShortName)
                 && regexOneMoreDecimal.test(input) && regexDotPlacement.test(input)) { // If user tries to change digits after dot
         //Check if user changes digits or adds more

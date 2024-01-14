@@ -3,6 +3,10 @@ import ReactDOM from 'react-dom/client';
 import './index.scss';
 import reportWebVitals from './reportWebVitals';
 import Donate from './containers/Donate/Donate'
+import {
+  createBrowserRouter,
+  RouterProvider,
+} from "react-router-dom";
 
 // **********************************
 // **********************************
@@ -43,7 +47,8 @@ import Donate from './containers/Donate/Donate'
 
   "server" - generate stripe links on the server real-time
     pros:
-      - user can select his own donation amount on foundation site which is send to checkout page
+      - user can select his own donation amount on foundation site
+      - no redirects
     cons:
       - server needed to generate payment links every time
 
@@ -236,6 +241,90 @@ const removeLeadingZeros = true;
 */
 const donateButtonText = "Donate";
 
+// **********************************
+// ********** FUNDRAISERS ***********
+// **********************************
+const fundraisersData = [
+  {
+    // Path to the fundraiser (example.com/path)
+    path:"tram-ad-campaign",
+    // Title at the top of the page
+    title:"Create Ad Campaign in the Tram",
+    // Description under the title
+    description:"The campaign will feature posters and banners that highlight the benefits of meditation and mindfulness. We believe that by spreading awareness about the importance of mental health, we can help people lead happier and healthier lives.",
+    questionsAndAnswers:[
+      {
+        question:"What is the purpose of a tram campaign promoting meditation and mindfulness?",
+        answer:"A tram campaign promoting meditation and mindfulness could help raise awareness about these practices and encourage people to incorporate them into their daily lives."
+      },
+      {
+        question:"What are some benefits of practicing meditation and mindfulness?",
+        answer:"Meditation and mindfulness practices have been shown to have a variety of health benefits, including reducing stress and anxiety, improving sleep, and fostering compassion and empathy."
+      },
+      {
+        question:"What are some mindfulness exercises?",
+        answer:"Here are some mindfulness exercises you can try: Body scan meditation, Mindful breathing, Walking meditation, Loving-kindness meditation, Mindful listening."
+      }
+    ],
+    rewards:[
+      {
+        goal:"Donate $10",
+        title:"Get an exclusive Discord Donor rank",
+        description:"Discord Donor rank gives you access to a private channel and special emotes."
+      },
+      {
+        goal:"Donate $25",
+        title:"Get a personalized thank-you",
+        description:"Get a personalized thank-you message from the organization and a shoutout on social media."
+      },
+      {
+        goal:"Donate $100",
+        title:"Get a custom-made T-shirt",
+        description:"Get a custom-made T-shirt with the organization's logo."
+      },
+    ]
+  },
+  {
+    // Path to the fundraiser (example.com/path)
+    path:"street-ad-campaign",
+    // Title at the top of the page
+    title:"Create Ad Campaign in the Streets",
+    // Description under the title
+    description:"The campaign will feature posters and banners that highlight the benefits of meditation and mindfulness. We believe that by spreading awareness about the importance of mental health, we can help people lead happier and healthier lives.",
+    questionsAndAnswers:[
+      {
+        question:"What is the purpose of a street campaign promoting meditation and mindfulness?",
+        answer:"A street campaign promoting meditation and mindfulness could help raise awareness about these practices and encourage people to incorporate them into their daily lives."
+      },
+      {
+        question:"What are some benefits of practicing meditation and mindfulness?",
+        answer:"Meditation and mindfulness practices have been shown to have a variety of health benefits, including reducing stress and anxiety, improving sleep, and fostering compassion and empathy."
+      },
+      {
+        question:"What are some mindfulness exercises?",
+        answer:"Here are some mindfulness exercises you can try: Body scan meditation, Mindful breathing, Walking meditation, Loving-kindness meditation, Mindful listening."
+      }
+    ],
+    rewards:[
+      {
+        goal:"Donate $10",
+        title:"Get an exclusive Discord Donor rank",
+        description:"Discord Donor rank gives you access to a private channel and special emotes."
+      },
+      {
+        goal:"Donate $25",
+        title:"Get a personalized thank-you",
+        description:"Get a personalized thank-you message from the organization and a shoutout on social media."
+      },
+      {
+        goal:"Donate $100",
+        title:"Get a custom-made T-shirt",
+        description:"Get a custom-made T-shirt with the organization's logo."
+      },
+    ]
+  }
+]
+
 
 // Import settings to props
 const PageSettings = {
@@ -255,11 +344,36 @@ const PageSettings = {
   threeDecimalCurrencies:threeDecimalCurrencies,
 }
 
+// Create routes for every fundraiser
+var pathArray = [];
+for (let index = 0; index < fundraisersData.length; index++) {
+  const fundraiserData = fundraisersData[index];
+  pathArray.push({
+    path:fundraiserData.path,
+    element: <Donate PageSettings={PageSettings} fundraiserData={fundraiserData} />,
+    errorElement: <Donate PageSettings={PageSettings} fundraiserData={fundraiserData} />,
+  })
+}
+
+// On path"/" or fundraiser not found redirect to the first fundraiser
+if(pathArray.length>0){
+  pathArray.push(
+  {
+    path: "/",
+    element: <Donate PageSettings={PageSettings} fundraiserData={fundraisersData[0]} />,
+    errorElement: <Donate PageSettings={PageSettings} fundraiserData={fundraisersData[0]} />,
+  }
+  )
+}
+
+const router = createBrowserRouter(pathArray);
+
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <Donate PageSettings={PageSettings} />
+    <RouterProvider router={router} />
   </React.StrictMode>
 );
 
