@@ -90,15 +90,28 @@ h3 {
 
   // Responsiveness
 
-  @media all and (max-width: 1600px) {
-    $container-big-width: 600px;
-    $container-small-width: 340px;
-    $font-main-color: white;
+  @media all and (max-width: 1200px) {
+    .DonationInfo-container, .LatestDonations-container {
+        width: $container-big-width;
+    }
   }
-  
-  /* Small screens */
+
   @media all and (max-width: 800px) {
-    $container-big-width: 600px;
-    $container-small-width: 600px;
-    $font-main-color: white;
+    .DonationInfo-container, .LatestDonations-container {
+        width: $container-small-width;
+    }
   }
+
+
+//   @media all and (max-width: 1162px) {
+//     $container-big-width: 600px;
+//     $container-small-width: 340px;
+//     $font-main-color: white;
+//   }
+  
+//   /* Small screens */
+//   @media all and (max-width: 800px) {
+//     $container-big-width: 600px;
+//     $container-small-width: 600px;
+//     $font-main-color: white;
+//   }
