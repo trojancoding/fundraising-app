@@ -63,10 +63,14 @@
       }
 
       .email-check-icon {
-        content: url(Shared.$done-icon);
+        content: url(Shared.$edit-icon);
         width: 36px;
         margin-right: 6px;
         opacity: 0.5;
+      }
+
+      .valid {
+        content: url(Shared.$done-icon);
       }
     }
     
