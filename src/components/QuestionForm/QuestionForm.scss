@@ -8,17 +8,18 @@
 .QuestionForm-container {
   display: flex;
   flex-flow: column wrap;
-  width: Shared.$container-big-width;
   background-color: Shared.$container-background;
   padding: Shared.$container-padding;
   margin: Shared.$container-margin;
   border-radius: Shared.$container-border-radius;
   box-shadow: Shared.$container-box-shadow;
   height: fit-content;
+  width: Shared.$container-big-width;
 
   .form-container {
     display: flex;
     flex-flow: column wrap;
+    width: 100%;
   
     .form-label {
       color: Shared.$font-main-color;
@@ -41,6 +42,11 @@
       border-radius: 3px;
       margin: 8px 0;
       height: 46px;
+
+      &:focus {
+        border: 2.5px solid Shared.$color-main;
+        padding: 7.5px;
+      }
     }
     
     .email-input-container {
@@ -53,7 +59,7 @@
 
       .email-input {
         @include form-input();
-        width: calc(100% - 50px)
+        width: calc(100% - 50px);
       }
 
       .email-check-icon {
@@ -69,7 +75,7 @@
       width: 100%;
       resize: vertical;
       min-height: 46px;
-      max-height: 200px;
+      max-height: 175px;
     }
 
     .characters-left {
@@ -83,6 +89,7 @@
   }
 
   .send-button {
+    cursor: pointer;
     display: flex;
     flex-flow: row nowrap;
     justify-content: center;

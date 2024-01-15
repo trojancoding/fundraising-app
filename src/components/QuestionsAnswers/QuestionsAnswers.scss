@@ -72,7 +72,7 @@
         background-position: center center;
         background-size: contain;
         z-index: 0;
-        opacity: 0.05;
+        filter: invert(89%) sepia(14%) saturate(234%) hue-rotate(319deg) brightness(110%) contrast(97%);
     }
     .reward{
         position: relative;

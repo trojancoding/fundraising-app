@@ -57,6 +57,30 @@
     margin: 6px 0;
     border: none;
     border-radius: 3px;
+    transition: border 0.2s;
+  }
+
+  select {
+    @include text-box();
+    background-color: Shared.$color-accent;
+    color: Shared.$font-text-color;
+    font-family: Shared.$font-main, Helvetica, sans-serif;
+    font-size: Shared.$font-text-size;
+    font-weight: 500;
+    padding: 0 14px;
+    border: none;
+    width: 100%;
+    cursor: pointer;
+
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    text-indent: 1px;
+    text-overflow: '';
+
+    &:focus {
+      border: 2.5px solid Shared.$color-main;
+      padding-left: 11.5px;
+    }
   }
 
   .input-container {
@@ -87,10 +111,16 @@
       padding: 0 14px;
       border: none;
       width: 100%;
+
+      &:focus {
+        border: 2.5px solid Shared.$color-main;
+        padding-left: 11.5px;
+      }
     }
   }
 
   .donation-button {
+    cursor: pointer;
     display: flex;
     flex-flow: row nowrap;
     justify-content: center;

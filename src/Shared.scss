@@ -4,6 +4,10 @@
     box-sizing: border-box;
 }
 
+*:focus {
+    outline: none;
+}
+
 // Icons
 
 $done-icon: '../../assets/icons/done_icon.svg';
@@ -97,21 +101,19 @@ h3 {
   }
 
   @media all and (max-width: 800px) {
-    .DonationInfo-container, .LatestDonations-container {
-        width: $container-small-width;
+    .Donate-container > * {
+        width: 98%;
+    }
+
+    .QuestionsAnswers-header-choice * {
+        font-size: $font-text-size !important;
     }
   }
 
-
-//   @media all and (max-width: 1162px) {
-//     $container-big-width: 600px;
-//     $container-small-width: 340px;
-//     $font-main-color: white;
-//   }
-  
-//   /* Small screens */
-//   @media all and (max-width: 800px) {
-//     $container-big-width: 600px;
-//     $container-small-width: 600px;
-//     $font-main-color: white;
-//   }
+  @media all and (max-width: 400px) {
+    html {
+        zoom: 0.7; 
+        -moz-transform: scale(0.7);
+        -moz-transform-origin: 0 0;
+    }
+  }
