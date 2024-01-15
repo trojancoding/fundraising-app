@@ -34,6 +34,14 @@ function Donate(props) {
   const PageSettings = props.PageSettings;
   const fundraiserData = props.fundraiserData;
   const { height, width } = useWindowDimensions();
+  const [latestDonations, setLatestDonations] = useState([]);
+
+  const updateLatestDonations = (newState) => {
+    setLatestDonations(newState);
+  };
+  // const updateLatestDonationsInHtml = (newState) => {
+  //   setLatestDonationsInHtml(newState);
+  // };
 
   return (
     <div className='Donate-container'>
@@ -42,7 +50,8 @@ function Donate(props) {
             <div className='Donate-container'>
               <Header title={fundraiserData.title} description={fundraiserData.description} newBadge={fundraiserData.newBadge}/>
               <DonationInfo moneyRaised='US$ 20,712' PageSettings={PageSettings} />
-              <LatestDonations />
+              <LatestDonations latestDonations={latestDonations} setLatestDonations={updateLatestDonations}
+              />
               <QuestionsAnswers questionsAndAnswers={fundraiserData.questionsAndAnswers} rewards={fundraiserData.rewards} />
               <QuestionForm />
             </div>
@@ -57,7 +66,8 @@ function Donate(props) {
             </div>
             <div className='column'>
             <DonationInfo moneyRaised='US$ 20,712' PageSettings={PageSettings} />
-            <LatestDonations />
+            <LatestDonations latestDonations={latestDonations} setLatestDonations={updateLatestDonations}
+              />
             </div>
       </>
       }
