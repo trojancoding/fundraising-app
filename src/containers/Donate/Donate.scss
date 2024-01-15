@@ -14,12 +14,20 @@ body {
   background-size: 100% 100%;
   background-repeat: no-repeat;
   background-image: radial-gradient(ellipse farthest-corner at 150% 100%, $gradient-color-1 0%, $gradient-color-2 60%, $gradient-color-3 100%);
-  height: 150vh;
+  height: fit-content;
 }
 
 .Donate-container {
   display: flex;
   flex-flow: row wrap;
   justify-content: center;
-  width: 100%;
+  gap: 16px;
+  margin: 16px;
+
+  .column {
+    display: flex;
+    flex-flow: column wrap;
+    gap: 16px;
+    margin: 0;
+  }
 }

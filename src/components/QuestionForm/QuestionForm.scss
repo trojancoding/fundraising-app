@@ -68,6 +68,7 @@
       @include form-input();
       width: 100%;
       resize: vertical;
+      min-height: 46px;
       max-height: 200px;
     }
 

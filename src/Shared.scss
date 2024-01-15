@@ -43,7 +43,7 @@ $font-text-italic: 'Red Hat Text Italic';
 
 $font-main-size: 45px;
 $font-secondary-size: 25px;
-$font-text-size: 18px;
+$font-text-size: 19px;
 $font-tiny-size: 14px;
 
 // Colors Variables
@@ -62,12 +62,12 @@ $color-mild: #2222221D;
 
 // Gaps and Sizes
 
-$container-padding: 40px;
-$container-margin: 8px;
+$container-padding: 36px;
+$container-margin: 0;
 $container-border-radius: 16px;
-$container-box-shadow: 0 0 20px rgba(#000000, 0.1);
-$container-big-width: 36%;
-$container-small-width: 20%;
+$container-box-shadow: 0 0 12px rgba(#000000, 0.12);
+$container-big-width: 700px;
+$container-small-width: 400px;
 
 // Separator
 
@@ -77,7 +77,7 @@ $container-small-width: 20%;
     margin: 24px 0px;
 }
 
-// Smaller Header
+// Smaller Heading
 
 h3 {
     font-family: $font-main, Helvetica, sans-serif;
@@ -86,4 +86,19 @@ h3 {
     color: $font-main-color;
     line-height: 120%;
     margin: 0 0 20px;
+  }
+
+  // Responsiveness
+
+  @media all and (max-width: 1600px) {
+    $container-big-width: 600px;
+    $container-small-width: 340px;
+    $font-main-color: white;
+  }
+  
+  /* Small screens */
+  @media all and (max-width: 800px) {
+    $container-big-width: 600px;
+    $container-small-width: 600px;
+    $font-main-color: white;
   }
