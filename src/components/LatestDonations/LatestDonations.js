@@ -152,6 +152,17 @@ function LatestDonations(props) {
     return (
         <div className='LatestDonations-container'>
             <h3 id='latestDonationsHeader'>Latest donations</h3>
+            {latestDonations.length === 0 &&
+                    <div class='latest-donation-container'>
+                    <div class='latest-donation-value'></div>
+                    <div class='latest-donation-details'>
+                        <p class='inline-separator'>●</p>
+                        <p class='latest-donation-donor'>Be the first one to donate!</p>
+                        <p class='inline-separator'>●</p>
+                        <p class='latest-donation-date'></p>
+                    </div>
+                    </div>
+            }
             <div className='LatestDonations-donations' id="LatestDonations-donations" ref={latestDonationsDonations}>
 
             </div>
