@@ -9,6 +9,10 @@ function QuestionsAnswers(props) {
     const showRewards = props.showRewards;
     const setShowRewards = props.setShowRewards;
     
+    // Data of selected currency
+    const priceElementSelected = props.priceElementSelected;
+
+
     const questionsHeader = useRef(null);
     const rewardsHeader = useRef(null);
     
@@ -65,12 +69,17 @@ function QuestionsAnswers(props) {
             {showRewards &&
             <div className='rewards'>
                     <div className={`reward-background`}></div>
-                    {rewards.map(reward =>
+                    {rewards.map(reward => {
+                        const findCurrency = reward.goalCurrencies.find(goal => goal.currencyShortName === priceElementSelected.currencyShortName);
+                        return <>
                         <div className='reward'>
-                            <h3 className={`goal`}>{reward.goal}</h3>
+                            <h3 className={`goal`}>{findCurrency != undefined ? findCurrency.goal : reward.goal}</h3>
                             <h4 className={`title`}>{reward.title}</h4>
                             <p className={`description`}>{reward.description}</p>
                         </div>
+                        </>
+                    }
+
                     )}
             </div>
             }

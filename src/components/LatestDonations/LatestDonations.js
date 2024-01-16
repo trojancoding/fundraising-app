@@ -106,13 +106,10 @@ function LatestDonations(props) {
         if(clear){
             latestDonationsHeaderElement.innerHTML = "";
         }
-        console.log(latestDonations);
-        console.log(latestDonationsInHtml);
         var newDonations = latestDonations.filter(function(el) {
             return !(latestDonationsInHtml.some(e => e.donorName === el.donorName && e.donationTimestamp === el.donationTimestamp
                 && e.donationCurrency === el.donationCurrency && e.donationAmount === el.donationAmount));
         });
-        console.log(newDonations);
         for (let idx = 0; idx < newDonations.length; idx++) {
             const donation = newDonations[idx];
             if(latestDonationsInHtml.length > 0 || idx > 0){

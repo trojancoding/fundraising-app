@@ -89,6 +89,18 @@ function Donate(props) {
   //   setLatestDonationsInHtml(newState);
   // };
 
+
+  // Currency
+  const [priceElementSelected, setPriceElementSelected] = useState(
+    PageSettings.paymentMethod === "client-side" ? PageSettings.clientSideMethodPriceList[0] :
+    PageSettings.paymentMethod === "server" ? PageSettings.serverMethodPriceList[0] :
+    PageSettings.paymentMethod === "server" ? PageSettings.linkMethodPriceList[0] : ""
+  );
+
+  const updatePriceElementSelected = (newState) => {
+    setPriceElementSelected(newState);
+  };
+
   return (
     <div className='Donate-container'>
       {width <= 1200 &&
@@ -108,11 +120,12 @@ function Donate(props) {
               setMoneyToRaise={updateMoneyToRaise}
               setPercentRaised={updatePercentRaised}
               setMoneyRaisedSpanValue={updateMoneyRaisedSpanValue}
+              priceElementSelected={priceElementSelected} setPriceElementSelected={updatePriceElementSelected}
             />
             <LatestDonations donationPath={fundraiserData.path} latestDonations={latestDonations} setLatestDonations={updateLatestDonations} getLatestDonationsDataUrl={PageSettings.getLatestDonationsDataUrl}
             />
             <QuestionsAnswers questionsAndAnswers={fundraiserData.questionsAndAnswers} rewards={fundraiserData.rewards}
-              showRewards={showRewards} setShowRewards={updateShowRewards} />
+              showRewards={showRewards} setShowRewards={updateShowRewards} priceElementSelected={priceElementSelected} />
             {!showRewards &&
               <QuestionForm submitQuestionFormUrl={PageSettings.submitQuestionFormUrl} donationPath={fundraiserData.path}
                 message={formMessage} email={formEmail} setMessage={updateFormMessage} setEmail={updateFormEmail} />
@@ -125,7 +138,7 @@ function Donate(props) {
           <div className='column'>
             <Header title={fundraiserData.title} description={fundraiserData.description} newBadge={fundraiserData.newBadge} />
             <QuestionsAnswers questionsAndAnswers={fundraiserData.questionsAndAnswers} rewards={fundraiserData.rewards}
-              showRewards={showRewards} setShowRewards={updateShowRewards} />
+              showRewards={showRewards} setShowRewards={updateShowRewards} priceElementSelected={priceElementSelected} />
             {!showRewards &&
               <QuestionForm donationPath={fundraiserData.path} submitQuestionFormUrl={PageSettings.submitQuestionFormUrl}
                 message={formMessage} email={formEmail} setMessage={updateFormMessage} setEmail={updateFormEmail} />
@@ -145,6 +158,7 @@ function Donate(props) {
               setMoneyToRaise={updateMoneyToRaise}
               setPercentRaised={updatePercentRaised}
               setMoneyRaisedSpanValue={updateMoneyRaisedSpanValue}
+              priceElementSelected={priceElementSelected} setPriceElementSelected={updatePriceElementSelected}
             />
             <LatestDonations donationPath={fundraiserData.path} latestDonations={latestDonations} setLatestDonations={updateLatestDonations} getLatestDonationsDataUrl={PageSettings.getLatestDonationsDataUrl}
             />

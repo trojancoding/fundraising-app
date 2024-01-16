@@ -50,13 +50,16 @@ function calculatePercentage(moneyRaised, moneyToRaise) {
 function genRand(min, max, decimalPlaces) {  
     var rand = Math.random()*(max-min) + min;
     var power = Math.pow(10, decimalPlaces);
-    console.log((Math.floor(rand*power) / power).toFixed(2))
     return Number((Math.floor(rand*power) / power).toFixed(2));
 }
 function DonationInfo(props) {
     const PageSettings = props.PageSettings;
     const getDonationGoalDataUrl = props.getDonationGoalDataUrl;
     const donationPath = props.donationPath;
+
+      // Data of selected currency
+    const priceElementSelected = props.priceElementSelected;
+    const setPriceElementSelected = props.setPriceElementSelected;
 
     const {
         donationData,
@@ -135,10 +138,11 @@ function DonationInfo(props) {
         if(donationData === null){
             return false;
         }
-        //TODO: Check which currency is selected
+        // Check which currency is selected
+        // If selected currency not in array select first one
 
-        // //?If selected currency not in array select first one
-        const goalObject = donationData.goalArray[0];
+        const findCurrency = donationData.goalArray.find(goal => goal.currencyShortName === priceElementSelected.currencyShortName);
+        const goalObject = findCurrency != undefined ? findCurrency : donationData.goalArray[0];
 
         animateValue(moneyRaised,goalObject.raisedAmount,350)
         //Update values
@@ -172,7 +176,7 @@ function DonationInfo(props) {
 
     useEffect(() => {
         handleDataUpdate();
-      }, [donationData]);
+      }, [donationData,priceElementSelected]);
 
       useEffect(() => {
         handleDataUpdate();
@@ -206,6 +210,7 @@ function DonationInfo(props) {
                     zeroDecimalCurrencies={PageSettings.zeroDecimalCurrencies}
                     threeDecimalCurrencies={PageSettings.threeDecimalCurrencies}
                     divisableByHundredCurrencies={PageSettings.divisableByHundredCurrencies}
+                    priceElementSelected={props.priceElementSelected} setPriceElementSelected={props.setPriceElementSelected}
                 />
             }
             {PageSettings.paymentMethod === "server" &&
@@ -216,11 +221,13 @@ function DonationInfo(props) {
                     divisableByHundredCurrencies={PageSettings.divisableByHundredCurrencies}
                     createPaymentIntentUrl={PageSettings.createPaymentIntentUrl}
                     donationPath={donationPath}
+                    priceElementSelected={priceElementSelected} setPriceElementSelected={setPriceElementSelected}
                 />
             }
             {PageSettings.paymentMethod === "link" &&
                 <StripeCheckoutLink priceList={PageSettings.linkMethodPriceList}
-                    buttonText={PageSettings.donateButtonText} />
+                    buttonText={PageSettings.donateButtonText}
+                    priceElementSelected={priceElementSelected} setPriceElementSelected={setPriceElementSelected} />
             }
         </div>
     );

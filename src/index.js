@@ -285,6 +285,76 @@ const serverMethodPriceList = [
 const fundraisersData = [
   {
     // Path to the fundraiser (example.com/path)
+    path: "clean-water-project",
+    newBadge: true,// [NEW] badge on the title
+    // Title at the top of the page
+    title: "Clean Water Project for Rural Communities",
+    // Description under the title
+    description: "Join us in providing access to clean and safe drinking water for rural communities. Your support will help install water purification systems and ensure that families have a sustainable source of clean water for their daily needs.",
+    questionsAndAnswers: [
+      {
+        question: "Why is access to clean water crucial for rural communities?",
+        answer: "Access to clean water is essential for health and well-being. It helps prevent waterborne diseases and provides a foundation for community development, education, and economic stability."
+      },
+      {
+        question: "How will the funds be used in this clean water project?",
+        answer: "The funds raised will be used to install water purification systems, drill wells, and implement sustainable water management practices in rural areas, ensuring a long-term solution to the water crisis."
+      },
+      {
+        question: "What impact will my donation have on the community?",
+        answer: "Your donation will directly contribute to improving the quality of life for people in rural communities by providing them with a basic necessity – clean and safe drinking water. It's a step towards breaking the cycle of poverty and promoting overall well-being."
+      }
+    ],
+    rewards: [
+      {
+        goal: "Donate $25", // Default goal when goalCurrencies is empty/doesn't have currency active
+        goalCurrencies: [ // Goal in different currencies
+          {
+            currencyShortName:"USD",
+            goal:"Donate $25",
+          },
+          {
+            currencyShortName:"EUR",
+            goal:"Donate €20",
+          },
+        ],
+        title: "Receive a personalized digital certificate",
+        description: "Receive a digital certificate expressing gratitude for your contribution to the Clean Water Project."
+      },
+      {
+        goal: "Donate $50",
+        goalCurrencies: [ // Goal in different currencies
+          {
+            currencyShortName:"USD",
+            goal:"Donate $50",
+          },
+          {
+            currencyShortName:"EUR",
+            goal:"Donate €45",
+          },
+        ],
+        title: "Get a photo book documenting the project",
+        description: "Receive a photo book showcasing the progress of the Clean Water Project, including pictures of installations, community members, and the positive impact of your donation."
+      },
+      {
+        goal: "Donate $200",
+        goalCurrencies: [ // Goal in different currencies
+        {
+          currencyShortName:"USD",
+          goal:"Donate $200",
+        },
+        {
+          currencyShortName:"EUR",
+          goal:"Donate €185",
+        },
+      ],
+        title: "Name a water purification system after you",
+        description: "Have a water purification system named after you or a person of your choice, recognizing your significant contribution to providing clean water to a community."
+      }
+    ]
+  },
+  {
+    // Path to the fundraiser (example.com/path)
     path: "tram-ad-campaign",
     newBadge: false, // [NEW] badge on the title
     // Title at the top of the page
@@ -308,58 +378,51 @@ const fundraisersData = [
     rewards: [
       {
         goal: "Donate $10",
+        goalCurrencies: [ // Goal in different currencies
+        {
+          currencyShortName:"USD",
+          goal:"Donate $10",
+        },
+        {
+          currencyShortName:"EUR",
+          goal:"Donate €9",
+        },
+      ],
         title: "Get an exclusive Discord Donor rank",
         description: "Discord Donor rank gives you access to a private channel and special emotes."
       },
       {
         goal: "Donate $25",
+        goalCurrencies: [ // Goal in different currencies
+        {
+          currencyShortName:"USD",
+          goal:"Donate $25",
+        },
+        {
+          currencyShortName:"EUR",
+          goal:"Donate €20",
+        },
+      ],
         title: "Get a personalized thank-you",
         description: "Get a personalized thank-you message from the organization and a shoutout on social media."
       },
       {
         goal: "Donate $100",
+        goalCurrencies: [ // Goal in different currencies
+        {
+          currencyShortName:"USD",
+          goal:"Donate $100",
+        },
+        {
+          currencyShortName:"EUR",
+          goal:"Donate €90",
+        },
+      ],
         title: "Get a custom-made T-shirt",
         description: "Get a custom-made T-shirt with the organization's logo."
       },
     ]
   },
-  {
-    path: "clean-water-project",
-    newBadge: true,
-    title: "Clean Water Project for Rural Communities",
-    description: "Join us in providing access to clean and safe drinking water for rural communities. Your support will help install water purification systems and ensure that families have a sustainable source of clean water for their daily needs.",
-    questionsAndAnswers: [
-      {
-        question: "Why is access to clean water crucial for rural communities?",
-        answer: "Access to clean water is essential for health and well-being. It helps prevent waterborne diseases and provides a foundation for community development, education, and economic stability."
-      },
-      {
-        question: "How will the funds be used in this clean water project?",
-        answer: "The funds raised will be used to install water purification systems, drill wells, and implement sustainable water management practices in rural areas, ensuring a long-term solution to the water crisis."
-      },
-      {
-        question: "What impact will my donation have on the community?",
-        answer: "Your donation will directly contribute to improving the quality of life for people in rural communities by providing them with a basic necessity – clean and safe drinking water. It's a step towards breaking the cycle of poverty and promoting overall well-being."
-      }
-    ],
-    rewards: [
-      {
-        goal: "Donate $20",
-        title: "Receive a personalized digital certificate",
-        description: "Receive a digital certificate expressing gratitude for your contribution to the Clean Water Project."
-      },
-      {
-        goal: "Donate $50",
-        title: "Get a photo book documenting the project",
-        description: "Receive a photo book showcasing the progress of the Clean Water Project, including pictures of installations, community members, and the positive impact of your donation."
-      },
-      {
-        goal: "Donate $200",
-        title: "Name a water purification system after you",
-        description: "Have a water purification system named after you or a person of your choice, recognizing your significant contribution to providing clean water to a community."
-      }
-    ]
-  }
 ]
 
 
