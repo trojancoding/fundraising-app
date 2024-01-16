@@ -4,6 +4,10 @@
     box-sizing: border-box;
 }
 
+* {
+    transition: border 0.3s;
+}
+
 *:focus {
     outline: none;
 }
@@ -11,6 +15,7 @@
 // Icons
 
 $done-icon: '../../assets/icons/done_icon.svg';
+$edit-icon: '../../assets/icons/edit_icon.svg';
 $heart-icon: '../../assets/icons/heart_icon.svg';
 $help-icon: '../../assets/icons/help_icon.svg';
 $redeem-icon: '../../assets/icons/redeem_icon.svg';
