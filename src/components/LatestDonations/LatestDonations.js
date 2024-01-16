@@ -142,8 +142,8 @@ function LatestDonations(props) {
     }, 1000);
 
     const handleSeeAllBtnClick = (e) => {
-        latestDonationsDonations.current.classList.toggle('more');
         latestDonationsDonations.current.scrollTop = 0;
+        latestDonationsDonations.current.classList.toggle('more');
         setSeeAllToggled(!seeAllToggled);
     }
 
