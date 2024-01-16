@@ -106,7 +106,69 @@ const divisableByHundredCurrencies = ["ISK", "UGX"]; // currency shortNames
 
 // Set website static/dynamic data
 
+// **********************************
+// ********* SERVER METHOD **********
+// **********************************
+/*
+  URL of the server's createPaymentIntent method
+  POST parameters: amount, currency, donationPath (works as id)
+*/
+const createPaymentIntentUrl = "http://localhost:3003/api/create-payment-intent";
 
+
+// **********************************
+// ********* API ENDPOINTS **********
+// **********************************
+/*
+  URL of the server's submitForm method
+  POST parameters: message, email, donationPath (works as id)
+  string or null
+*/
+const submitQuestionFormUrl = 'http://localhost:3003/api/submitForm';
+
+// Url of API endpoint that gets DonationInfo data
+// GET parameters: donationPath (works as id)
+// returned data should be JSON
+// DonationGoalData accepts array of donation info in different currencies at the same time
+// DonationGoalData format: (array of objects)
+//   {
+//     goalArray:[
+//         {
+//             currencyShortName:"USD",// currency in which amount is stated
+//             currencySymbol:"$",// string of donation currency symbol that is shown before donation amount
+//             goalAmount: 10000, // goal amount number in the currency
+//             raisedAmount: 500, // raised amount number in the currency
+//         },
+//         {
+//             currencyShortName:"EUR",
+//             currencySymbol:"€",
+//             goalAmount: 9190,
+//             raisedAmount: 460,
+//         },
+//     ]
+// }
+// null or url string
+const getDonationGoalDataUrl =  null;//'http://localhost:3003/api/getDonationGoalData';
+// Url of API endpoint that gets LatestDonations data
+// GET parameters: donationPath (works as id)
+// returned data should be JSON
+// LatestDonationsData format: (array of objects)
+// [
+// {
+//   donorName: "Anonymous",     //    String of donor name
+//   donationAmount: 200, //   donation amount number
+//   donationCurrency: "$", // string of donation currency that is shown before donation amount
+//   donationTimestamp: 186400000, // unix timestamp of the donation
+// },
+// {
+//   donorName: "Anonymous 2",     //    String of donor name
+//   donationAmount: 100, //   donation amount number
+//   donationCurrency: "$", // string of donation currency that is shown before donation amount
+//   donationTimestamp: 126400000, // unix timestamp of the donation
+// }
+// ]
+// null or url string
+const getLatestDonationsDataUrl =  null;//'http://localhost:3003/api/getLatestDonationsData';
 
 // **********************************
 // ****** CLIENT-SIDE METHOD ********
@@ -192,71 +254,6 @@ const linkMethodPriceList = [
     "productLink": "https://donate.stripe.com/test_dR600bcYCdMsaKQ5kk",
   },
 ];
-
-// **********************************
-// ********* SERVER METHOD **********
-// **********************************
-/*
-  URL of the server's createPaymentIntent method
-  POST parameters: amount, currency, donationPath (works as id)
-*/
-const createPaymentIntentUrl = "http://localhost:3003/api/create-payment-intent";
-
-
-// **********************************
-// ********* API ENDPOINTS **********
-// **********************************
-/*
-  URL of the server's submitForm method
-  POST parameters: message, email, donationPath (works as id)
-  string or null
-*/
-const submitQuestionFormUrl = 'http://localhost:3003/api/submitForm';
-
-// Url of API endpoint that gets DonationInfo data
-// GET parameters: donationPath (works as id)
-// returned data should be JSON
-// DonationGoalData accepts array of donation info in different currencies at the same time
-// DonationGoalData format: (array of objects)
-//   {
-//     goalArray:[
-//         {
-//             currencyShortName:"USD",// currency in which amount is stated
-//             currencySymbol:"$",// string of donation currency symbol that is shown before donation amount
-//             goalAmount: 10000, // goal amount number in the currency
-//             raisedAmount: 500, // raised amount number in the currency
-//         },
-//         {
-//             currencyShortName:"EUR",
-//             currencySymbol:"€",
-//             goalAmount: 9190,
-//             raisedAmount: 460,
-//         },
-//     ]
-// }
-// null or url string
-const getDonationGoalDataUrl =  null;//'http://localhost:3003/api/getDonationGoalData';
-// Url of API endpoint that gets LatestDonations data
-// GET parameters: donationPath (works as id)
-// returned data should be JSON
-// LatestDonationsData format: (array of objects)
-// [
-// {
-//   donorName: "Anonymous",     //    String of donor name
-//   donationAmount: 200, //   donation amount number
-//   donationCurrency: "$", // string of donation currency that is shown before donation amount
-//   donationTimestamp: 186400000, // unix timestamp of the donation
-// },
-// {
-//   donorName: "Anonymous 2",     //    String of donor name
-//   donationAmount: 100, //   donation amount number
-//   donationCurrency: "$", // string of donation currency that is shown before donation amount
-//   donationTimestamp: 126400000, // unix timestamp of the donation
-// }
-// ]
-// null or url string
-const getLatestDonationsDataUrl =  null;//'http://localhost:3003/api/getLatestDonationsData';
-
 /*
   List of currencies with their productLinks for link method
   Default value is the first value
@@ -280,25 +277,7 @@ const serverMethodPriceList = [
     "maximumCharge": 999999.99,
   },
 ];
-// **********************************
-// ********** UI SETTINGS ***********
-// **********************************
 
-// Adjust website appearance
-/*
-  You can change variables in Shared.scss file to change website appearance
-*/
-
-/*
-  Remove leading zeros from donate amount on input
-*/
-const removeLeadingZeros = true;
-
-/*
-  Text on dotation form button
-  Default value is "Donate"
-*/
-const donateButtonText = "Donate";
 
 // **********************************
 // ********** FUNDRAISERS ***********
@@ -345,46 +324,64 @@ const fundraisersData = [
     ]
   },
   {
-    // Path to the fundraiser (example.com/path)
-    path: "street-ad-campaign",
-    newBadge: true, // [NEW] badge on the title
-    // Title at the top of the page
-    title: "Create Ad Campaign in the Streets",
-    // Description under the title
-    description: "The campaign will feature banners in the streets that highlight the benefits of meditation and mindfulness. We believe that by spreading awareness about the importance of mental health, we can help people lead happier and healthier lives.",
+    path: "clean-water-project",
+    newBadge: true,
+    title: "Clean Water Project for Rural Communities",
+    description: "Join us in providing access to clean and safe drinking water for rural communities. Your support will help install water purification systems and ensure that families have a sustainable source of clean water for their daily needs.",
     questionsAndAnswers: [
       {
-        question: "What is the purpose of a street campaign promoting meditation and mindfulness?",
-        answer: "A street campaign promoting meditation and mindfulness could help raise awareness about these practices and encourage people to incorporate them into their daily lives."
+        question: "Why is access to clean water crucial for rural communities?",
+        answer: "Access to clean water is essential for health and well-being. It helps prevent waterborne diseases and provides a foundation for community development, education, and economic stability."
       },
       {
-        question: "What are some benefits of practicing meditation and mindfulness?",
-        answer: "Meditation and mindfulness practices have been shown to have a variety of health benefits, including reducing stress and anxiety, improving sleep, and fostering compassion and empathy."
+        question: "How will the funds be used in this clean water project?",
+        answer: "The funds raised will be used to install water purification systems, drill wells, and implement sustainable water management practices in rural areas, ensuring a long-term solution to the water crisis."
       },
       {
-        question: "What are some mindfulness exercises?",
-        answer: "Here are some mindfulness exercises you can try: Body scan meditation, Mindful breathing, Walking meditation, Loving-kindness meditation, Mindful listening."
+        question: "What impact will my donation have on the community?",
+        answer: "Your donation will directly contribute to improving the quality of life for people in rural communities by providing them with a basic necessity – clean and safe drinking water. It's a step towards breaking the cycle of poverty and promoting overall well-being."
       }
     ],
     rewards: [
       {
-        goal: "Donate $10",
-        title: "Get an exclusive Discord Donor rank",
-        description: "Discord Donor rank gives you access to a private channel and special emotes."
+        goal: "Donate $20",
+        title: "Receive a personalized digital certificate",
+        description: "Receive a digital certificate expressing gratitude for your contribution to the Clean Water Project."
       },
       {
-        goal: "Donate $25",
-        title: "Get a personalized thank-you",
-        description: "Get a personalized thank-you message from the organization and a shoutout on social media."
+        goal: "Donate $50",
+        title: "Get a photo book documenting the project",
+        description: "Receive a photo book showcasing the progress of the Clean Water Project, including pictures of installations, community members, and the positive impact of your donation."
       },
       {
-        goal: "Donate $100",
-        title: "Get a custom-made T-shirt",
-        description: "Get a custom-made T-shirt with the organization's logo."
-      },
+        goal: "Donate $200",
+        title: "Name a water purification system after you",
+        description: "Have a water purification system named after you or a person of your choice, recognizing your significant contribution to providing clean water to a community."
+      }
     ]
   }
 ]
+
+
+// **********************************
+// ********** UI SETTINGS ***********
+// **********************************
+
+// Adjust website appearance
+/*
+  You can change variables in Shared.scss file to change website appearance
+*/
+
+/*
+  Remove leading zeros from donate amount on input
+*/
+const removeLeadingZeros = true;
+
+/*
+  Text on dotation form button
+  Default value is "Donate"
+*/
+const donateButtonText = "Donate";
 
 
 // Import settings to props
@@ -419,7 +416,7 @@ for (let index = 0; index < fundraisersData.length; index++) {
   })
 }
 
-// On path"/" or fundraiser not found redirect to the first fundraiser
+// On path "/" or fundraiser not found redirect to the first fundraiser
 if (pathArray.length > 0) {
   pathArray.push(
     {

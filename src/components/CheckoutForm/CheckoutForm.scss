@@ -1,0 +1,23 @@
+// Variables
+
+// Import color, font variables from Shared.scss file
+@use '../../Shared.scss';
+
+
+// Form styles
+@media all and (max-width: 400px) {
+    iframe {
+        zoom: 1.5; 
+        -moz-transform: scale(1.5);
+        -moz-transform-origin: 0 0;
+    }
+  }
+.stripeForm{
+    .donation-button {
+        margin-top: 10px;
+        width: 100%;
+        .icon-container {
+          visibility: hidden;
+        }
+      }
+}
