@@ -79,7 +79,7 @@ function LatestDonations(props) {
             "James Lee",
             "Laura Perez"
         ];
-        const currencies = ["$", "€"]
+        const currencies = ["$", "€","£","¥"]
 
         var lastDonations = latestDonations;
         if (Math.floor(Math.random() * 3) === 0) {
@@ -101,9 +101,8 @@ function LatestDonations(props) {
         const latestDonationsHeaderElement = document.getElementById('LatestDonations-donations');
         if(clear){
             latestDonationsHeaderElement.innerHTML = "";
-            console.log("CLEARED")
         }
-        console.log(latestDonationsInHtml);
+        //console.log(latestDonationsInHtml);
         var newDonations = latestDonations.filter(function(el) {
             return !latestDonationsInHtml.includes(el);
         });
@@ -139,7 +138,6 @@ function LatestDonations(props) {
         // Fetch donations data here
         const responseJson = await getLastFakeDonations();
         setLatestDonations(responseJson);
-        console.log(latestDonations);
         handleLatestDonationsChange(clear);
     }, 1000);
 

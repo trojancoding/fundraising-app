@@ -36,6 +36,38 @@ function Donate(props) {
   const { height, width } = useWindowDimensions();
   const [latestDonations, setLatestDonations] = useState([]);
 
+  const [donationData, setDonationData] = useState(null);
+  const [currencyShortName, setCurrencyShortName] = useState("USD");
+  const [symbol, setSymbol] = useState("$");
+  const [moneyRaised, setMoneyRaised] = useState(0);
+  const [moneyToRaise, setMoneyToRaise] = useState(0);
+  const [percentRaised, setPercentRaised] = useState(0);
+  const [moneyRaisedSpanValue, setMoneyRaisedSpanValue] = useState(0);
+
+
+
+  const updateCurrencyShortName = (newState) => {
+    setCurrencyShortName(newState);
+  };
+  const updateSymbol = (newState) => {
+    setSymbol(newState);
+  };
+  const updateMoneyRaised = (newState) => {
+    setMoneyRaised(newState);
+  };
+  const updateMoneyToRaise = (newState) => {
+    setMoneyToRaise(newState);
+  };
+  const updatePercentRaised = (newState) => {
+    setPercentRaised(newState);
+  };
+  const updateMoneyRaisedSpanValue = (newState) => {
+    setMoneyRaisedSpanValue(newState);
+  };
+  const updateDonationData = (newState) => {
+    setDonationData(newState);
+  };
+
   const updateLatestDonations = (newState) => {
     setLatestDonations(newState);
   };
@@ -49,7 +81,20 @@ function Donate(props) {
       <>
             <div className='Donate-container'>
               <Header title={fundraiserData.title} description={fundraiserData.description} newBadge={fundraiserData.newBadge}/>
-              <DonationInfo moneyRaised='US$ 20,712' PageSettings={PageSettings} />
+              <DonationInfo PageSettings={PageSettings} donationData={donationData} setDonationData={updateDonationData}
+                currencyShortName={currencyShortName}
+                symbol={symbol}
+                moneyRaised={moneyRaised}
+                moneyToRaise={moneyToRaise}
+                percentRaised={percentRaised}
+                moneyRaisedSpanValue={moneyRaisedSpanValue}
+                setCurrencyShortName={updateCurrencyShortName}
+                setSymbol={updateSymbol}
+                setMoneyRaised={updateMoneyRaised}
+                setMoneyToRaise={updateMoneyToRaise}
+                setPercentRaised={updatePercentRaised}
+                setMoneyRaisedSpanValue={updateMoneyRaisedSpanValue}
+              />
               <LatestDonations latestDonations={latestDonations} setLatestDonations={updateLatestDonations}
               />
               <QuestionsAnswers questionsAndAnswers={fundraiserData.questionsAndAnswers} rewards={fundraiserData.rewards} />
@@ -65,7 +110,20 @@ function Donate(props) {
             <QuestionForm />
             </div>
             <div className='column'>
-            <DonationInfo moneyRaised='US$ 20,712' PageSettings={PageSettings} />
+            <DonationInfo PageSettings={PageSettings} donationData={donationData} setDonationData={updateDonationData}
+              currencyShortName={currencyShortName}
+              symbol={symbol}
+              moneyRaised={moneyRaised}
+              moneyToRaise={moneyToRaise}
+              percentRaised={percentRaised}
+              moneyRaisedSpanValue={moneyRaisedSpanValue}
+              setCurrencyShortName={updateCurrencyShortName}
+              setSymbol={updateSymbol}
+              setMoneyRaised={updateMoneyRaised}
+              setMoneyToRaise={updateMoneyToRaise}
+              setPercentRaised={updatePercentRaised}
+              setMoneyRaisedSpanValue={updateMoneyRaisedSpanValue}
+            />
             <LatestDonations latestDonations={latestDonations} setLatestDonations={updateLatestDonations}
               />
             </div>
