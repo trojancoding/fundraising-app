@@ -2,10 +2,11 @@ import React, {useState} from 'react';
 import {useStripe, useElements, PaymentElement} from '@stripe/react-stripe-js';
 import './CheckoutForm.scss';
 
-const CheckoutForm = () => {
+const CheckoutForm = (props) => {
   const stripe = useStripe();
   const elements = useElements();
 
+  const options = props.options;
   const [errorMessage, setErrorMessage] = useState(null);
 
   const handleSubmit = async (event) => {
@@ -42,6 +43,9 @@ const CheckoutForm = () => {
 
   return (
     <form onSubmit={handleSubmit} className='stripeForm'>
+      <div class="separator"></div>
+      <p class="text">Donation Amount</p>
+      <h3>{options.priceElementSelected.symbol != null ? options.priceElementSelected.symbol : options.priceElementSelected.currencyShortName}{options.donationAmountValue}</h3>
       <PaymentElement />
       <button disabled={!stripe} className='donation-button'><p className='button-text'>Confirm</p><span className='icon-container'></span></button>
       {/* Show error message to your customers
