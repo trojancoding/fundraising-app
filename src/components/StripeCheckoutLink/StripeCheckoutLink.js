@@ -49,7 +49,7 @@ function StripeCheckoutClientSide(props) {
           <option value={priceElement.productLink}>{priceElement.currencyShortName + " - " + priceElement.currencyName}</option>
         )}
       </select>
-      {errorMessage ?? <div>{errorMessage}</div>}
+      {errorMessage && <div className='error'>{errorMessage}</div>}
       <button role="link" onClick={handleClick} className='donation-button'><p className='button-text'>{props.buttonText ?? "Donate"}</p><span className='icon-container'></span></button>
     </>
   );

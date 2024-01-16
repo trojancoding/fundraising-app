@@ -16,11 +16,13 @@
 
 $done-icon: '../../assets/icons/done_icon.svg';
 $edit-icon: '../../assets/icons/edit_icon.svg';
+$error-icon: './assets/icons/error_icon.svg';
 $heart-icon: '../../assets/icons/heart_icon.svg';
 $help-icon: '../../assets/icons/help_icon.svg';
 $redeem-icon: '../../assets/icons/redeem_icon.svg';
 $send-icon: '../../assets/icons/send_icon.svg';
 $expand-more-icon: '../../assets/icons/expand_more_icon.svg';
+
 // Font Face Variables
 
 @font-face {
@@ -68,6 +70,7 @@ $color-accent: #F5E6DC;
 $color-accent-2: #E4B290;
 $color-accent-3: #F0DDD1;
 $color-mild: #2222221D;
+$color-error: #e77979;
 
 // Gaps and Sizes
 
@@ -95,6 +98,41 @@ h3 {
     color: $font-main-color;
     line-height: 120%;
     margin: 0 0 20px;
+  }
+
+  // Errors
+
+  .error {
+    font-family: $font-main, Helvetica, sans-serif;
+    font-size: $font-tiny-size;
+    font-weight: 500;
+    color: $color-error;
+    line-height: 120%;
+    margin: 10px 0;
+
+    &::before {
+        content: url($error-icon);
+        display: inline-block;
+        transform: translateY(6px);
+        margin-top: -10px;
+        padding: 0;
+        margin-right: 6px;
+        filter: invert(60%) sepia(23%) saturate(1048%) hue-rotate(314deg) brightness(95%) contrast(91%);
+    }
+  }
+
+  .email-error {
+    margin: 0;
+  }
+
+  // Button Hover Effect
+  button {
+    cursor: pointer;
+    transition: filter 0.3s;
+
+    &:hover {
+        filter: brightness(0.95) saturate(1.3);
+    }
   }
 
   // Responsiveness

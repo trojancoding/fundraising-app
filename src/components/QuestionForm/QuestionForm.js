@@ -121,7 +121,7 @@ function QuestionForm(props) {
                     placeholder='What do you want to know?'
                 />
                 <span className='characters-left'>{300 - message.length} characters left</span>
-                {emailErrorMessage ?? <div className='error'>{emailErrorMessage}</div>}
+                {emailErrorMessage && <div className='error email-error'>{emailErrorMessage}</div>}
                 <button className='send-button' onClick={handleButtonClick}>
                     <p className='send-button-text'>Send</p>
                     <span className='send-icon-container'></span>

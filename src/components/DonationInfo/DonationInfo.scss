@@ -122,13 +122,17 @@
   }
 
   .donation-button {
-    cursor: pointer;
     display: flex;
     flex-flow: row nowrap;
     justify-content: center;
     align-items: center;
     background-color: Shared.$color-main;
+    transition: filter 0.3s !important;
     @include text-box();
+
+    &:hover {
+      filter: brightness(1.15);
+    }
 
     .button-text {
       color: Shared.$font-bright-color;

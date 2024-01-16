@@ -218,7 +218,7 @@ function StripeCheckoutServer(props) {
                 <div className='currency-dropdown'>{priceElementSelected.symbol != null ? priceElementSelected.symbol : priceElementSelected.currencyShortName}</div>
                 <input className='donation-input' type='text' placeholder='5.00' value={donationAmountValue} onChange={(e) => handleAmountChange(e)} />
       </div>
-      {errorMessage ?? <div>{errorMessage}</div>}
+      {errorMessage && <div className='error'>{errorMessage}</div>}
       <button onClick={handleClick} className='donation-button'><p className='button-text'>{props.buttonText ?? "Donate"}</p><span className='icon-container'></span></button>
       {showStripeElements &&
       <Elements stripe={stripePromise} options={stripeOptions}>
