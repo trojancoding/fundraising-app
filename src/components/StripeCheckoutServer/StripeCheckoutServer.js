@@ -1,5 +1,5 @@
 import React from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Elements, PaymentElement } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js'
 import CheckoutForm from '../CheckoutForm/CheckoutForm';
@@ -39,7 +39,8 @@ function StripeCheckoutServer(props) {
     };
   */
   const [stripeOptions, setStripeOptions] = useState(null);
-
+  const [paymentOptions, setPaymentOptions] = useState(null);
+  
   
   // Messages
   const [errorMessage, setErrorMessage] = useState("");
@@ -193,6 +194,7 @@ function StripeCheckoutServer(props) {
           };
         */
         setStripeOptions({clientSecret:intentResponseJson.client_secret})
+        setPaymentOptions({priceElementSelected:priceElementSelected, donationAmountValue:donationAmountValue})
         setShowStripeElements(true);
         setErrorMessage("");
       }else{
@@ -207,6 +209,10 @@ function StripeCheckoutServer(props) {
       }
     }
   };
+
+  useEffect(() => {
+    setShowStripeElements(false);
+  }, [donationAmountValue, currencyValue, priceElementSelected]);
   return (
     <>
       <select name="currency" id="currency" onChange={(e) => handleCurrencyChange(e)} value={currencyValue}>
@@ -222,7 +228,7 @@ function StripeCheckoutServer(props) {
       <button onClick={handleClick} className='donation-button'><p className='button-text'>{props.buttonText ?? "Donate"}</p><span className='icon-container'></span></button>
       {showStripeElements &&
       <Elements stripe={stripePromise} options={stripeOptions}>
-        <CheckoutForm />
+        <CheckoutForm options={paymentOptions} />
       </Elements>
       }
 

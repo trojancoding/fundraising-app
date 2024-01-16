@@ -31,23 +31,23 @@ function QuestionsAnswers(props) {
     } 
 
     const questionsHeaderOnClickHandle = (e) =>{
-        rewardsHeader.current.classList.add('disabled');
-        questionsHeader.current.classList.remove('disabled');
+        // rewardsHeader.current.classList.add('disabled');
+        // questionsHeader.current.classList.remove('disabled');
         setShowRewards(false);
     }
     const rewardsHeaderOnClickHandle = (e) =>{
-        rewardsHeader.current.classList.remove('disabled');
-        questionsHeader.current.classList.add('disabled');
+        // rewardsHeader.current.classList.remove('disabled');
+        // questionsHeader.current.classList.add('disabled');
         setShowRewards(true);
     }
     return (
         <div className='QuestionsAnswers-container'>
             <div className='QuestionsAnswers-header'>
-                <div className='QuestionsAnswers-header-choice' onClick={questionsHeaderOnClickHandle} ref={questionsHeader}>
+                <div className={`QuestionsAnswers-header-choice ${showRewards && 'disabled'}`} onClick={questionsHeaderOnClickHandle} ref={questionsHeader}>
                     <h2>Q&A</h2>
                     <span className='icon icon-help'></span>
                 </div>
-                <div className='QuestionsAnswers-header-choice disabled' onClick={rewardsHeaderOnClickHandle} ref={rewardsHeader}>
+                <div className={`QuestionsAnswers-header-choice ${!showRewards && 'disabled'}`} onClick={rewardsHeaderOnClickHandle} ref={rewardsHeader}>
                     <h2>Rewards</h2>
                     <span className='icon icon-redeem'></span>
                 </div>

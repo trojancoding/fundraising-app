@@ -53,7 +53,7 @@ import {
       - server needed to generate payment links every time
 
 */
-const paymentMethod = "server";
+const paymentMethod = "server-side";
 
 
 // **********************************
@@ -148,7 +148,7 @@ const submitQuestionFormUrl = 'http://localhost:3003/api/submitForm';
 //     ]
 // }
 // null or url string
-const getDonationGoalDataUrl =  null;//'http://localhost:3003/api/getDonationGoalData';
+const getDonationGoalDataUrl =  'http://localhost:3003/api/getDonationGoalData'; //null
 // Url of API endpoint that gets LatestDonations data
 // GET parameters: donationPath (works as id)
 // returned data should be JSON
@@ -168,7 +168,7 @@ const getDonationGoalDataUrl =  null;//'http://localhost:3003/api/getDonationGoa
 // }
 // ]
 // null or url string
-const getLatestDonationsDataUrl =  null;//'http://localhost:3003/api/getLatestDonationsData';
+const getLatestDonationsDataUrl =  'http://localhost:3003/api/getLatestDonationsData'; //null
 
 // **********************************
 // ****** CLIENT-SIDE METHOD ********
