@@ -149,6 +149,8 @@ const submitQuestionFormUrl = null;//'http://localhost:3003/api/submitForm';
 // }
 // null or url string
 const getDonationGoalDataUrl =  null;//'http://localhost:3003/api/getDonationGoalData';
+const donationGoalDataFetchInterval = 1000; //interval in ms
+
 // Url of API endpoint that gets LatestDonations data
 // GET parameters: donationPath (works as id)
 // returned data should be JSON
@@ -169,6 +171,7 @@ const getDonationGoalDataUrl =  null;//'http://localhost:3003/api/getDonationGoa
 // ]
 // null or url string
 const getLatestDonationsDataUrl =  null;//'http://localhost:3003/api/getLatestDonationsData';
+const latestDonationsDataFetchInterval = 1000; //interval in ms
 
 // **********************************
 // ****** CLIENT-SIDE METHOD ********
@@ -455,6 +458,9 @@ const PageSettings = {
   getDonationGoalDataUrl: getDonationGoalDataUrl,
   getLatestDonationsDataUrl: getLatestDonationsDataUrl,
   submitQuestionFormUrl: submitQuestionFormUrl,
+
+  donationGoalDataFetchInterval:donationGoalDataFetchInterval,
+  latestDonationsDataFetchInterval: latestDonationsDataFetchInterval,
 
   serverMethodPriceList: serverMethodPriceList,
   clientSideMethodPriceList: clientSideMethodPriceList,

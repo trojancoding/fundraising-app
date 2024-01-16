@@ -121,8 +121,11 @@ function Donate(props) {
               setPercentRaised={updatePercentRaised}
               setMoneyRaisedSpanValue={updateMoneyRaisedSpanValue}
               priceElementSelected={priceElementSelected} setPriceElementSelected={updatePriceElementSelected}
+              donationGoalDataFetchInterval={PageSettings.donationGoalDataFetchInterval}
             />
-            <LatestDonations donationPath={fundraiserData.path} latestDonations={latestDonations} setLatestDonations={updateLatestDonations} getLatestDonationsDataUrl={PageSettings.getLatestDonationsDataUrl}
+            <LatestDonations donationPath={fundraiserData.path} latestDonations={latestDonations}
+            setLatestDonations={updateLatestDonations} getLatestDonationsDataUrl={PageSettings.getLatestDonationsDataUrl}
+            latestDonationsDataFetchInterval={PageSettings.latestDonationsDataFetchInterval}
             />
             <QuestionsAnswers questionsAndAnswers={fundraiserData.questionsAndAnswers} rewards={fundraiserData.rewards}
               showRewards={showRewards} setShowRewards={updateShowRewards} priceElementSelected={priceElementSelected} />
@@ -159,8 +162,11 @@ function Donate(props) {
               setPercentRaised={updatePercentRaised}
               setMoneyRaisedSpanValue={updateMoneyRaisedSpanValue}
               priceElementSelected={priceElementSelected} setPriceElementSelected={updatePriceElementSelected}
+              donationGoalDataFetchInterval={PageSettings.donationGoalDataFetchInterval}
             />
-            <LatestDonations donationPath={fundraiserData.path} latestDonations={latestDonations} setLatestDonations={updateLatestDonations} getLatestDonationsDataUrl={PageSettings.getLatestDonationsDataUrl}
+            <LatestDonations donationPath={fundraiserData.path} latestDonations={latestDonations}
+            setLatestDonations={updateLatestDonations} getLatestDonationsDataUrl={PageSettings.getLatestDonationsDataUrl}
+            latestDonationsDataFetchInterval={PageSettings.latestDonationsDataFetchInterval}
             />
           </div>
         </>

@@ -61,6 +61,8 @@ function DonationInfo(props) {
     const priceElementSelected = props.priceElementSelected;
     const setPriceElementSelected = props.setPriceElementSelected;
 
+    const donationGoalDataFetchInterval = props.donationGoalDataFetchInterval;
+    
     const {
         donationData,
         setDonationData,
@@ -172,7 +174,7 @@ function DonationInfo(props) {
         } catch (error) {
             console.log("Something went wrong while trying to get donation goal data.")
         }
-    }, 1000, true);
+    }, donationGoalDataFetchInterval, true);
 
     useEffect(() => {
         handleDataUpdate();
