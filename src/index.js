@@ -71,7 +71,7 @@ const paymentMethod = "server";
 
   A list of zero-decimal currencies (no decimal point in the input) 
 */
-const zeroDecimalCurrencies = ["BIF","CLP","DJF","GNF","JPY","KMF","KRW","MGA","PYG","RWF","UGX","VND","VUV","XAF","XOF","XPF"]; // currency shortNames
+const zeroDecimalCurrencies = ["BIF", "CLP", "DJF", "GNF", "JPY", "KMF", "KRW", "MGA", "PYG", "RWF", "UGX", "VND", "VUV", "XAF", "XOF", "XPF"]; // currency shortNames
 
 /*
   https://stripe.com/docs/currencies#three-decimal
@@ -96,7 +96,7 @@ const threeDecimalCurrencies = [];
   In that case divisableByHundredCurrencies are treated as zeroDecimalCurrencies
   In CLIENT-SIDE METHOD the lowest price is set to minimal 0.01
 */
-const divisableByHundredCurrencies = ["ISK","UGX"]; // currency shortNames
+const divisableByHundredCurrencies = ["ISK", "UGX"]; // currency shortNames
 
 // **********************************
 // **********************************
@@ -111,85 +111,85 @@ const divisableByHundredCurrencies = ["ISK","UGX"]; // currency shortNames
 // **********************************
 // ****** CLIENT-SIDE METHOD ********
 // **********************************
-    /*
-        USING PRODUCTS WITH PRICE
-    */
+/*
+    USING PRODUCTS WITH PRICE
+*/
 /*
   List of currencies with their priceIds for client-side method
   Default value is the first value
 */
 const clientSideMethodPriceList = [
   {
-    "symbol":"€", // (string or null) Currency symbol shown before donation amount
+    "symbol": "€", // (string or null) Currency symbol shown before donation amount
     // if symbol is null currencyShortName is shown before donation amount
     "currencyShortName": "EUR", // (string) Currency shortName (Provide the same shortNames across settings)
     "currencyName": "Euro", // (string) Currency name shown in currency 
-    "priceId" : "price_1OXs7jAz4DzMSQxdkNE0vEcr", // (string) Stripe priceId from product
-    "productPrice" : 0.01, // (float) Stripe product price to calculate quantity for desired amount
-    "minimumCharge":0.50, // (float) Minimum charge amount from stripe website (https://stripe.com/docs/currencies#minimum-and-maximum-charge-amounts)
+    "priceId": "price_1OXs7jAz4DzMSQxdkNE0vEcr", // (string) Stripe priceId from product
+    "productPrice": 0.01, // (float) Stripe product price to calculate quantity for desired amount
+    "minimumCharge": 0.50, // (float) Minimum charge amount from stripe website (https://stripe.com/docs/currencies#minimum-and-maximum-charge-amounts)
     //(the lowest amount from the page doesn't always work, so boost it up in some cases)
     // ('Amount must convert to at least X.XX. CA$0.50 converts to approximately X.XX.')
-    "maximumCharge":999999.99,// (int) Maximum charge amount from stripe website (https://stripe.com/docs/currencies#minimum-and-maximum-charge-amounts)
+    "maximumCharge": 999999.99,// (int) Maximum charge amount from stripe website (https://stripe.com/docs/currencies#minimum-and-maximum-charge-amounts)
   },
   {
-    "symbol":"$",
+    "symbol": "$",
     "currencyShortName": "USD",
     "currencyName": "US Dollar",
-    "priceId" : "price_1OXqzwAz4DzMSQxdAVc2CAKt",
-    "productPrice" : 0.01,
-    "minimumCharge":0.50,
-    "maximumCharge":999999.99,
+    "priceId": "price_1OXqzwAz4DzMSQxdAVc2CAKt",
+    "productPrice": 0.01,
+    "minimumCharge": 0.50,
+    "maximumCharge": 999999.99,
   },
   {
-    "symbol":"CA$",
+    "symbol": "CA$",
     "currencyShortName": "CAD",
     "currencyName": "Canadian Dollar",
-    "priceId" : "price_1OXs8dAz4DzMSQxdpq84Kq6X",
-    "productPrice" : 0.01,
-    "minimumCharge":0.50,
-    "maximumCharge":999999.99,
+    "priceId": "price_1OXs8dAz4DzMSQxdpq84Kq6X",
+    "productPrice": 0.01,
+    "minimumCharge": 0.50,
+    "maximumCharge": 999999.99,
   },
   {
-    "symbol":"£",
+    "symbol": "£",
     "currencyShortName": "GBP",
     "currencyName": "British Pound",
-    "priceId" : "price_1OXs9kAz4DzMSQxdUCnSQry9",
-    "productPrice" : 0.01,
-    "minimumCharge":0.40,
-    "maximumCharge":999999.99,
+    "priceId": "price_1OXs9kAz4DzMSQxdUCnSQry9",
+    "productPrice": 0.01,
+    "minimumCharge": 0.40,
+    "maximumCharge": 999999.99,
   },
   {
-    "symbol":null,
+    "symbol": null,
     "currencyShortName": "ISK",
     "currencyName": "Icelandic Króna",
-    "priceId" : "price_1OYG6PAz4DzMSQxdFonqWysw",
-    "productPrice" : 0.01,
-    "minimumCharge":100,
-    "maximumCharge":999999.99,
+    "priceId": "price_1OYG6PAz4DzMSQxdFonqWysw",
+    "productPrice": 0.01,
+    "minimumCharge": 100,
+    "maximumCharge": 999999.99,
   },
 ];
 // **********************************
 // ********* LINK METHOD ************
 // **********************************
-    /*
-        USING STRIPE LINKS FOR CURRENCIES
-    */
+/*
+    USING STRIPE LINKS FOR CURRENCIES
+*/
 /*
   List of currencies with their productLinks for link method
   Default value is the first value
 */
 const linkMethodPriceList = [
   {
-    "symbol":"€", // (string or null) Currency symbol shown before donation amount
+    "symbol": "€", // (string or null) Currency symbol shown before donation amount
     "currencyShortName": "EUR", // (string) Currency shortName (Provide the same shortNames across settings)
     "currencyName": "Euro", // (string) Currency name shown in currency 
-    "productLink" : "https://donate.stripe.com/test_5kAbIT6AedMs9GM145", // (string) Stripe productLink from product
+    "productLink": "https://donate.stripe.com/test_5kAbIT6AedMs9GM145", // (string) Stripe productLink from product
   },
   {
-    "symbol":"$",
+    "symbol": "$",
     "currencyShortName": "USD",
     "currencyName": "US Dollar",
-    "productLink" : "https://donate.stripe.com/test_dR600bcYCdMsaKQ5kk",
+    "productLink": "https://donate.stripe.com/test_dR600bcYCdMsaKQ5kk",
   },
 ];
 
@@ -198,30 +198,86 @@ const linkMethodPriceList = [
 // **********************************
 /*
   URL of the server's createPaymentIntent method
-  POST parameters: amount, currency
+  POST parameters: amount, currency, donationPath (works as id)
 */
 const createPaymentIntentUrl = "http://localhost:3003/api/create-payment-intent";
+
+
+// **********************************
+// ********* API ENDPOINTS **********
+// **********************************
+/*
+  URL of the server's submitForm method
+  POST parameters: message, email, donationPath (works as id)
+  string or null
+*/
+const submitQuestionFormUrl = 'http://localhost:3003/api/submitForm';
+
+// Url of API endpoint that gets DonationInfo data
+// GET parameters: donationPath (works as id)
+// returned data should be JSON
+// DonationGoalData accepts array of donation info in different currencies at the same time
+// DonationGoalData format: (array of objects)
+//   {
+//     goalArray:[
+//         {
+//             currencyShortName:"USD",// currency in which amount is stated
+//             currencySymbol:"$",// string of donation currency symbol that is shown before donation amount
+//             goalAmount: 10000, // goal amount number in the currency
+//             raisedAmount: 500, // raised amount number in the currency
+//         },
+//         {
+//             currencyShortName:"EUR",
+//             currencySymbol:"€",
+//             goalAmount: 9190,
+//             raisedAmount: 460,
+//         },
+//     ]
+// }
+// null or url string
+const getDonationGoalDataUrl =  null;//'http://localhost:3003/api/getDonationGoalData';
+// Url of API endpoint that gets LatestDonations data
+// GET parameters: donationPath (works as id)
+// returned data should be JSON
+// LatestDonationsData format: (array of objects)
+// [
+// {
+//   donorName: "Anonymous",     //    String of donor name
+//   donationAmount: 200, //   donation amount number
+//   donationCurrency: "$", // string of donation currency that is shown before donation amount
+//   donationTimestamp: 186400000, // unix timestamp of the donation
+// },
+// {
+//   donorName: "Anonymous 2",     //    String of donor name
+//   donationAmount: 100, //   donation amount number
+//   donationCurrency: "$", // string of donation currency that is shown before donation amount
+//   donationTimestamp: 126400000, // unix timestamp of the donation
+// }
+// ]
+// null or url string
+const getLatestDonationsDataUrl =  null;//'http://localhost:3003/api/getLatestDonationsData';
+
 /*
   List of currencies with their productLinks for link method
   Default value is the first value
 */
 const serverMethodPriceList = [
   {
-    "symbol":"€", // (string or null) Currency symbol shown before donation amount
+    "symbol": "€", // (string or null) Currency symbol shown before donation amount
     "currencyShortName": "EUR", // (string) Currency shortName (Provide the same shortNames across settings)
     // currencyShortName is used as ID in Checkout component
     "currencyName": "Euro", // (string) Currency name shown in currency 
-    "minimumCharge":0.50, // (float) Minimum charge amount from stripe website (https://stripe.com/docs/currencies#minimum-and-maximum-charge-amounts)
+    "minimumCharge": 0.50, // (float) Minimum charge amount from stripe website (https://stripe.com/docs/currencies#minimum-and-maximum-charge-amounts)
     //(the lowest amount from the page doesn't always work, so boost it up in some cases)
     // ('Amount must convert to at least X.XX. CA$0.50 converts to approximately X.XX.')
-    "maximumCharge":999999.99,// (int) Maximum charge amount from stripe website (https://stripe.com/docs/currencies#minimum-and-maximum-charge-amounts)
+    "maximumCharge": 999999.99,// (int) Maximum charge amount from stripe website (https://stripe.com/docs/currencies#minimum-and-maximum-charge-amounts)
   },
   {
-    "symbol":"$",
+    "symbol": "$",
     "currencyShortName": "USD",
     "currencyName": "US Dollar",
-    "minimumCharge":0.50,
-    "maximumCharge":999999.99,
+    "minimumCharge": 0.50,
+    "maximumCharge": 999999.99,
   },
 ];
 // **********************************
@@ -229,6 +285,9 @@ const serverMethodPriceList = [
 // **********************************
 
 // Adjust website appearance
+/*
+  You can change variables in Shared.scss file to change website appearance
+*/
 
 /*
   Remove leading zeros from donate amount on input
@@ -247,81 +306,81 @@ const donateButtonText = "Donate";
 const fundraisersData = [
   {
     // Path to the fundraiser (example.com/path)
-    path:"tram-ad-campaign",
-    newBadge:false, // [NEW] badge on the title
+    path: "tram-ad-campaign",
+    newBadge: false, // [NEW] badge on the title
     // Title at the top of the page
-    title:"Create Ad Campaign in the Tram",
+    title: "Create Ad Campaign in the Tram",
     // Description under the title
-    description:"The campaign will feature posters and banners that highlight the benefits of meditation and mindfulness. We believe that by spreading awareness about the importance of mental health, we can help people lead happier and healthier lives.",
-    questionsAndAnswers:[
+    description: "The campaign will feature posters and banners that highlight the benefits of meditation and mindfulness. We believe that by spreading awareness about the importance of mental health, we can help people lead happier and healthier lives.",
+    questionsAndAnswers: [
       {
-        question:"What is the purpose of a tram campaign promoting meditation and mindfulness?",
-        answer:"A tram campaign promoting meditation and mindfulness could help raise awareness about these practices and encourage people to incorporate them into their daily lives."
+        question: "What is the purpose of a tram campaign promoting meditation and mindfulness?",
+        answer: "A tram campaign promoting meditation and mindfulness could help raise awareness about these practices and encourage people to incorporate them into their daily lives."
       },
       {
-        question:"What are some benefits of practicing meditation and mindfulness?",
-        answer:"Meditation and mindfulness practices have been shown to have a variety of health benefits, including reducing stress and anxiety, improving sleep, and fostering compassion and empathy."
+        question: "What are some benefits of practicing meditation and mindfulness?",
+        answer: "Meditation and mindfulness practices have been shown to have a variety of health benefits, including reducing stress and anxiety, improving sleep, and fostering compassion and empathy."
       },
       {
-        question:"What are some mindfulness exercises?",
-        answer:"Here are some mindfulness exercises you can try: Body scan meditation, Mindful breathing, Walking meditation, Loving-kindness meditation, Mindful listening."
+        question: "What are some mindfulness exercises?",
+        answer: "Here are some mindfulness exercises you can try: Body scan meditation, Mindful breathing, Walking meditation, Loving-kindness meditation, Mindful listening."
       }
     ],
-    rewards:[
+    rewards: [
       {
-        goal:"Donate $10",
-        title:"Get an exclusive Discord Donor rank",
-        description:"Discord Donor rank gives you access to a private channel and special emotes."
+        goal: "Donate $10",
+        title: "Get an exclusive Discord Donor rank",
+        description: "Discord Donor rank gives you access to a private channel and special emotes."
       },
       {
-        goal:"Donate $25",
-        title:"Get a personalized thank-you",
-        description:"Get a personalized thank-you message from the organization and a shoutout on social media."
+        goal: "Donate $25",
+        title: "Get a personalized thank-you",
+        description: "Get a personalized thank-you message from the organization and a shoutout on social media."
       },
       {
-        goal:"Donate $100",
-        title:"Get a custom-made T-shirt",
-        description:"Get a custom-made T-shirt with the organization's logo."
+        goal: "Donate $100",
+        title: "Get a custom-made T-shirt",
+        description: "Get a custom-made T-shirt with the organization's logo."
       },
     ]
   },
   {
     // Path to the fundraiser (example.com/path)
-    path:"street-ad-campaign",
-    newBadge:true, // [NEW] badge on the title
+    path: "street-ad-campaign",
+    newBadge: true, // [NEW] badge on the title
     // Title at the top of the page
-    title:"Create Ad Campaign in the Streets",
+    title: "Create Ad Campaign in the Streets",
     // Description under the title
-    description:"The campaign will feature banners in the streets that highlight the benefits of meditation and mindfulness. We believe that by spreading awareness about the importance of mental health, we can help people lead happier and healthier lives.",
-    questionsAndAnswers:[
+    description: "The campaign will feature banners in the streets that highlight the benefits of meditation and mindfulness. We believe that by spreading awareness about the importance of mental health, we can help people lead happier and healthier lives.",
+    questionsAndAnswers: [
       {
-        question:"What is the purpose of a street campaign promoting meditation and mindfulness?",
-        answer:"A street campaign promoting meditation and mindfulness could help raise awareness about these practices and encourage people to incorporate them into their daily lives."
+        question: "What is the purpose of a street campaign promoting meditation and mindfulness?",
+        answer: "A street campaign promoting meditation and mindfulness could help raise awareness about these practices and encourage people to incorporate them into their daily lives."
       },
       {
-        question:"What are some benefits of practicing meditation and mindfulness?",
-        answer:"Meditation and mindfulness practices have been shown to have a variety of health benefits, including reducing stress and anxiety, improving sleep, and fostering compassion and empathy."
+        question: "What are some benefits of practicing meditation and mindfulness?",
+        answer: "Meditation and mindfulness practices have been shown to have a variety of health benefits, including reducing stress and anxiety, improving sleep, and fostering compassion and empathy."
       },
       {
-        question:"What are some mindfulness exercises?",
-        answer:"Here are some mindfulness exercises you can try: Body scan meditation, Mindful breathing, Walking meditation, Loving-kindness meditation, Mindful listening."
+        question: "What are some mindfulness exercises?",
+        answer: "Here are some mindfulness exercises you can try: Body scan meditation, Mindful breathing, Walking meditation, Loving-kindness meditation, Mindful listening."
       }
     ],
-    rewards:[
+    rewards: [
       {
-        goal:"Donate $10",
-        title:"Get an exclusive Discord Donor rank",
-        description:"Discord Donor rank gives you access to a private channel and special emotes."
+        goal: "Donate $10",
+        title: "Get an exclusive Discord Donor rank",
+        description: "Discord Donor rank gives you access to a private channel and special emotes."
       },
       {
-        goal:"Donate $25",
-        title:"Get a personalized thank-you",
-        description:"Get a personalized thank-you message from the organization and a shoutout on social media."
+        goal: "Donate $25",
+        title: "Get a personalized thank-you",
+        description: "Get a personalized thank-you message from the organization and a shoutout on social media."
       },
       {
-        goal:"Donate $100",
-        title:"Get a custom-made T-shirt",
-        description:"Get a custom-made T-shirt with the organization's logo."
+        goal: "Donate $100",
+        title: "Get a custom-made T-shirt",
+        description: "Get a custom-made T-shirt with the organization's logo."
       },
     ]
   }
@@ -330,20 +389,23 @@ const fundraisersData = [
 
 // Import settings to props
 const PageSettings = {
-  paymentMethod:paymentMethod,
+  paymentMethod: paymentMethod,
 
-  createPaymentIntentUrl:createPaymentIntentUrl,
+  createPaymentIntentUrl: createPaymentIntentUrl,
+  getDonationGoalDataUrl: getDonationGoalDataUrl,
+  getLatestDonationsDataUrl: getLatestDonationsDataUrl,
+  submitQuestionFormUrl: submitQuestionFormUrl,
 
-  serverMethodPriceList:serverMethodPriceList,
-  clientSideMethodPriceList:clientSideMethodPriceList,
-  linkMethodPriceList:linkMethodPriceList,
+  serverMethodPriceList: serverMethodPriceList,
+  clientSideMethodPriceList: clientSideMethodPriceList,
+  linkMethodPriceList: linkMethodPriceList,
 
-  donateButtonText:donateButtonText,
-  removeLeadingZeros:removeLeadingZeros,
+  donateButtonText: donateButtonText,
+  removeLeadingZeros: removeLeadingZeros,
 
-  zeroDecimalCurrencies:zeroDecimalCurrencies,
-  divisableByHundredCurrencies:divisableByHundredCurrencies,
-  threeDecimalCurrencies:threeDecimalCurrencies,
+  zeroDecimalCurrencies: zeroDecimalCurrencies,
+  divisableByHundredCurrencies: divisableByHundredCurrencies,
+  threeDecimalCurrencies: threeDecimalCurrencies,
 }
 
 // Create routes for every fundraiser
@@ -351,20 +413,20 @@ var pathArray = [];
 for (let index = 0; index < fundraisersData.length; index++) {
   const fundraiserData = fundraisersData[index];
   pathArray.push({
-    path:fundraiserData.path,
+    path: fundraiserData.path,
     element: <Donate PageSettings={PageSettings} fundraiserData={fundraiserData} />,
     errorElement: <Donate PageSettings={PageSettings} fundraiserData={fundraiserData} />,
   })
 }
 
 // On path"/" or fundraiser not found redirect to the first fundraiser
-if(pathArray.length>0){
+if (pathArray.length > 0) {
   pathArray.push(
-  {
-    path: "/",
-    element: <Donate PageSettings={PageSettings} fundraiserData={fundraisersData[0]} />,
-    errorElement: <Donate PageSettings={PageSettings} fundraiserData={fundraisersData[0]} />,
-  }
+    {
+      path: "/",
+      element: <Donate PageSettings={PageSettings} fundraiserData={fundraisersData[0]} />,
+      errorElement: <Donate PageSettings={PageSettings} fundraiserData={fundraisersData[0]} />,
+    }
   )
 }
 

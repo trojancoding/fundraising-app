@@ -44,7 +44,21 @@ function Donate(props) {
   const [percentRaised, setPercentRaised] = useState(0);
   const [moneyRaisedSpanValue, setMoneyRaisedSpanValue] = useState(0);
 
+  const [formEmail, setFormEmail] = useState('');
+  const [formMessage, setFormMessage] = useState('');
 
+  const [showRewards, setShowRewards] = useState(false);
+
+  const updateFormMessage = (newState) => {
+    setFormMessage(newState);
+  };
+  const updateFormEmail = (newState) => {
+    setFormEmail(newState);
+  };
+
+  const updateShowRewards = (newState) => {
+    setShowRewards(newState);
+  };
 
   const updateCurrencyShortName = (newState) => {
     setCurrencyShortName(newState);
@@ -78,39 +92,10 @@ function Donate(props) {
   return (
     <div className='Donate-container'>
       {width <= 1200 &&
-      <>
-            <div className='Donate-container'>
-              <Header title={fundraiserData.title} description={fundraiserData.description} newBadge={fundraiserData.newBadge}/>
-              <DonationInfo PageSettings={PageSettings} donationData={donationData} setDonationData={updateDonationData}
-                currencyShortName={currencyShortName}
-                symbol={symbol}
-                moneyRaised={moneyRaised}
-                moneyToRaise={moneyToRaise}
-                percentRaised={percentRaised}
-                moneyRaisedSpanValue={moneyRaisedSpanValue}
-                setCurrencyShortName={updateCurrencyShortName}
-                setSymbol={updateSymbol}
-                setMoneyRaised={updateMoneyRaised}
-                setMoneyToRaise={updateMoneyToRaise}
-                setPercentRaised={updatePercentRaised}
-                setMoneyRaisedSpanValue={updateMoneyRaisedSpanValue}
-              />
-              <LatestDonations latestDonations={latestDonations} setLatestDonations={updateLatestDonations}
-              />
-              <QuestionsAnswers questionsAndAnswers={fundraiserData.questionsAndAnswers} rewards={fundraiserData.rewards} />
-              <QuestionForm />
-            </div>
-      </>
-      }
-      {width > 1200 &&
-      <>
-            <div className='column'>
-            <Header title={fundraiserData.title} description={fundraiserData.description} newBadge={fundraiserData.newBadge}/>
-            <QuestionsAnswers questionsAndAnswers={fundraiserData.questionsAndAnswers} rewards={fundraiserData.rewards} />
-            <QuestionForm />
-            </div>
-            <div className='column'>
-            <DonationInfo PageSettings={PageSettings} donationData={donationData} setDonationData={updateDonationData}
+        <>
+          <div className='Donate-container'>
+            <Header title={fundraiserData.title} description={fundraiserData.description} newBadge={fundraiserData.newBadge} />
+            <DonationInfo donationPath={fundraiserData.path} PageSettings={PageSettings} donationData={donationData} setDonationData={updateDonationData} getDonationGoalDataUrl={PageSettings.getDonationGoalDataUrl}
               currencyShortName={currencyShortName}
               symbol={symbol}
               moneyRaised={moneyRaised}
@@ -124,10 +109,47 @@ function Donate(props) {
               setPercentRaised={updatePercentRaised}
               setMoneyRaisedSpanValue={updateMoneyRaisedSpanValue}
             />
-            <LatestDonations latestDonations={latestDonations} setLatestDonations={updateLatestDonations}
-              />
-            </div>
-      </>
+            <LatestDonations donationPath={fundraiserData.path} latestDonations={latestDonations} setLatestDonations={updateLatestDonations} getLatestDonationsDataUrl={PageSettings.getLatestDonationsDataUrl}
+            />
+            <QuestionsAnswers questionsAndAnswers={fundraiserData.questionsAndAnswers} rewards={fundraiserData.rewards}
+              showRewards={showRewards} setShowRewards={updateShowRewards} />
+            {!showRewards &&
+              <QuestionForm submitQuestionFormUrl={PageSettings.submitQuestionFormUrl} donationPath={fundraiserData.path}
+                message={formMessage} email={formEmail} setMessage={updateFormMessage} setEmail={updateFormEmail} />
+            }
+          </div>
+        </>
+      }
+      {width > 1200 &&
+        <>
+          <div className='column'>
+            <Header title={fundraiserData.title} description={fundraiserData.description} newBadge={fundraiserData.newBadge} />
+            <QuestionsAnswers questionsAndAnswers={fundraiserData.questionsAndAnswers} rewards={fundraiserData.rewards}
+              showRewards={showRewards} setShowRewards={updateShowRewards} />
+            {!showRewards &&
+              <QuestionForm donationPath={fundraiserData.path} submitQuestionFormUrl={PageSettings.submitQuestionFormUrl}
+                message={formMessage} email={formEmail} setMessage={updateFormMessage} setEmail={updateFormEmail} />
+            }
+          </div>
+          <div className='column'>
+            <DonationInfo donationPath={fundraiserData.path} PageSettings={PageSettings} donationData={donationData} setDonationData={updateDonationData} getDonationGoalDataUrl={PageSettings.getDonationGoalDataUrl}
+              currencyShortName={currencyShortName}
+              symbol={symbol}
+              moneyRaised={moneyRaised}
+              moneyToRaise={moneyToRaise}
+              percentRaised={percentRaised}
+              moneyRaisedSpanValue={moneyRaisedSpanValue}
+              setCurrencyShortName={updateCurrencyShortName}
+              setSymbol={updateSymbol}
+              setMoneyRaised={updateMoneyRaised}
+              setMoneyToRaise={updateMoneyToRaise}
+              setPercentRaised={updatePercentRaised}
+              setMoneyRaisedSpanValue={updateMoneyRaisedSpanValue}
+            />
+            <LatestDonations donationPath={fundraiserData.path} latestDonations={latestDonations} setLatestDonations={updateLatestDonations} getLatestDonationsDataUrl={PageSettings.getLatestDonationsDataUrl}
+            />
+          </div>
+        </>
       }
 
     </div>

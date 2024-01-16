@@ -55,7 +55,8 @@ function genRand(min, max, decimalPlaces) {
 }
 function DonationInfo(props) {
     const PageSettings = props.PageSettings;
-
+    const getDonationGoalDataUrl = props.getDonationGoalDataUrl;
+    const donationPath = props.donationPath;
 
     const {
         donationData,
@@ -153,8 +154,20 @@ function DonationInfo(props) {
 
     useInterval(async (clear) => {
         // Fetch donations data here
-        const responseJson = await getFakeDonationData();
-        setDonationData(responseJson);
+        try {
+            if(getDonationGoalDataUrl != null){
+                const response = await fetch(getDonationGoalDataUrl + "?" + new URLSearchParams({
+                    donationPath: donationPath,
+                }));
+                const responseJson = await response.json();
+                setDonationData(responseJson);
+            }else{
+                const responseJson = await getFakeDonationData();
+                setDonationData(responseJson);
+            }
+        } catch (error) {
+            console.log("Something went wrong while trying to get donation goal data.")
+        }
     }, 1000, true);
 
     useEffect(() => {
@@ -202,6 +215,7 @@ function DonationInfo(props) {
                     threeDecimalCurrencies={PageSettings.threeDecimalCurrencies}
                     divisableByHundredCurrencies={PageSettings.divisableByHundredCurrencies}
                     createPaymentIntentUrl={PageSettings.createPaymentIntentUrl}
+                    donationPath={donationPath}
                 />
             }
             {PageSettings.paymentMethod === "link" &&

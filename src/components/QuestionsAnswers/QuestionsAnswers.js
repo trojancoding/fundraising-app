@@ -6,7 +6,9 @@ function QuestionsAnswers(props) {
     const questionsAndAnswers = props.questionsAndAnswers;
     const rewards = props.rewards;
 
-    const [showRewards, setShowRewards] = useState(false);
+    const showRewards = props.showRewards;
+    const setShowRewards = props.setShowRewards;
+    
     const questionsHeader = useRef(null);
     const rewardsHeader = useRef(null);
     

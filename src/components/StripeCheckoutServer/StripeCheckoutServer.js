@@ -11,7 +11,8 @@ function StripeCheckoutServer(props) {
   const priceList = props.priceList;
 
   const createPaymentIntentUrl = props.createPaymentIntentUrl;
-  
+  const donationPath = props.donationPath;
+
   const removeLeadingZeros = props.removeLeadingZeros ?? true;
 
   const zeroDecimalCurrencies = props.zeroDecimalCurrencies;
@@ -177,6 +178,7 @@ function StripeCheckoutServer(props) {
         body: JSON.stringify({
           currency:priceElementSelected.currencyShortName,
           amount:Math.round(parseFloat(donationAmountValue)),
+          donationPath:donationPath,
         }),
       });
       const intentResponseJson = await intentResponse.json();
