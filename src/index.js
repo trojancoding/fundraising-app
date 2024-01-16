@@ -53,7 +53,7 @@ import {
       - server needed to generate payment links every time
 
 */
-const paymentMethod = "server-side";
+const paymentMethod = "client-side";
 
 
 // **********************************
@@ -113,7 +113,7 @@ const divisableByHundredCurrencies = ["ISK", "UGX"]; // currency shortNames
   URL of the server's createPaymentIntent method
   POST parameters: amount, currency, donationPath (works as id)
 */
-const createPaymentIntentUrl = "http://localhost:3003/api/create-payment-intent";
+const createPaymentIntentUrl = null;//"http://localhost:3003/api/create-payment-intent";
 
 
 // **********************************
@@ -124,7 +124,7 @@ const createPaymentIntentUrl = "http://localhost:3003/api/create-payment-intent"
   POST parameters: message, email, donationPath (works as id)
   string or null
 */
-const submitQuestionFormUrl = 'http://localhost:3003/api/submitForm';
+const submitQuestionFormUrl = null;//'http://localhost:3003/api/submitForm';
 
 // Url of API endpoint that gets DonationInfo data
 // GET parameters: donationPath (works as id)
@@ -148,7 +148,7 @@ const submitQuestionFormUrl = 'http://localhost:3003/api/submitForm';
 //     ]
 // }
 // null or url string
-const getDonationGoalDataUrl =  'http://localhost:3003/api/getDonationGoalData'; //null
+const getDonationGoalDataUrl =  null;//'http://localhost:3003/api/getDonationGoalData';
 // Url of API endpoint that gets LatestDonations data
 // GET parameters: donationPath (works as id)
 // returned data should be JSON
@@ -168,7 +168,7 @@ const getDonationGoalDataUrl =  'http://localhost:3003/api/getDonationGoalData';
 // }
 // ]
 // null or url string
-const getLatestDonationsDataUrl =  'http://localhost:3003/api/getLatestDonationsData'; //null
+const getLatestDonationsDataUrl =  null;//'http://localhost:3003/api/getLatestDonationsData';
 
 // **********************************
 // ****** CLIENT-SIDE METHOD ********
