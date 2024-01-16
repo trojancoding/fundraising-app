@@ -63,6 +63,10 @@ function LatestDonations(props) {
     const setLatestDonations = props.setLatestDonations;
     const [latestDonationsInHtml, setLatestDonationsInHtml] = useState([]);
 
+    const getLatestDonationsDataUrl = props.getLatestDonationsDataUrl;
+    const donationPath = props.donationPath;
+
+
     function getLastFakeDonations() {
         const fakeNames = [
             "Anonymous",
@@ -79,7 +83,7 @@ function LatestDonations(props) {
             "James Lee",
             "Laura Perez"
         ];
-        const currencies = ["$", "€"]
+        const currencies = ["$", "€","£","¥"]
 
         var lastDonations = latestDonations;
         if (Math.floor(Math.random() * 3) === 0) {
@@ -101,11 +105,10 @@ function LatestDonations(props) {
         const latestDonationsHeaderElement = document.getElementById('LatestDonations-donations');
         if(clear){
             latestDonationsHeaderElement.innerHTML = "";
-            console.log("CLEARED")
         }
-        console.log(latestDonationsInHtml);
         var newDonations = latestDonations.filter(function(el) {
-            return !latestDonationsInHtml.includes(el);
+            return !(latestDonationsInHtml.some(e => e.donorName === el.donorName && e.donationTimestamp === el.donationTimestamp
+                && e.donationCurrency === el.donationCurrency && e.donationAmount === el.donationAmount));
         });
         for (let idx = 0; idx < newDonations.length; idx++) {
             const donation = newDonations[idx];
@@ -137,21 +140,45 @@ function LatestDonations(props) {
 
     useInterval(async (clear) => {
         // Fetch donations data here
-        const responseJson = await getLastFakeDonations();
-        setLatestDonations(responseJson);
-        console.log(latestDonations);
-        handleLatestDonationsChange(clear);
+        try {
+            if(getLatestDonationsDataUrl != null){
+                const response = await fetch(getLatestDonationsDataUrl + "?" + new URLSearchParams({
+                    donationPath: donationPath,
+                }));
+                const responseJson = await response.json();
+                setLatestDonations(responseJson);
+            }else{
+                const responseJson = await getLastFakeDonations();
+                setLatestDonations(responseJson);
+            }
+            handleLatestDonationsChange(clear);
+        } catch (error) {
+            console.log("Something went wrong while trying to get latest donations data.")
+        }
+
     }, 1000);
 
     const handleSeeAllBtnClick = (e) => {
+        setSeeAllToggled(!seeAllToggled);
         latestDonationsDonations.current.classList.toggle('more');
         latestDonationsDonations.current.scrollTop = 0;
-        setSeeAllToggled(!seeAllToggled);
+        // latestDonationsDonations.current.scrollTo(0, 0);
     }
 
     return (
         <div className='LatestDonations-container'>
             <h3 id='latestDonationsHeader'>Latest donations</h3>
+            {latestDonationsInHtml.length === 0 &&
+                    <div class='latest-donation-container'>
+                    <div class='latest-donation-value'></div>
+                    <div class='latest-donation-details'>
+                        <p class='inline-separator'>●</p>
+                        <p class='latest-donation-donor'>Be the first one to donate!</p>
+                        <p class='inline-separator'>●</p>
+                        <p class='latest-donation-date'></p>
+                    </div>
+                    </div>
+            }
             <div className='LatestDonations-donations' id="LatestDonations-donations" ref={latestDonationsDonations}>
 
             </div>

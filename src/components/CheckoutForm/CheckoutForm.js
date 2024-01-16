@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import {useStripe, useElements, PaymentElement} from '@stripe/react-stripe-js';
+import './CheckoutForm.scss';
 
 const CheckoutForm = () => {
   const stripe = useStripe();
@@ -40,11 +41,11 @@ const CheckoutForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className='stripeForm'>
       <PaymentElement />
-      <button disabled={!stripe}>Submit</button>
-      {/* Show error message to your customers */}
-      {errorMessage && <div>{errorMessage}</div>}
+      <button disabled={!stripe} className='donation-button'><p className='button-text'>Confirm</p><span className='icon-container'></span></button>
+      {/* Show error message to your customers
+      {errorMessage && <div>{errorMessage}</div>} */}
     </form>
   )
 };

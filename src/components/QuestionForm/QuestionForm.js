@@ -3,9 +3,14 @@ import './QuestionForm.scss';
 import logo from '../../assets/logo.svg';
 
 function QuestionForm(props) {
-    const [email, setEmail] = useState('');
-    const [message, setMessage] = useState('');
+    const email = props.email;
+    const setEmail = props.setEmail;
+    const message = props.message;
+    const setMessage = props.setMessage;
+
     const [textareaHeight, setTextareaHeight] = useState('46px');
+    const submitQuestionFormUrl = props.submitQuestionFormUrl;
+    const donationPath = props.donationPath;
 
     const textCounter = (field, maxlimit) => {
         if (field.length > maxlimit) {
@@ -30,7 +35,7 @@ function QuestionForm(props) {
     const emailInput = useRef(null);
     const emailInputIcon = useRef(null);
 
-    const emailInputOnChangeHandle = (isEmailValid) =>{
+    const emailInputOnChangeHandle = (isEmailValid) => {
         if (isEmailValid) {
             emailInputIcon.current.classList.add('valid');
         }
@@ -40,6 +45,29 @@ function QuestionForm(props) {
     }
 
     const [emailErrorMessage, setEmailErrorMessage] = useState("");
+
+    async function postData(url = "", data = {}) {
+        try {
+            // Default options are marked with *
+            const response = await fetch(url, {
+                method: "POST", // *GET, POST, PUT, DELETE, etc.
+                //   mode: "cors", // no-cors, *cors, same-origin
+                //   cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+                //   credentials: "same-origin", // include, *same-origin, omit
+                headers: {
+                    "Content-Type": "application/json",
+                    // 'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                //   redirect: "follow", // manual, *follow, error
+                //   referrerPolicy: "no-referrer", // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+                body: JSON.stringify(data), // body data type must match "Content-Type" header
+            });
+            return response.json(); // parses JSON response into native JavaScript objects
+        } catch (error) {
+            console.log("Something went wrong while sending message to the server");
+        }
+
+    }
     const handleButtonClick = () => {
         if (!isValidEmail(email)) {
             setEmailErrorMessage('Invalid email.');
@@ -52,8 +80,14 @@ function QuestionForm(props) {
         }
         else {
             setEmailErrorMessage('');
+            if (submitQuestionFormUrl != null) {
+                postData(submitQuestionFormUrl, { message: message, email: email, donationPath:donationPath});
+            }
+            setMessage('');
+            setEmail('');
         }
     }
+
 
     return (
         <div className='QuestionForm-container'>

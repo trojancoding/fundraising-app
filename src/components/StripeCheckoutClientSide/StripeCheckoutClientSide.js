@@ -15,7 +15,8 @@ function StripeCheckoutClientSide(props) {
   const threeDecimalCurrencies = props.threeDecimalCurrencies;
 
   // Data of selected currency
-  const [priceElementSelected, setPriceElementSelected] = useState(priceList[0]);
+  const priceElementSelected = props.priceElementSelected;
+  const setPriceElementSelected = props.setPriceElementSelected;
   const [currencyValue, setCurrencyValue] = useState(priceElementSelected.priceId);
 
 
