@@ -47,9 +47,10 @@ const CheckoutForm = (props) => {
       <p class="text">Donation Amount</p>
       <h3>{options.priceElementSelected.symbol != null ? options.priceElementSelected.symbol : options.priceElementSelected.currencyShortName}{options.donationAmountValue}</h3>
       <PaymentElement />
+            {/* Show error message to your customers */}
+            {errorMessage && <div className='error'>{errorMessage}</div>}
+
       <button disabled={!stripe} className='donation-button'><p className='button-text'>Confirm</p><span className='icon-container'></span></button>
-      {/* Show error message to your customers
-      {errorMessage && <div>{errorMessage}</div>} */}
     </form>
   )
 };
