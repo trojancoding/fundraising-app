@@ -105,6 +105,37 @@ function Donate(props) {
   // Responsiveness
   const DonateContainerRef = useRef(null);
 
+  const handleHeightChange = () => {
+    const { innerWidth: width, innerHeight: height } = window;
+    if (width <= 1200) {
+      DonateContainerRef.current.style.height = 'fit-content';
+    }
+    else if (width > 1200) {
+      const headerContainerEl = document.getElementById("Header-container");
+      const questionsAnswersContainerEl = document.getElementById("QuestionsAnswers-container");
+      const questionFormContainerEl = document.getElementById("QuestionForm-container");
+      
+      const headerContainerHeight = headerContainerEl ? headerContainerEl.offsetHeight : 0;
+      const questionsAnswersContainerHeight = questionsAnswersContainerEl ? questionsAnswersContainerEl.offsetHeight : 0;
+      const questionFormContainerHeight = questionFormContainerEl ? questionFormContainerEl.offsetHeight : 0;
+
+      const leftContainerHeight = headerContainerHeight+questionsAnswersContainerHeight+questionFormContainerHeight;
+
+      const donationInfoContainerEl = document.getElementById("DonationInfo-container");
+      const latestDonationsContainerEl = document.getElementById("LatestDonations-container");
+
+      const donationInfoHeight = donationInfoContainerEl ? donationInfoContainerEl.offsetHeight : 0;
+      const latestDonationsContainerHeight = latestDonationsContainerEl ? latestDonationsContainerEl.offsetHeight : 0;
+
+
+      const rightContainerHeight = donationInfoHeight+latestDonationsContainerHeight;
+
+      console.log([leftContainerHeight,rightContainerHeight])
+
+      DonateContainerRef.current.style.height = `${(Math.max(leftContainerHeight,rightContainerHeight))+(100)}px`;
+    }
+  }
+  
   useEffect(() => {
     if (width <= 1200) {
       DonateContainerRef.current.style.height = 'fit-content';
@@ -118,9 +149,49 @@ function Donate(props) {
       const questionsAnswersContainerHeight = questionsAnswersContainerEl ? questionsAnswersContainerEl.offsetHeight : 0;
       const questionFormContainerHeight = questionFormContainerEl ? questionFormContainerEl.offsetHeight : 0;
 
-      DonateContainerRef.current.style.height = `${(headerContainerHeight+questionsAnswersContainerHeight+questionFormContainerHeight)+(100)}px`;
+      const leftContainerHeight = headerContainerHeight+questionsAnswersContainerHeight+questionFormContainerHeight;
+
+      const donationInfoContainerEl = document.getElementById("DonationInfo-container");
+      const latestDonationsContainerEl = document.getElementById("LatestDonations-container");
+
+      const donationInfoHeight = donationInfoContainerEl ? donationInfoContainerEl.offsetHeight : 0;
+      const latestDonationsContainerHeight = latestDonationsContainerEl ? latestDonationsContainerEl.offsetHeight : 0;
+
+
+      const rightContainerHeight = donationInfoHeight+latestDonationsContainerHeight;
+
+      console.log([leftContainerHeight,rightContainerHeight])
+
+      DonateContainerRef.current.style.height = `${(Math.max(leftContainerHeight,rightContainerHeight))+(100)}px`;
     }
   }, [width,showRewards]);
+
+  useEffect(() => {
+      // create an Observer instance
+      const resizeObserver = new ResizeObserver(entries => {
+        handleHeightChange();
+      })
+      // start observing a DOM node
+      const headerContainerEl = document.getElementById("Header-container");
+      const questionsAnswersContainerEl = document.getElementById("QuestionsAnswers-container");
+      const questionFormContainerEl = document.getElementById("QuestionForm-container");
+      const donationInfoContainerEl = document.getElementById("DonationInfo-container");
+      const latestDonationsContainerEl = document.getElementById("LatestDonations-container");
+
+
+      resizeObserver.observe(headerContainerEl)
+      resizeObserver.observe(questionsAnswersContainerEl)
+      resizeObserver.observe(questionFormContainerEl)
+      resizeObserver.observe(donationInfoContainerEl)
+      resizeObserver.observe(latestDonationsContainerEl)
+
+      return () => {
+        resizeObserver.disconnect();
+      };
+  }, []);
+
+
+
 
   return (
     <div className='Donate-container' ref={DonateContainerRef}>

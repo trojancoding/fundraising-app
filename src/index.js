@@ -53,7 +53,7 @@ import {
       - server needed to generate payment links every time
 
 */
-const paymentMethod = "client-side";
+const paymentMethod = "server";
 
 
 // **********************************
@@ -113,7 +113,7 @@ const divisableByHundredCurrencies = ["ISK", "UGX"]; // currency shortNames
   URL of the server's createPaymentIntent method
   POST parameters: amount, currency, donationPath (works as id)
 */
-const createPaymentIntentUrl = null;//"http://localhost:3003/api/create-payment-intent";
+const createPaymentIntentUrl = "http://localhost:3003/api/create-payment-intent";
 
 
 // **********************************
@@ -124,7 +124,7 @@ const createPaymentIntentUrl = null;//"http://localhost:3003/api/create-payment-
   POST parameters: message, email, donationPath (works as id)
   string or null
 */
-const submitQuestionFormUrl = null;//'http://localhost:3003/api/submitForm';
+const submitQuestionFormUrl = 'http://localhost:3003/api/submitForm';
 
 // Url of API endpoint that gets DonationInfo data
 // GET parameters: donationPath (works as id)
@@ -148,7 +148,7 @@ const submitQuestionFormUrl = null;//'http://localhost:3003/api/submitForm';
 //     ]
 // }
 // null or url string
-const getDonationGoalDataUrl =  null;//'http://localhost:3003/api/getDonationGoalData';
+const getDonationGoalDataUrl =  'http://localhost:3003/api/getDonationGoalData';
 const donationGoalDataFetchInterval = 1000; //interval in ms
 
 // Url of API endpoint that gets LatestDonations data
@@ -170,7 +170,7 @@ const donationGoalDataFetchInterval = 1000; //interval in ms
 // }
 // ]
 // null or url string
-const getLatestDonationsDataUrl =  null;//'http://localhost:3003/api/getLatestDonationsData';
+const getLatestDonationsDataUrl =  'http://localhost:3003/api/getLatestDonationsData';
 const latestDonationsDataFetchInterval = 1000; //interval in ms
 
 

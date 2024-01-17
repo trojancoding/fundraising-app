@@ -185,7 +185,7 @@ function DonationInfo(props) {
         handleDataUpdate();
       }, []);
     return (
-        <div className='DonationInfo-container'>
+        <div className='DonationInfo-container' id='DonationInfo-container'>
             {donationData === null &&
             <>
                 <h2 className='money-raised'>Loading...</h2>

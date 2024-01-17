@@ -172,7 +172,7 @@ function LatestDonations(props) {
     }
 
     return (
-        <div className='LatestDonations-container'>
+        <div className='LatestDonations-container' id="LatestDonations-container">
             <h3 id='latestDonationsHeader'>{latestDonationsHeadingText}</h3>
             {latestDonationsInHtml.length === 0 &&
                     <div class='latest-donation-container'>
