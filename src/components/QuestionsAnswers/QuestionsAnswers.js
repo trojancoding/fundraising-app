@@ -47,7 +47,7 @@ function QuestionsAnswers(props) {
         setShowRewards(true);
     }
     return (
-        <div className='QuestionsAnswers-container'>
+        <div className='QuestionsAnswers-container' id='QuestionsAnswers-container'>
             <div className='QuestionsAnswers-header'>
                 <div className={`QuestionsAnswers-header-choice ${showRewards && 'disabled'}`} onClick={questionsHeaderOnClickHandle} ref={questionsHeader}>
                     <h2>{questionsAndAnswersHeadingText}</h2>

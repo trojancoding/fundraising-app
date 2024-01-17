@@ -9,6 +9,7 @@ import { useState, useEffect, useRef } from 'react';
 
 function getWindowDimensions() {
   const { innerWidth: width, innerHeight: height } = window;
+  //const { clientWidth: width, clientHeight: height } = document.documentElement;
   return {
     width,
     height
@@ -103,28 +104,32 @@ function Donate(props) {
 
   // Responsiveness
   const DonateContainerRef = useRef(null);
-  const HeaderContainerRef = useRef(null);
-  const QuestionsAnswersContainerRef = useRef(null);
-  const DonateContainerHeight = '150vh';
 
-  useEffect(() => {
+  useEffect(() => {    
+    console.log(width)
     if (width <= 1200) {
       DonateContainerRef.current.style.height = 'fit-content';
     }
     else if (width > 1200) {
-      DonateContainerRef.current.style.height = DonateContainerHeight;
+      const headerContainerEl = document.getElementById("Header-container");
+      const questionsAnswersContainerEl = document.getElementById("QuestionsAnswers-container");
+      const questionFormContainerEl = document.getElementById("QuestionForm-container");
+      
+      const headerContainerHeight = headerContainerEl ? headerContainerEl.offsetHeight : 0;
+      const questionsAnswersContainerHeight = questionsAnswersContainerEl ? questionsAnswersContainerEl.offsetHeight : 0;
+      const questionFormContainerHeight = questionFormContainerEl ? questionFormContainerEl.offsetHeight : 0;
+
+      DonateContainerRef.current.style.height = `${(headerContainerHeight+questionsAnswersContainerHeight+questionFormContainerHeight)+(100)}px`;
     }
-  }, [width]);
+  }, [width,showRewards]);
 
   return (
     <div className='Donate-container' ref={DonateContainerRef}>
 
-          <Header title={fundraiserData.title} description={fundraiserData.description} newBadge={fundraiserData.newBadge} 
-            ref={HeaderContainerRef} />
             <Header title={fundraiserData.title} description={fundraiserData.description} newBadge={fundraiserData.newBadge} />
             <QuestionsAnswers questionsAndAnswers={fundraiserData.questionsAndAnswers} rewards={fundraiserData.rewards}
               showRewards={showRewards} setShowRewards={updateShowRewards} priceElementSelected={priceElementSelected}
-              ref={QuestionsAnswersContainerRef} PageSettings={PageSettings} />
+              PageSettings={PageSettings} />
             {!showRewards &&
               <QuestionForm donationPath={fundraiserData.path} submitQuestionFormUrl={PageSettings.submitQuestionFormUrl}
                 message={formMessage} email={formEmail} setMessage={updateFormMessage} setEmail={updateFormEmail}

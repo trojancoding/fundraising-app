@@ -27,7 +27,7 @@
   .LatestDonations-donations{
     max-height: 430px;
     overflow: hidden;
-    scroll-behavior: smooth;
+    scroll-behavior: auto;
   }
   .LatestDonations-donations.more{
     overflow: auto;
