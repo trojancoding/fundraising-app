@@ -61,6 +61,7 @@ function LatestDonations(props) {
 
     const latestDonations = props.latestDonations;
     const setLatestDonations = props.setLatestDonations;
+    const latestDonationsDataFetchInterval = props.latestDonationsDataFetchInterval;
     const [latestDonationsInHtml, setLatestDonationsInHtml] = useState([]);
 
     const getLatestDonationsDataUrl = props.getLatestDonationsDataUrl;
@@ -156,7 +157,7 @@ function LatestDonations(props) {
             console.log("Something went wrong while trying to get latest donations data.")
         }
 
-    }, 1000);
+    }, latestDonationsDataFetchInterval);
 
     const handleSeeAllBtnClick = (e) => {
         setSeeAllToggled(!seeAllToggled);
