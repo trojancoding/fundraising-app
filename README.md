@@ -166,4 +166,4 @@ To host the app on Cloudflare Pages, follow these general steps:
 2. Configure the build settings for the React app.
 3. Deploy the app on Cloudflare Pages.
 
-For detailed instructions, refer to the [Cloudflare Pages documentation](https://developers.cloudflare.com/pages/).
+For detailed instructions, refer to the [Cloudflare Pages documentation - Deploy a React Site](https://developers.cloudflare.com/pages/framework-guides/deploy-a-react-site/).
