@@ -141,11 +141,15 @@ h3 {
     .DonationInfo-container, .LatestDonations-container {
         width: $container-big-width;
     }
+
+    .Header-container {order: -1; }
+    .DonationInfo-container {order: -1; }
+    .LatestDonations-container {order: -1;}
   }
 
   @media all and (max-width: 800px) {
     .Donate-container > * {
-        width: 98%;
+        width: 98% !important;
         margin: 0;
     }
 
