@@ -5,7 +5,7 @@ import LatestDonations from '../../components/LatestDonations/LatestDonations';
 import QuestionsAnswers from '../../components/QuestionsAnswers/QuestionsAnswers';
 import QuestionForm from '../../components/QuestionForm/QuestionForm';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 function getWindowDimensions() {
   const { innerWidth: width, innerHeight: height } = window;
@@ -101,57 +101,35 @@ function Donate(props) {
     setPriceElementSelected(newState);
   };
 
+  // Responsiveness
+  const DonateContainerRef = useRef(null);
+  const HeaderContainerRef = useRef(null);
+  const QuestionsAnswersContainerRef = useRef(null);
+  const DonateContainerHeight = '150vh';
+
+  useEffect(() => {
+    if (width <= 1200) {
+      DonateContainerRef.current.style.height = 'fit-content';
+    }
+    else if (width > 1200) {
+      DonateContainerRef.current.style.height = DonateContainerHeight;
+    }
+  }, [width]);
+
   return (
-    <div className='Donate-container'>
-      {width <= 1200 &&
-        <>
-          <div className='Donate-container'>
-            <Header title={fundraiserData.title} description={fundraiserData.description} newBadge={fundraiserData.newBadge} />
-            <DonationInfo donationPath={fundraiserData.path} PageSettings={PageSettings} donationData={donationData} setDonationData={updateDonationData} getDonationGoalDataUrl={PageSettings.getDonationGoalDataUrl}
-              currencyShortName={currencyShortName}
-              symbol={symbol}
-              moneyRaised={moneyRaised}
-              moneyToRaise={moneyToRaise}
-              percentRaised={percentRaised}
-              moneyRaisedSpanValue={moneyRaisedSpanValue}
-              setCurrencyShortName={updateCurrencyShortName}
-              setSymbol={updateSymbol}
-              setMoneyRaised={updateMoneyRaised}
-              setMoneyToRaise={updateMoneyToRaise}
-              setPercentRaised={updatePercentRaised}
-              setMoneyRaisedSpanValue={updateMoneyRaisedSpanValue}
-              priceElementSelected={priceElementSelected} setPriceElementSelected={updatePriceElementSelected}
-              donationGoalDataFetchInterval={PageSettings.donationGoalDataFetchInterval}
-            />
-            <LatestDonations donationPath={fundraiserData.path} latestDonations={latestDonations}
-            setLatestDonations={updateLatestDonations} getLatestDonationsDataUrl={PageSettings.getLatestDonationsDataUrl}
-            latestDonationsDataFetchInterval={PageSettings.latestDonationsDataFetchInterval} PageSettings={PageSettings}
-            />
-            <QuestionsAnswers questionsAndAnswers={fundraiserData.questionsAndAnswers} rewards={fundraiserData.rewards}
-              showRewards={showRewards} setShowRewards={updateShowRewards} priceElementSelected={priceElementSelected}
-              PageSettings={PageSettings} />
-            {!showRewards &&
-              <QuestionForm submitQuestionFormUrl={PageSettings.submitQuestionFormUrl} donationPath={fundraiserData.path}
-                message={formMessage} email={formEmail} setMessage={updateFormMessage} setEmail={updateFormEmail}
-                PageSettings={PageSettings}  />
-            }
-          </div>
-        </>
-      }
-      {width > 1200 &&
-        <>
-          <div className='column'>
+    <div className='Donate-container' ref={DonateContainerRef}>
+
+          <Header title={fundraiserData.title} description={fundraiserData.description} newBadge={fundraiserData.newBadge} 
+            ref={HeaderContainerRef} />
             <Header title={fundraiserData.title} description={fundraiserData.description} newBadge={fundraiserData.newBadge} />
             <QuestionsAnswers questionsAndAnswers={fundraiserData.questionsAndAnswers} rewards={fundraiserData.rewards}
               showRewards={showRewards} setShowRewards={updateShowRewards} priceElementSelected={priceElementSelected}
-              PageSettings={PageSettings} />
+              ref={QuestionsAnswersContainerRef} PageSettings={PageSettings} />
             {!showRewards &&
               <QuestionForm donationPath={fundraiserData.path} submitQuestionFormUrl={PageSettings.submitQuestionFormUrl}
                 message={formMessage} email={formEmail} setMessage={updateFormMessage} setEmail={updateFormEmail}
                 PageSettings={PageSettings}  />
             }
-          </div>
-          <div className='column'>
             <DonationInfo donationPath={fundraiserData.path} PageSettings={PageSettings} donationData={donationData} setDonationData={updateDonationData} getDonationGoalDataUrl={PageSettings.getDonationGoalDataUrl}
               currencyShortName={currencyShortName}
               symbol={symbol}
@@ -172,10 +150,6 @@ function Donate(props) {
             setLatestDonations={updateLatestDonations} getLatestDonationsDataUrl={PageSettings.getLatestDonationsDataUrl}
             latestDonationsDataFetchInterval={PageSettings.latestDonationsDataFetchInterval} PageSettings={PageSettings}
             />
-          </div>
-        </>
-      }
-
     </div>
   );
 }

@@ -19,15 +19,17 @@ body {
 
 .Donate-container {
   display: flex;
-  flex-flow: row wrap;
-  justify-content: center;
+  flex-flow: column wrap;
+  justify-content: flex-start;
+  align-content: center;
   gap: 16px;
   margin: 16px;
+  height: 150vh;
 
-  .column {
-    display: flex;
-    flex-flow: column wrap;
-    gap: 16px;
-    margin: 0;
-  }
+  // .column {
+  //   display: flex;
+  //   flex-flow: column wrap;
+  //   gap: 16px;
+  //   margin: 0;
+  // }
 }
