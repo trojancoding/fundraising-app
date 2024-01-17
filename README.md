@@ -22,7 +22,7 @@ The Fundraising React App is a flexible single-page web application designed to 
 
 To install and run the Fundraising React App locally, follow these steps:
 
-1. Clone the repository: `git clone https://github.com/your-username/fundraising-app.git`
+1. Clone the repository: `git clone https://github.com/trojancoding/fundraising-app.git`
 2. Navigate to the app directory: `cd fundraising-app`
 3. Install dependencies: `npm install`
 4. Start the app: `npm start`
