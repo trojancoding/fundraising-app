@@ -67,6 +67,11 @@ function LatestDonations(props) {
     const getLatestDonationsDataUrl = props.getLatestDonationsDataUrl;
     const donationPath = props.donationPath;
 
+    const PageSettings = props.PageSettings;
+    
+    const latestDonationsHeadingText = PageSettings.latestDonationsHeadingText;
+    const latestDonationsNoDonationsText = PageSettings.latestDonationsNoDonationsText;
+
 
     function getLastFakeDonations() {
         const fakeNames = [
@@ -168,13 +173,13 @@ function LatestDonations(props) {
 
     return (
         <div className='LatestDonations-container'>
-            <h3 id='latestDonationsHeader'>Latest donations</h3>
+            <h3 id='latestDonationsHeader'>{latestDonationsHeadingText}</h3>
             {latestDonationsInHtml.length === 0 &&
                     <div class='latest-donation-container'>
                     <div class='latest-donation-value'></div>
                     <div class='latest-donation-details'>
                         <p class='inline-separator'>●</p>
-                        <p class='latest-donation-donor'>Be the first one to donate!</p>
+                        <p class='latest-donation-donor'>{latestDonationsNoDonationsText}</p>
                         <p class='inline-separator'>●</p>
                         <p class='latest-donation-date'></p>
                     </div>

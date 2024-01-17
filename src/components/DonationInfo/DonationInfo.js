@@ -191,7 +191,7 @@ function DonationInfo(props) {
                 <div className='progress-bar-container'>
                     <div className='progress-bar' ref={progressBar}></div>
                 </div>
-                <p className='text'>...% raised of ...</p>
+                <p className='text'>...% {PageSettings.donationInfoProgressText} ...</p>
             </>
             }
             {donationData != null &&
@@ -200,15 +200,16 @@ function DonationInfo(props) {
                 <div className='progress-bar-container'>
                     <div className='progress-bar' ref={progressBar}></div>
                 </div>
-                <p className='text'>{percentRaised}% raised of {symbol != null ? symbol:currencyShortName}{moneyToRaise}</p>
+                <p className='text'>{percentRaised}% {PageSettings.donationInfoProgressText} {symbol != null ? symbol:currencyShortName}{moneyToRaise}</p>
             </>
             }
             <div className='separator'></div>
-            <h3>Support this project</h3>
+            <h3>{PageSettings.donationInfoHeadingText}</h3>
 
             {PageSettings.paymentMethod === "client-side" &&
                 <StripeCheckoutClientSide priceList={PageSettings.clientSideMethodPriceList}
                     buttonText={PageSettings.donateButtonText} removeLeadingZeros={PageSettings.removeLeadingZeros}
+                    donationAmountPlaceholder={PageSettings.donationAmountPlaceholder}
                     zeroDecimalCurrencies={PageSettings.zeroDecimalCurrencies}
                     threeDecimalCurrencies={PageSettings.threeDecimalCurrencies}
                     divisableByHundredCurrencies={PageSettings.divisableByHundredCurrencies}
@@ -218,6 +219,7 @@ function DonationInfo(props) {
             {PageSettings.paymentMethod === "server" &&
                 <StripeCheckoutServer priceList={PageSettings.serverMethodPriceList}
                     buttonText={PageSettings.donateButtonText} removeLeadingZeros={PageSettings.removeLeadingZeros}
+                    donationAmountPlaceholder={PageSettings.donationAmountPlaceholder}
                     zeroDecimalCurrencies={PageSettings.zeroDecimalCurrencies}
                     threeDecimalCurrencies={PageSettings.threeDecimalCurrencies}
                     divisableByHundredCurrencies={PageSettings.divisableByHundredCurrencies}

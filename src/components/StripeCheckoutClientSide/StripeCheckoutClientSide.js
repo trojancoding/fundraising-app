@@ -9,6 +9,7 @@ const stripePromise = loadStripe('pk_test_51OXpJKAz4DzMSQxdYvJCa8y6OJX5Wrg5TZYrO
 function StripeCheckoutClientSide(props) {
   const priceList = props.priceList;
   const removeLeadingZeros = props.removeLeadingZeros ?? true;
+  const donationAmountPlaceholder = props.donationAmountPlaceholder;
 
   const zeroDecimalCurrencies = props.zeroDecimalCurrencies;
   const divisableByHundredCurrencies = props.divisableByHundredCurrencies;
@@ -181,7 +182,7 @@ function StripeCheckoutClientSide(props) {
       </select>
       <div className='input-container'>
                 <div className='currency-dropdown'>{priceElementSelected.symbol != null ? priceElementSelected.symbol : priceElementSelected.currencyShortName}</div>
-                <input className='donation-input' type='text' placeholder='5.00' value={donationAmountValue} onChange={(e) => handleAmountChange(e)} />
+                <input className='donation-input' type='text' placeholder={donationAmountPlaceholder} value={donationAmountValue} onChange={(e) => handleAmountChange(e)} />
       </div>
       {errorMessage && <div className='error'>{errorMessage}</div>}
       <button role="link" onClick={handleClick} className='donation-button'><p className='button-text'>{props.buttonText ?? "Donate"}</p><span className='icon-container'></span></button>

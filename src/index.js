@@ -449,6 +449,65 @@ const removeLeadingZeros = true;
 */
 const donateButtonText = "Donate";
 
+/*
+  Text above donate button
+*/
+const donationInfoHeadingText = "Support this project";
+
+/*
+  Donation amount input placeholder
+*/
+const donationAmountPlaceholder = "5.00";
+
+/*
+  Text between % and raisedValue
+*/
+const donationInfoProgressText = "raised of";
+
+/*
+  Max message length
+*/
+const maxFormCharacters = 300;
+/*
+  Text in question form heading
+*/
+const questionFormHeadingText = "Do you have any questions?";
+/*
+  Text above email input
+*/
+const questionFormEmailText = "Enter your email";
+/*
+  Text above question input
+*/
+const questionFormQuestionText = "Ask a question";
+/*
+  Email input placeholder
+*/
+const emailPlaceholder = "example@email.com";
+/*
+  Question input placeholder
+*/
+const questionPlaceholder = "What do you want to know?";
+
+/*
+  Text in Q&A header
+*/
+const questionsAndAnswersHeadingText = "Q&A";
+/*
+  Text in Rewards header
+*/
+const rewardsHeadingText = "Rewards";
+
+/*
+  Text above donations
+*/
+const latestDonationsHeadingText = "Latest donations";
+
+/*
+  No donations loaded message
+*/
+const latestDonationsNoDonationsText = "Be the first one to donate!";
+
 
 // Import settings to props
 const PageSettings = {
@@ -466,6 +525,20 @@ const PageSettings = {
   clientSideMethodPriceList: clientSideMethodPriceList,
   linkMethodPriceList: linkMethodPriceList,
 
+  rewardsHeadingText:rewardsHeadingText,
+  questionsAndAnswersHeadingText:questionsAndAnswersHeadingText,
+  questionPlaceholder:questionPlaceholder,
+  emailPlaceholder:emailPlaceholder,
+  questionFormQuestionText:questionFormQuestionText,
+  questionFormEmailText:questionFormEmailText,
+
+  questionFormHeadingText:questionFormHeadingText,
+  donationInfoHeadingText:donationInfoHeadingText,
+  donationAmountPlaceholder:donationAmountPlaceholder,
+  donationInfoProgressText:donationInfoProgressText,
+  maxFormCharacters:maxFormCharacters,
+  latestDonationsHeadingText:latestDonationsHeadingText,
+  latestDonationsNoDonationsText:latestDonationsNoDonationsText,
   donateButtonText: donateButtonText,
   removeLeadingZeros: removeLeadingZeros,
 

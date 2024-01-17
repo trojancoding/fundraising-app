@@ -13,6 +13,12 @@ function QuestionsAnswers(props) {
     const priceElementSelected = props.priceElementSelected;
 
 
+    const PageSettings = props.PageSettings;
+    
+    const questionsAndAnswersHeadingText = PageSettings.questionsAndAnswersHeadingText;
+    const rewardsHeadingText = PageSettings.rewardsHeadingText;
+
+
     const questionsHeader = useRef(null);
     const rewardsHeader = useRef(null);
     
@@ -44,11 +50,11 @@ function QuestionsAnswers(props) {
         <div className='QuestionsAnswers-container'>
             <div className='QuestionsAnswers-header'>
                 <div className={`QuestionsAnswers-header-choice ${showRewards && 'disabled'}`} onClick={questionsHeaderOnClickHandle} ref={questionsHeader}>
-                    <h2>Q&A</h2>
+                    <h2>{questionsAndAnswersHeadingText}</h2>
                     <span className='icon icon-help'></span>
                 </div>
                 <div className={`QuestionsAnswers-header-choice ${!showRewards && 'disabled'}`} onClick={rewardsHeaderOnClickHandle} ref={rewardsHeader}>
-                    <h2>Rewards</h2>
+                    <h2>{rewardsHeadingText}</h2>
                     <span className='icon icon-redeem'></span>
                 </div>
             </div>

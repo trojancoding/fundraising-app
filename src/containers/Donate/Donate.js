@@ -125,13 +125,15 @@ function Donate(props) {
             />
             <LatestDonations donationPath={fundraiserData.path} latestDonations={latestDonations}
             setLatestDonations={updateLatestDonations} getLatestDonationsDataUrl={PageSettings.getLatestDonationsDataUrl}
-            latestDonationsDataFetchInterval={PageSettings.latestDonationsDataFetchInterval}
+            latestDonationsDataFetchInterval={PageSettings.latestDonationsDataFetchInterval} PageSettings={PageSettings}
             />
             <QuestionsAnswers questionsAndAnswers={fundraiserData.questionsAndAnswers} rewards={fundraiserData.rewards}
-              showRewards={showRewards} setShowRewards={updateShowRewards} priceElementSelected={priceElementSelected} />
+              showRewards={showRewards} setShowRewards={updateShowRewards} priceElementSelected={priceElementSelected}
+              PageSettings={PageSettings} />
             {!showRewards &&
               <QuestionForm submitQuestionFormUrl={PageSettings.submitQuestionFormUrl} donationPath={fundraiserData.path}
-                message={formMessage} email={formEmail} setMessage={updateFormMessage} setEmail={updateFormEmail} />
+                message={formMessage} email={formEmail} setMessage={updateFormMessage} setEmail={updateFormEmail}
+                PageSettings={PageSettings}  />
             }
           </div>
         </>
@@ -141,10 +143,12 @@ function Donate(props) {
           <div className='column'>
             <Header title={fundraiserData.title} description={fundraiserData.description} newBadge={fundraiserData.newBadge} />
             <QuestionsAnswers questionsAndAnswers={fundraiserData.questionsAndAnswers} rewards={fundraiserData.rewards}
-              showRewards={showRewards} setShowRewards={updateShowRewards} priceElementSelected={priceElementSelected} />
+              showRewards={showRewards} setShowRewards={updateShowRewards} priceElementSelected={priceElementSelected}
+              PageSettings={PageSettings} />
             {!showRewards &&
               <QuestionForm donationPath={fundraiserData.path} submitQuestionFormUrl={PageSettings.submitQuestionFormUrl}
-                message={formMessage} email={formEmail} setMessage={updateFormMessage} setEmail={updateFormEmail} />
+                message={formMessage} email={formEmail} setMessage={updateFormMessage} setEmail={updateFormEmail}
+                PageSettings={PageSettings}  />
             }
           </div>
           <div className='column'>
@@ -166,7 +170,7 @@ function Donate(props) {
             />
             <LatestDonations donationPath={fundraiserData.path} latestDonations={latestDonations}
             setLatestDonations={updateLatestDonations} getLatestDonationsDataUrl={PageSettings.getLatestDonationsDataUrl}
-            latestDonationsDataFetchInterval={PageSettings.latestDonationsDataFetchInterval}
+            latestDonationsDataFetchInterval={PageSettings.latestDonationsDataFetchInterval} PageSettings={PageSettings}
             />
           </div>
         </>

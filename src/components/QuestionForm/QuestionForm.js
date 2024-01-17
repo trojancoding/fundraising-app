@@ -12,6 +12,15 @@ function QuestionForm(props) {
     const submitQuestionFormUrl = props.submitQuestionFormUrl;
     const donationPath = props.donationPath;
 
+    const PageSettings = props.PageSettings;
+    
+    const questionFormHeadingText = PageSettings.questionFormHeadingText;
+    const maxFormCharacters = PageSettings.maxFormCharacters;
+    const questionFormEmailText = PageSettings.questionFormEmailText;
+    const questionFormQuestionText = PageSettings.questionFormQuestionText;
+    const emailPlaceholder = PageSettings.emailPlaceholder;
+    const questionPlaceholder = PageSettings.questionPlaceholder;
+
     const textCounter = (field, maxlimit) => {
         if (field.length > maxlimit) {
             return field.substring(0, maxlimit);
@@ -75,7 +84,7 @@ function QuestionForm(props) {
         else if (message.length < 1) {
             setEmailErrorMessage('Message is empty.');
         }
-        else if (message.length > 300) {
+        else if (message.length > maxFormCharacters) {
             setEmailErrorMessage('Too many characters.');
         }
         else {
@@ -91,14 +100,14 @@ function QuestionForm(props) {
 
     return (
         <div className='QuestionForm-container'>
-            <h3>Do you have any questions?</h3>
+            <h3>{questionFormHeadingText}</h3>
             <div className='form-container'>
-                <div className='form-label'>Enter your email</div>
+                <div className='form-label'>{questionFormEmailText}</div>
                 <div className='email-input-container'>
                     <input
                         className='email-input'
                         type='text'
-                        placeholder='example@email.com'
+                        placeholder={emailPlaceholder}
                         value={email}
                         ref={emailInput}
                         onChange={(e) => {
@@ -112,15 +121,15 @@ function QuestionForm(props) {
                     />
                     <p className='email-check-icon' ref={emailInputIcon}></p>
                 </div>
-                <div className='form-label'>Ask a question</div>
+                <div className='form-label'>{questionFormQuestionText}</div>
                 <textarea
                     className='message-input'
                     style={{ height: textareaHeight }}
                     value={message}
-                    onChange={(e) => handleInputChange(e, setMessage, 300)}
-                    placeholder='What do you want to know?'
+                    onChange={(e) => handleInputChange(e, setMessage, maxFormCharacters)}
+                    placeholder={questionPlaceholder}
                 />
-                <span className='characters-left'>{300 - message.length} characters left</span>
+                <span className='characters-left'>{maxFormCharacters - message.length} characters left</span>
                 {emailErrorMessage && <div className='error email-error'>{emailErrorMessage}</div>}
                 <button className='send-button' onClick={handleButtonClick}>
                     <p className='send-button-text'>Send</p>
