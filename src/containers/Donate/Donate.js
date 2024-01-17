@@ -105,8 +105,7 @@ function Donate(props) {
   // Responsiveness
   const DonateContainerRef = useRef(null);
 
-  useEffect(() => {    
-    console.log(width)
+  useEffect(() => {
     if (width <= 1200) {
       DonateContainerRef.current.style.height = 'fit-content';
     }
