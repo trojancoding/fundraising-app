@@ -1,20 +1,36 @@
 // Variables
 
-$gradient-color-1: #F1CFB5;
-$gradient-color-2: #EFE7FF;
-$gradient-color-3: #E3E3E3;
-
 // Import color, font variables from Shared.scss file
 @use '../../Shared.scss';
 
 // Donate styles
 
 body {
-  background-color: $gradient-color-2;
-  background-size: 100% 100%;
-  background-repeat: no-repeat;
-  background-image: radial-gradient(ellipse farthest-corner at 150% 100%, $gradient-color-1 0%, $gradient-color-2 60%, $gradient-color-3 100%);
   height: fit-content;
+  background-repeat: no-repeat;
+
+  // Static Background
+  background-color: Shared.$gradient-color-2;
+  background-image: radial-gradient(ellipse farthest-corner at 150% 100%, Shared.$gradient-color-1 0%, Shared.$gradient-color-2 60%, Shared.$gradient-color-3 100%);
+  background-size: 100% 100%;
+
+// Animated Background Gradient
+  background-image: linear-gradient(300deg, Shared.$gradient-color-1, Shared.$gradient-color-2, Shared.$gradient-color-3);
+  background-size: 300% 300%;
+
+  -webkit-animation: BackgroundAnimation 10s ease infinite;
+  animation: BackgroundAnimation 10s ease infinite;
+}
+
+@-webkit-keyframes BackgroundAnimation {
+  0%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+  100%{background-position:0% 50%}
+}
+@keyframes BackgroundAnimation {
+  0%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+  100%{background-position:0% 50%}
 }
 
 .Donate-container {
