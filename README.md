@@ -1,231 +1,146 @@
-# Flexible Fundraising Single Web Page
+# Fundraising React App
 
-Versatile single web page that can be adapted for various fundraising initiatives, such as hiring personnel, creating ad campaigns, or developing new features.
+## Overview
 
-# Documentation
-
-This documentation provides details on various settings and configurations that can be modified in the `index.js` and `Shared.scss` files to customize the appearance and behavior of the app.
-
-Feel free to explore and modify settings to tailor the app to your specific needs. If you have any questions or need further assistance, refer to the comments or reach out to our team.
+The Fundraising React App is a flexible single-page web application designed to support various fundraising initiatives. Whether you're raising funds for hiring personnel, launching ad campaigns, or developing new features, this app provides a versatile platform. The app allows you to set up multiple fundraisers with different goals and donation options. It seamlessly integrates with the Stripe payment gateway, offering multiple methods to handle donations.
 
 ## Table of Contents
-### 1. Main Settings
-   1.1 [Payment Method](#payment-method)
 
-### 2. Currency Settings
-   2.1 [Zero-Decimal Currencies](#zero-decimal-currencies)  
-   2.2 [Three-Decimal Currencies](#three-decimal-currencies)  
-   2.3 [Divisible-by-Hundred Currencies](#divisible-by-hundred-currencies)
+- [Installation](#installation)
+- [Settings](#settings)
+  - [Main Settings](#main-settings)
+  - [Currency Settings](#currency-settings)
+  - [Website Data](#website-data)
+  - [Server Method](#server-method)
+  - [API Endpoints](#api-endpoints)
+  - [Fundraisers](#fundraisers)
+- [UI Settings](#ui-settings)
+- [Example Backend Server](#example-backend-server)
+- [Hosted Examples](#hosted-examples)
 
-### 3. Website Data
-   3.1 [Server Method](#server-method)  
-   3.2 [API Endpoints](#api-endpoints)
+## Installation
 
-### 4. Client-Side Method
-   4.1 [Client-Side Method Price List](#client-side-method-price-list)
+To install and run the Fundraising React App locally, follow these steps:
 
-### 5. Link Method
-   5.1 [Link Method Price List](#link-method-price-list)
+1. Clone the repository: `git clone https://github.com/your-username/fundraising-app.git`
+2. Navigate to the app directory: `cd fundraising-app`
+3. Install dependencies: `npm install`
+4. Start the app: `npm start`
 
-### 6. Server Method
-   6.1 [Server Method Price List](#server-method-price-list)
+## Settings
 
-### 7. Fundraisers
-   7.1 [Fundraiser Data Structure](#fundraiser-data-structure)  
-   7.2 [Example Fundraisers](#example-fundraisers)
+### Main Settings
 
-### 8. UI Settings
-   8.1 [Remove Leading Zeros](#remove-leading-zeros)  
-   8.2 [Donate Button Text](#donate-button-text)
+In the `src/index.js` file, you can modify the following main settings:
 
-### 9. Shared.scss
-   - [Adjust Website Appearance](#adjust-website-appearance)
+#### Payment Method
 
-## Main Settings
-### 1. Payment Method
-```javascript
-// Choose the payment method for the app
-const paymentMethod = "client-side"; // Options: "client-side", "link", "server"
-```
-In the `paymentMethod` variable, choose the payment method for the app. Options are:
-- `"client-side"`: Create products on Stripe with a minimum price and "sell multiple items" to achieve the end price for donation.
-- `"link"`: Set Stripe links for products with "customer chooses price."
+Choose the payment method for handling donations:
+
+- `"client-side"`: Create products on Stripe with a minimum price, allowing users to select their donation amount on the foundation site.
+- `"link"`: Set Stripe links for products with "customer chooses price" on the Stripe website.
 - `"server"`: Generate Stripe links on the server in real-time.
-### Client-Side Method
-#### Pros:
-- Users can select their own donation amount on the foundation site, sent to the checkout page.
-- Redirects after successful/unsuccessful payment.
-- No server needed for payment processing.
 
-#### Cons:
-- "Qty 500, €0.01 each" info after the product description on the Stripe checkout page.
+Example:
+```javascript
+const paymentMethod = "server";
+```
 
-### Link Method
-#### Pros:
-- Donation amount choice is made on the Stripe website, which may seem more secure to the user.
-- "Thanks for your donation" info on the Stripe website.
+### Currency Settings
 
-#### Cons:
-- No redirect after successful/unsuccessful payment.
-- Users cannot select the donation amount on the foundation site.
+Adjust currency settings, including zero-decimal currencies and divisible-by-hundred currencies.
+
+Example:
+```javascript
+const zeroDecimalCurrencies = ["BIF", "CLP", "DJF", ...];
+const divisableByHundredCurrencies = ["ISK", "UGX"];
+```
+
+### Website Data
+
+Set static and dynamic data for the website.
 
 ### Server Method
-#### Pros:
-- Users can select their own donation amount on the foundation site.
-- No redirects needed.
-- Allows real-time generation of Stripe links.
 
-#### Cons:
-- Requires a server to generate payment links every time.
+Specify the URL for the server's `createPaymentIntent` method for the server payment method.
 
-## 2. Currency Settings
-### Zero-Decimal Currencies
-List of currencies (`zeroDecimalCurrencies`) without a decimal point in the input. Amounts should be provided in the currency’s smallest unit.
+Example:
 ```javascript
-// List of currencies without a decimal point in the input
-const zeroDecimalCurrencies = ["BIF", "CLP", "DJF", /* ... */];
-```
-### Three-Decimal Currencies
-List of currencies (`threeDecimalCurrencies`) that support three decimals. No specific implementation is necessary.
-```javascript
-// List of currencies supporting three decimals
-const threeDecimalCurrencies = [];
-```
-### Divisible-by-Hundred Currencies
-List of currencies (`divisableByHundredCurrencies`) where amounts must be evenly divisible by 100.
-```javascript
-// List of currencies where amounts must be evenly divisible by 100
-const divisibleByHundredCurrencies = ["ISK", "UGX"];
+const createPaymentIntentUrl = "http://localhost:3003/api/create-payment-intent";
 ```
 
-## 3. Website Data
-### Server Method
-Set the URL of the server's `createPaymentIntent` method for the server method.
-```javascript
-// Set the URL of the server's createPaymentIntent method
-const createPaymentIntentUrl = null; // or "http://localhost:3003/api/create-payment-intent";
-```
 ### API Endpoints
-- `submitQuestionFormUrl`: URL of the server's `submitForm` method for form submissions.
-- `getDonationGoalDataUrl`: URL of the API endpoint for fetching DonationGoalData.
-- `getLatestDonationsDataUrl`: URL of the API endpoint for fetching LatestDonationsData.
+
+Configure the URLs for server API endpoints for submitting forms and fetching donation information.
+
+Example:
 ```javascript
-// URL for form submission
-const submitQuestionFormUrl = null; // or "http://localhost:3003/api/submitForm";
-
-// URL for fetching DonationGoalData
-const getDonationGoalDataUrl = null; // or "http://localhost:3003/api/getDonationGoalData";
-
-// URL for fetching LatestDonationsData
-const getLatestDonationsDataUrl = null; // or "http://localhost:3003/api/getLatestDonationsData";
+const submitQuestionFormUrl = 'http://localhost:3003/api/submitForm';
+const getDonationGoalDataUrl = 'http://localhost:3003/api/getDonationGoalData';
+const getLatestDonationsDataUrl = 'http://localhost:3003/api/getLatestDonationsData';
 ```
-## 4. Price List
-### Client-Side Method Price List
-List of currencies with their `priceIds` for the client-side method. Customize currency symbols, minimum/maximum charge amounts, and more.
+
+### Fundraisers
+
+Set up multiple fundraisers with specific details, including paths, titles, descriptions, donation amounts, and rewards.
+
+Example:
 ```javascript
-// List of currencies with their priceIds for client-side method
-const clientSideMethodPriceList = [
+const fundraisersData = [
   {
-    // Example entry
-    "symbol": "€",
-    "currencyShortName": "EUR",
-    "currencyName": "Euro",
-    "priceId": "price_1OXs7jAz4DzMSQxdkNE0vEcr",
-    // ... other properties
+    path: "clean-water-project",
+    title: "Clean Water Project for Rural Communities",
+    // ...other details
   },
-  // ... other currencies
+  {
+    path: "tram-ad-campaign",
+    title: "Create Ad Campaign in the Tram",
+    // ...other details
+  },
+  // Add more fundraisers as needed
 ];
 ```
-## 5. Link Method Price List
-List of currencies with their `productLinks` for the link method.
-```javascript
-// List of currencies with their productLinks for link method
-const linkMethodPriceList = [
-  {
-    // Example entry
-    "symbol": "€",
-    "currencyShortName": "EUR",
-    "currencyName": "Euro",
-    "productLink": "https://donate.stripe.com/test_5kAbIT6AedMs9GM145",
-  },
-  // ... other currencies
-];
-```
-## 6. Server Method Price List
-List of currencies for the server method. Customize currency symbols, minimum/maximum charge amounts, and more.
-```javascript
-// List of currencies with their properties for server method
-const serverMethodPriceList = [
-  {
-    // Example entry
-    "symbol": "€",
-    "currencyShortName": "EUR",
-    "currencyName": "Euro",
-    "minimumCharge": 0.50,
-    // ... other properties
-  },
-  // ... other currencies
-];
-```
-## 7. Fundraisers
-### Fundraiser Data Structure
-Details on the structure of fundraiser data, including path, title, description, questionsAndAnswers, and rewards.
-```javascript
-// Example fundraiser data structure
-const fundraiserData = {
-  path: "clean-water-project",
-  newBadge: true,
-  title: "Clean Water Project for Rural Communities",
-  description: "Join us in providing access to clean and safe drinking water...",
-  questionsAndAnswers: [
-    // ... questions and answers
-  ],
-  rewards: [
-    // ... rewards
-  ],
-};
-```
-### Example Fundraisers
-Example data for two fundraisers, including Clean Water Project and Tram Ad Campaign.
 
-## 8. UI Settings
-### Remove Leading Zeros
-Option to remove leading zeros from the donate amount on input.
-```javascript
-// Option to remove leading zeros from the donate amount on input
-const removeLeadingZeros = true;
-```
-### Donate Button Text
-Customize the text on the donation form button.
-```javascript
-// Customize the text on the donation form button
-const donateButtonText = "Donate";
-```
+## UI Settings
 
-## 9. Shared.scss
-### Adjust Website Appearance
+Adjust the appearance of the website by modifying variables in the `Shared.scss` file. Customize donation buttons, form text, and more.
 
-In the `Shared.scss` file, you can change variables to customize the overall appearance of the website. This file contains styling information that affects the visual presentation of the app. Below are some variables you can modify:
-
-#### Example:
-
+Example:
 ```scss
-// Shared.scss
+// Example UI settings in Shared.scss
+// Colors Variables
+$font-main-color: #222222;
+$font-text-color: #22222277;
+$font-bright-color: #FFFFFF;
 
-// Modify primary color
-$primary-color: #3498db;
+$container-background: #FFFFFF;
 
-// Adjust font size
-$font-size: 16px;
-
-// Change background color
-$background-color: #f2f2f2;
-
-// Customize button styling
-$button-background: $primary-color;
-$button-color: #ffffff;
-$button-hover-background: darken($button-background, 10%);
-
-// Add custom styles as needed
-// ...
+$color-main: #9C79E7;
+$color-accent: #F5E6DC;
+$color-accent-2: #E4B290;
+$color-accent-3: #F0DDD1;
+$color-mild: #2222221D;
+$color-error: #e77979;
+// ...other UI settings
 ```
+
+## Example Backend Server
+
+For a sample backend server using Express.js, check out the [fundraising-app-express-js-example](https://github.com/trojancoding/fundraising-app-express-js-example) repository.
+
+## Hosted Examples
+
+Explore hosted examples of the Fundraising React App on the following links:
+
+- [Clean Water Project](https://fundraising-app.vercel.app/clean-water-project)
+- [Tram Ad Campaign](https://fundraising-app.vercel.app/tram-ad-campaign)
+
+### Hosting on Cloudflare Pages
+
+To host the app on Cloudflare Pages, follow these general steps:
+
+1. Connect your GitHub repository to Cloudflare Pages.
+2. Configure the build settings for the React app.
+3. Deploy the app on Cloudflare Pages.
+
+For detailed instructions, refer to the [Cloudflare Pages documentation](https://developers.cloudflare.com/pages/).
