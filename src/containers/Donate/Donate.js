@@ -130,8 +130,6 @@ function Donate(props) {
 
       const rightContainerHeight = donationInfoHeight+latestDonationsContainerHeight;
 
-      console.log([leftContainerHeight,rightContainerHeight])
-
       DonateContainerRef.current.style.height = `${(Math.max(leftContainerHeight,rightContainerHeight))+(100)}px`;
     }
   }
@@ -159,8 +157,6 @@ function Donate(props) {
 
 
       const rightContainerHeight = donationInfoHeight+latestDonationsContainerHeight;
-
-      console.log([leftContainerHeight,rightContainerHeight])
 
       DonateContainerRef.current.style.height = `${(Math.max(leftContainerHeight,rightContainerHeight))+(100)}px`;
     }
