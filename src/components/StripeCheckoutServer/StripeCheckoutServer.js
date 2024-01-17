@@ -181,7 +181,7 @@ function StripeCheckoutServer(props) {
         },
         body: JSON.stringify({
           currency:priceElementSelected.currencyShortName,
-          amount:Math.round(parseFloat(donationAmountValue)),
+          amount:Number(parseFloat(donationAmountValue).toFixed(2)),
           donationPath:donationPath,
         }),
       });
