@@ -173,113 +173,6 @@ const donationGoalDataFetchInterval = 1000; //interval in ms
 const getLatestDonationsDataUrl =  null;//'http://localhost:3003/api/getLatestDonationsData';
 const latestDonationsDataFetchInterval = 1000; //interval in ms
 
-// **********************************
-// ****** CLIENT-SIDE METHOD ********
-// **********************************
-/*
-    USING PRODUCTS WITH PRICE
-*/
-/*
-  List of currencies with their priceIds for client-side method
-  Default value is the first value
-*/
-const clientSideMethodPriceList = [
-  {
-    "symbol": "€", // (string or null) Currency symbol shown before donation amount
-    // if symbol is null currencyShortName is shown before donation amount
-    "currencyShortName": "EUR", // (string) Currency shortName (Provide the same shortNames across settings)
-    "currencyName": "Euro", // (string) Currency name shown in currency 
-    "priceId": "price_1OXs7jAz4DzMSQxdkNE0vEcr", // (string) Stripe priceId from product
-    "productPrice": 0.01, // (float) Stripe product price to calculate quantity for desired amount
-    "minimumCharge": 0.50, // (float) Minimum charge amount from stripe website (https://stripe.com/docs/currencies#minimum-and-maximum-charge-amounts)
-    //(the lowest amount from the page doesn't always work, so boost it up in some cases)
-    // ('Amount must convert to at least X.XX. CA$0.50 converts to approximately X.XX.')
-    "maximumCharge": 999999.99,// (int) Maximum charge amount from stripe website (https://stripe.com/docs/currencies#minimum-and-maximum-charge-amounts)
-  },
-  {
-    "symbol": "$",
-    "currencyShortName": "USD",
-    "currencyName": "US Dollar",
-    "priceId": "price_1OXqzwAz4DzMSQxdAVc2CAKt",
-    "productPrice": 0.01,
-    "minimumCharge": 0.50,
-    "maximumCharge": 999999.99,
-  },
-  {
-    "symbol": "CA$",
-    "currencyShortName": "CAD",
-    "currencyName": "Canadian Dollar",
-    "priceId": "price_1OXs8dAz4DzMSQxdpq84Kq6X",
-    "productPrice": 0.01,
-    "minimumCharge": 0.50,
-    "maximumCharge": 999999.99,
-  },
-  {
-    "symbol": "£",
-    "currencyShortName": "GBP",
-    "currencyName": "British Pound",
-    "priceId": "price_1OXs9kAz4DzMSQxdUCnSQry9",
-    "productPrice": 0.01,
-    "minimumCharge": 0.40,
-    "maximumCharge": 999999.99,
-  },
-  {
-    "symbol": null,
-    "currencyShortName": "ISK",
-    "currencyName": "Icelandic Króna",
-    "priceId": "price_1OYG6PAz4DzMSQxdFonqWysw",
-    "productPrice": 0.01,
-    "minimumCharge": 100,
-    "maximumCharge": 999999.99,
-  },
-];
-// **********************************
-// ********* LINK METHOD ************
-// **********************************
-/*
-    USING STRIPE LINKS FOR CURRENCIES
-*/
-/*
-  List of currencies with their productLinks for link method
-  Default value is the first value
-*/
-const linkMethodPriceList = [
-  {
-    "symbol": "€", // (string or null) Currency symbol shown before donation amount
-    "currencyShortName": "EUR", // (string) Currency shortName (Provide the same shortNames across settings)
-    "currencyName": "Euro", // (string) Currency name shown in currency 
-    "productLink": "https://donate.stripe.com/test_5kAbIT6AedMs9GM145", // (string) Stripe productLink from product
-  },
-  {
-    "symbol": "$",
-    "currencyShortName": "USD",
-    "currencyName": "US Dollar",
-    "productLink": "https://donate.stripe.com/test_dR600bcYCdMsaKQ5kk",
-  },
-];
-/*
-  List of currencies with their productLinks for link method
-  Default value is the first value
-*/
-const serverMethodPriceList = [
-  {
-    "symbol": "€", // (string or null) Currency symbol shown before donation amount
-    "currencyShortName": "EUR", // (string) Currency shortName (Provide the same shortNames across settings)
-    // currencyShortName is used as ID in Checkout component
-    "currencyName": "Euro", // (string) Currency name shown in currency 
-    "minimumCharge": 0.50, // (float) Minimum charge amount from stripe website (https://stripe.com/docs/currencies#minimum-and-maximum-charge-amounts)
-    //(the lowest amount from the page doesn't always work, so boost it up in some cases)
-    // ('Amount must convert to at least X.XX. CA$0.50 converts to approximately X.XX.')
-    "maximumCharge": 999999.99,// (int) Maximum charge amount from stripe website (https://stripe.com/docs/currencies#minimum-and-maximum-charge-amounts)
-  },
-  {
-    "symbol": "$",
-    "currencyShortName": "USD",
-    "currencyName": "US Dollar",
-    "minimumCharge": 0.50,
-    "maximumCharge": 999999.99,
-  },
-];
 
 
 // **********************************
@@ -294,6 +187,10 @@ const fundraisersData = [
     title: "Clean Water Project for Rural Communities",
     // Description under the title
     description: "Join us in providing access to clean and safe drinking water for rural communities. Your support will help install water purification systems and ensure that families have a sustainable source of clean water for their daily needs.",
+    /*
+    Donation amount input placeholder
+    */
+    donationAmountPlaceholder:"5.00",
     questionsAndAnswers: [
       {
         question: "Why is access to clean water crucial for rural communities?",
@@ -307,6 +204,117 @@ const fundraisersData = [
         question: "What impact will my donation have on the community?",
         answer: "Your donation will directly contribute to improving the quality of life for people in rural communities by providing them with a basic necessity – clean and safe drinking water. It's a step towards breaking the cycle of poverty and promoting overall well-being."
       }
+    ],
+    // **********************************
+    // ****** CLIENT-SIDE METHOD ********
+    // **********************************
+    /*
+        USING PRODUCTS WITH PRICE
+    */
+    /*
+      List of currencies with their priceIds for client-side method
+      Default value is the first value
+    */
+    clientSideMethodPriceList : [
+      {
+        "symbol": "€", // (string or null) Currency symbol shown before donation amount
+        // if symbol is null currencyShortName is shown before donation amount
+        "currencyShortName": "EUR", // (string) Currency shortName (Provide the same shortNames across settings)
+        "currencyName": "Euro", // (string) Currency name shown in currency 
+        "priceId": "price_1OXs7jAz4DzMSQxdkNE0vEcr", // (string) Stripe priceId from product
+        "productPrice": 0.01, // (float) Stripe product price to calculate quantity for desired amount
+        "minimumCharge": 0.50, // (float) Minimum charge amount from stripe website (https://stripe.com/docs/currencies#minimum-and-maximum-charge-amounts)
+        //(the lowest amount from the page doesn't always work, so boost it up in some cases)
+        // ('Amount must convert to at least X.XX. CA$0.50 converts to approximately X.XX.')
+        "maximumCharge": 999999.99,// (int) Maximum charge amount from stripe website (https://stripe.com/docs/currencies#minimum-and-maximum-charge-amounts)
+      },
+      {
+        "symbol": "$",
+        "currencyShortName": "USD",
+        "currencyName": "US Dollar",
+        "priceId": "price_1OXqzwAz4DzMSQxdAVc2CAKt",
+        "productPrice": 0.01,
+        "minimumCharge": 0.50,
+        "maximumCharge": 999999.99,
+      },
+      {
+        "symbol": "CA$",
+        "currencyShortName": "CAD",
+        "currencyName": "Canadian Dollar",
+        "priceId": "price_1OXs8dAz4DzMSQxdpq84Kq6X",
+        "productPrice": 0.01,
+        "minimumCharge": 0.50,
+        "maximumCharge": 999999.99,
+      },
+      {
+        "symbol": "£",
+        "currencyShortName": "GBP",
+        "currencyName": "British Pound",
+        "priceId": "price_1OXs9kAz4DzMSQxdUCnSQry9",
+        "productPrice": 0.01,
+        "minimumCharge": 0.40,
+        "maximumCharge": 999999.99,
+      },
+      {
+        "symbol": null,
+        "currencyShortName": "ISK",
+        "currencyName": "Icelandic Króna",
+        "priceId": "price_1OYG6PAz4DzMSQxdFonqWysw",
+        "productPrice": 0.01,
+        "minimumCharge": 100,
+        "maximumCharge": 999999.99,
+      },
+    ],
+    // **********************************
+    // ********* LINK METHOD ************
+    // **********************************
+    /*
+        USING STRIPE LINKS FOR CURRENCIES
+    */
+    /*
+      List of currencies with their productLinks for link method
+      Default value is the first value
+    */
+    linkMethodPriceList : [
+      {
+        "symbol": "€", // (string or null) Currency symbol shown before donation amount
+        "currencyShortName": "EUR", // (string) Currency shortName (Provide the same shortNames across settings)
+        "currencyName": "Euro", // (string) Currency name shown in currency 
+        "productLink": "https://donate.stripe.com/test_5kAbIT6AedMs9GM145", // (string) Stripe productLink from product
+      },
+      {
+        "symbol": "$",
+        "currencyShortName": "USD",
+        "currencyName": "US Dollar",
+        "productLink": "https://donate.stripe.com/test_dR600bcYCdMsaKQ5kk",
+      },
+    ],
+    // **********************************
+    // ********* SERVER METHOD **********
+    // **********************************
+
+    /*
+      List of currencies with their productLinks for link method
+      Default value is the first value
+    */
+      serverMethodPriceList : [
+      {
+        "symbol": "€", // (string or null) Currency symbol shown before donation amount
+        "currencyShortName": "EUR", // (string) Currency shortName (Provide the same shortNames across settings)
+        // currencyShortName is used as ID in Checkout component
+        "currencyName": "Euro", // (string) Currency name shown in currency 
+        "minimumCharge": 0.50, // (float) Minimum charge amount from stripe website (https://stripe.com/docs/currencies#minimum-and-maximum-charge-amounts)
+        //(the lowest amount from the page doesn't always work, so boost it up in some cases)
+        // ('Amount must convert to at least X.XX. CA$0.50 converts to approximately X.XX.')
+        "maximumCharge": 999999.99,// (int) Maximum charge amount from stripe website (https://stripe.com/docs/currencies#minimum-and-maximum-charge-amounts)
+      },
+      {
+        "symbol": "$",
+        "currencyShortName": "USD",
+        "currencyName": "US Dollar",
+        "minimumCharge": 0.50,
+        "maximumCharge": 999999.99,
+      },
     ],
     rewards: [
       {
@@ -356,6 +364,9 @@ const fundraisersData = [
       }
     ]
   },
+
+  // Second fundraiser
+
   {
     // Path to the fundraiser (example.com/path)
     path: "tram-ad-campaign",
@@ -364,6 +375,10 @@ const fundraisersData = [
     title: "Create Ad Campaign in the Tram",
     // Description under the title
     description: "The campaign will feature posters and banners that highlight the benefits of meditation and mindfulness. We believe that by spreading awareness about the importance of mental health, we can help people lead happier and healthier lives.",
+    /*
+    Donation amount input placeholder
+    */
+    donationAmountPlaceholder:"10.00",
     questionsAndAnswers: [
       {
         question: "What is the purpose of a tram campaign promoting meditation and mindfulness?",
@@ -377,6 +392,117 @@ const fundraisersData = [
         question: "What are some mindfulness exercises?",
         answer: "Here are some mindfulness exercises you can try: Body scan meditation, Mindful breathing, Walking meditation, Loving-kindness meditation, Mindful listening."
       }
+    ],
+    // **********************************
+    // ****** CLIENT-SIDE METHOD ********
+    // **********************************
+    /*
+        USING PRODUCTS WITH PRICE
+    */
+    /*
+      List of currencies with their priceIds for client-side method
+      Default value is the first value
+    */
+    clientSideMethodPriceList : [
+      {
+        "symbol": "€", // (string or null) Currency symbol shown before donation amount
+        // if symbol is null currencyShortName is shown before donation amount
+        "currencyShortName": "EUR", // (string) Currency shortName (Provide the same shortNames across settings)
+        "currencyName": "Euro", // (string) Currency name shown in currency 
+        "priceId": "price_1OXs7jAz4DzMSQxdkNE0vEcr", // (string) Stripe priceId from product
+        "productPrice": 0.01, // (float) Stripe product price to calculate quantity for desired amount
+        "minimumCharge": 0.50, // (float) Minimum charge amount from stripe website (https://stripe.com/docs/currencies#minimum-and-maximum-charge-amounts)
+        //(the lowest amount from the page doesn't always work, so boost it up in some cases)
+        // ('Amount must convert to at least X.XX. CA$0.50 converts to approximately X.XX.')
+        "maximumCharge": 999999.99,// (int) Maximum charge amount from stripe website (https://stripe.com/docs/currencies#minimum-and-maximum-charge-amounts)
+      },
+      {
+        "symbol": "$",
+        "currencyShortName": "USD",
+        "currencyName": "US Dollar",
+        "priceId": "price_1OXqzwAz4DzMSQxdAVc2CAKt",
+        "productPrice": 0.01,
+        "minimumCharge": 0.50,
+        "maximumCharge": 999999.99,
+      },
+      {
+        "symbol": "CA$",
+        "currencyShortName": "CAD",
+        "currencyName": "Canadian Dollar",
+        "priceId": "price_1OXs8dAz4DzMSQxdpq84Kq6X",
+        "productPrice": 0.01,
+        "minimumCharge": 0.50,
+        "maximumCharge": 999999.99,
+      },
+      {
+        "symbol": "£",
+        "currencyShortName": "GBP",
+        "currencyName": "British Pound",
+        "priceId": "price_1OXs9kAz4DzMSQxdUCnSQry9",
+        "productPrice": 0.01,
+        "minimumCharge": 0.40,
+        "maximumCharge": 999999.99,
+      },
+      {
+        "symbol": null,
+        "currencyShortName": "ISK",
+        "currencyName": "Icelandic Króna",
+        "priceId": "price_1OYG6PAz4DzMSQxdFonqWysw",
+        "productPrice": 0.01,
+        "minimumCharge": 100,
+        "maximumCharge": 999999.99,
+      },
+    ],
+    // **********************************
+    // ********* LINK METHOD ************
+    // **********************************
+    /*
+        USING STRIPE LINKS FOR CURRENCIES
+    */
+    /*
+      List of currencies with their productLinks for link method
+      Default value is the first value
+    */
+    linkMethodPriceList : [
+      {
+        "symbol": "€", // (string or null) Currency symbol shown before donation amount
+        "currencyShortName": "EUR", // (string) Currency shortName (Provide the same shortNames across settings)
+        "currencyName": "Euro", // (string) Currency name shown in currency 
+        "productLink": "https://donate.stripe.com/test_5kAbIT6AedMs9GM145", // (string) Stripe productLink from product
+      },
+      {
+        "symbol": "$",
+        "currencyShortName": "USD",
+        "currencyName": "US Dollar",
+        "productLink": "https://donate.stripe.com/test_dR600bcYCdMsaKQ5kk",
+      },
+    ],
+    // **********************************
+    // ********* SERVER METHOD **********
+    // **********************************
+
+    /*
+      List of currencies with their productLinks for link method
+      Default value is the first value
+    */
+      serverMethodPriceList : [
+      {
+        "symbol": "€", // (string or null) Currency symbol shown before donation amount
+        "currencyShortName": "EUR", // (string) Currency shortName (Provide the same shortNames across settings)
+        // currencyShortName is used as ID in Checkout component
+        "currencyName": "Euro", // (string) Currency name shown in currency 
+        "minimumCharge": 0.50, // (float) Minimum charge amount from stripe website (https://stripe.com/docs/currencies#minimum-and-maximum-charge-amounts)
+        //(the lowest amount from the page doesn't always work, so boost it up in some cases)
+        // ('Amount must convert to at least X.XX. CA$0.50 converts to approximately X.XX.')
+        "maximumCharge": 999999.99,// (int) Maximum charge amount from stripe website (https://stripe.com/docs/currencies#minimum-and-maximum-charge-amounts)
+      },
+      {
+        "symbol": "$",
+        "currencyShortName": "USD",
+        "currencyName": "US Dollar",
+        "minimumCharge": 0.50,
+        "maximumCharge": 999999.99,
+      },
     ],
     rewards: [
       {
@@ -455,11 +581,6 @@ const donateButtonText = "Donate";
 const donationInfoHeadingText = "Support this project";
 
 /*
-  Donation amount input placeholder
-*/
-const donationAmountPlaceholder = "5.00";
-
-/*
   Text between % and raisedValue
 */
 const donationInfoProgressText = "raised of";
@@ -521,9 +642,10 @@ const PageSettings = {
   donationGoalDataFetchInterval:donationGoalDataFetchInterval,
   latestDonationsDataFetchInterval: latestDonationsDataFetchInterval,
 
-  serverMethodPriceList: serverMethodPriceList,
-  clientSideMethodPriceList: clientSideMethodPriceList,
-  linkMethodPriceList: linkMethodPriceList,
+  // Now in fundraisersData for every fundraiser
+  // serverMethodPriceList: serverMethodPriceList,
+  // clientSideMethodPriceList: clientSideMethodPriceList,
+  // linkMethodPriceList: linkMethodPriceList,
 
   rewardsHeadingText:rewardsHeadingText,
   questionsAndAnswersHeadingText:questionsAndAnswersHeadingText,
@@ -534,7 +656,8 @@ const PageSettings = {
 
   questionFormHeadingText:questionFormHeadingText,
   donationInfoHeadingText:donationInfoHeadingText,
-  donationAmountPlaceholder:donationAmountPlaceholder,
+  // Now in fundraisersData
+  //donationAmountPlaceholder:donationAmountPlaceholder,
   donationInfoProgressText:donationInfoProgressText,
   maxFormCharacters:maxFormCharacters,
   latestDonationsHeadingText:latestDonationsHeadingText,

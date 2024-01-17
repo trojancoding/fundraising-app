@@ -93,9 +93,9 @@ function Donate(props) {
 
   // Currency
   const [priceElementSelected, setPriceElementSelected] = useState(
-    PageSettings.paymentMethod === "client-side" ? PageSettings.clientSideMethodPriceList[0] :
-    PageSettings.paymentMethod === "server" ? PageSettings.serverMethodPriceList[0] :
-    PageSettings.paymentMethod === "server" ? PageSettings.linkMethodPriceList[0] : ""
+    PageSettings.paymentMethod === "client-side" ? fundraiserData.clientSideMethodPriceList[0] :
+    PageSettings.paymentMethod === "server" ? fundraiserData.serverMethodPriceList[0] :
+    PageSettings.paymentMethod === "server" ? fundraiserData.linkMethodPriceList[0] : ""
   );
 
   const updatePriceElementSelected = (newState) => {
@@ -150,6 +150,7 @@ function Donate(props) {
               setMoneyRaisedSpanValue={updateMoneyRaisedSpanValue}
               priceElementSelected={priceElementSelected} setPriceElementSelected={updatePriceElementSelected}
               donationGoalDataFetchInterval={PageSettings.donationGoalDataFetchInterval}
+              fundraiserData={fundraiserData}
             />
             <LatestDonations donationPath={fundraiserData.path} latestDonations={latestDonations}
             setLatestDonations={updateLatestDonations} getLatestDonationsDataUrl={PageSettings.getLatestDonationsDataUrl}

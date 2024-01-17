@@ -54,6 +54,7 @@ function genRand(min, max, decimalPlaces) {
 }
 function DonationInfo(props) {
     const PageSettings = props.PageSettings;
+    const fundraiserData = props.fundraiserData;
     const getDonationGoalDataUrl = props.getDonationGoalDataUrl;
     const donationPath = props.donationPath;
 
@@ -207,9 +208,9 @@ function DonationInfo(props) {
             <h3>{PageSettings.donationInfoHeadingText}</h3>
 
             {PageSettings.paymentMethod === "client-side" &&
-                <StripeCheckoutClientSide priceList={PageSettings.clientSideMethodPriceList}
+                <StripeCheckoutClientSide priceList={fundraiserData.clientSideMethodPriceList}
                     buttonText={PageSettings.donateButtonText} removeLeadingZeros={PageSettings.removeLeadingZeros}
-                    donationAmountPlaceholder={PageSettings.donationAmountPlaceholder}
+                    donationAmountPlaceholder={fundraiserData.donationAmountPlaceholder}
                     zeroDecimalCurrencies={PageSettings.zeroDecimalCurrencies}
                     threeDecimalCurrencies={PageSettings.threeDecimalCurrencies}
                     divisableByHundredCurrencies={PageSettings.divisableByHundredCurrencies}
@@ -217,9 +218,9 @@ function DonationInfo(props) {
                 />
             }
             {PageSettings.paymentMethod === "server" &&
-                <StripeCheckoutServer priceList={PageSettings.serverMethodPriceList}
+                <StripeCheckoutServer priceList={fundraiserData.serverMethodPriceList}
                     buttonText={PageSettings.donateButtonText} removeLeadingZeros={PageSettings.removeLeadingZeros}
-                    donationAmountPlaceholder={PageSettings.donationAmountPlaceholder}
+                    donationAmountPlaceholder={fundraiserData.donationAmountPlaceholder}
                     zeroDecimalCurrencies={PageSettings.zeroDecimalCurrencies}
                     threeDecimalCurrencies={PageSettings.threeDecimalCurrencies}
                     divisableByHundredCurrencies={PageSettings.divisableByHundredCurrencies}
@@ -229,7 +230,7 @@ function DonationInfo(props) {
                 />
             }
             {PageSettings.paymentMethod === "link" &&
-                <StripeCheckoutLink priceList={PageSettings.linkMethodPriceList}
+                <StripeCheckoutLink priceList={fundraiserData.linkMethodPriceList}
                     buttonText={PageSettings.donateButtonText}
                     priceElementSelected={priceElementSelected} setPriceElementSelected={setPriceElementSelected} />
             }
