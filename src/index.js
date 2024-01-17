@@ -221,7 +221,7 @@ const fundraisersData = [
         // if symbol is null currencyShortName is shown before donation amount
         "currencyShortName": "EUR", // (string) Currency shortName (Provide the same shortNames across settings)
         "currencyName": "Euro", // (string) Currency name shown in currency 
-        "priceId": "price_1OXs7jAz4DzMSQxdkNE0vEcr", // (string) Stripe priceId from product
+        "priceId": "price_1OZd5QAz4DzMSQxdsmQ8Y0BY", // (string) Stripe priceId from product
         "productPrice": 0.01, // (float) Stripe product price to calculate quantity for desired amount
         "minimumCharge": 0.50, // (float) Minimum charge amount from stripe website (https://stripe.com/docs/currencies#minimum-and-maximum-charge-amounts)
         //(the lowest amount from the page doesn't always work, so boost it up in some cases)
@@ -232,16 +232,7 @@ const fundraisersData = [
         "symbol": "$",
         "currencyShortName": "USD",
         "currencyName": "US Dollar",
-        "priceId": "price_1OXqzwAz4DzMSQxdAVc2CAKt",
-        "productPrice": 0.01,
-        "minimumCharge": 0.50,
-        "maximumCharge": 999999.99,
-      },
-      {
-        "symbol": "CA$",
-        "currencyShortName": "CAD",
-        "currencyName": "Canadian Dollar",
-        "priceId": "price_1OXs8dAz4DzMSQxdpq84Kq6X",
+        "priceId": "price_1OZd4xAz4DzMSQxdYlBvd0p7",
         "productPrice": 0.01,
         "minimumCharge": 0.50,
         "maximumCharge": 999999.99,
@@ -250,7 +241,7 @@ const fundraisersData = [
         "symbol": "£",
         "currencyShortName": "GBP",
         "currencyName": "British Pound",
-        "priceId": "price_1OXs9kAz4DzMSQxdUCnSQry9",
+        "priceId": "price_1OZd66Az4DzMSQxdSwUMbg8w",
         "productPrice": 0.01,
         "minimumCharge": 0.40,
         "maximumCharge": 999999.99,
@@ -259,7 +250,7 @@ const fundraisersData = [
         "symbol": null,
         "currencyShortName": "ISK",
         "currencyName": "Icelandic Króna",
-        "priceId": "price_1OYG6PAz4DzMSQxdFonqWysw",
+        "priceId": "price_1OZd9iAz4DzMSQxdKmJXliFc",
         "productPrice": 0.01,
         "minimumCharge": 100,
         "maximumCharge": 999999.99,
