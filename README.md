@@ -37,9 +37,32 @@ In the `src/index.js` file, you can modify the following main settings:
 
 Choose the payment method for handling donations:
 
-- `"client-side"`: Create products on Stripe with a minimum price, allowing users to select their donation amount on the foundation site.
-- `"link"`: Set Stripe links for products with "customer chooses price" on the Stripe website.
-- `"server"`: Generate Stripe links on the server in real-time.
+##### - `"client-side"`: Create products on Stripe with a minimum price, allowing users to select their donation amount on the foundation site.
+Pros:
+- **User-Friendly Experience:** Enables users to select their donation amount directly on the foundation site, enhancing user experience.
+- **Redirection Control:** Allows redirection after successful or unsuccessful payments.
+- **No Server Dependency:** Removes the need for a server, simplifying the architecture and reducing maintenance overhead.
+
+Cons:
+- **Checkout Page Details:** Displays potentially confusing information like "Qty 500, €0.01 each" on the Stripe checkout page, as products are created with minimum prices and than multipied to get final price.
+
+##### - `"link"`: Set Stripe links for products with "customer chooses price" on the Stripe website.
+Pros:
+- **Secure Donation Amount Choice:** Donation amount is chosen on the Stripe website, potentially increasing user trust in the security of the transaction.
+- **Detailed Stripe Confirmation:** Displays a "Thanks for your donation" message on the Stripe website, providing clear confirmation to donors.
+
+Cons:
+- **No Redirection Control:** Lacks the ability to redirect users after successful or unsuccessful payments, potentially affecting user experience.
+- **Limited Donation Amount Selection:** Users cannot choose the donation amount on the foundation site, which may lead to a less personalized experience.
+
+##### - `"server"`: Generate Stripe links on the server in real-time.
+Pros:
+- **Dynamic Donation Amount:** Allows users to select their donation amount on the foundation site, providing a personalized experience.
+- **No Redirects:** Smooth user experience with no redirections during the donation process.
+
+Cons:
+- **Server Dependency:** Requires a server to generate payment links in real-time, introducing an additional layer of complexity and maintenance.
+- **Potential Latency:** Depending on server load, there may be slight delays in generating payment links, impacting the responsiveness of the donation process.
 
 Example:
 ```javascript
